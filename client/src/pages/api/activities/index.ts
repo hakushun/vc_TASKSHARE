@@ -1,12 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyIdToken } from '../../../libs/auth/firebaseAdmin';
+import { getInstance } from '../../../libs/db/getInstance';
+import { Activity } from '../../../redux/modules/activity';
 
 const activities = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
+  const db = getInstance();
+
   const { token, id } = JSON.parse(req.cookies.auth);
-  let activity = {};
+  let activity: Activity;
 
   try {
     await verifyIdToken(token);
@@ -19,22 +23,50 @@ const activities = async (
           createdAt: new Date().getTime(),
           updatedAt: new Date().getTime(),
         };
-        return res.status(200).json(activity);
+
+        db.collection('activities')
+          .add({ ...activity })
+          .then((docRef) => {
+            activity = {
+              ...activity,
+              id: docRef.id,
+            };
+            db.collection('activities')
+              .doc(docRef.id)
+              .update({
+                id: docRef.id,
+              })
+              .then(() => {
+                res.status(200).json(activity);
+              })
+              .catch((error) => {
+                res.status(500).json(error);
+              });
+          })
+          .catch((error) => {
+            res.status(500).json(error);
+          });
+        break;
 
       case 'PUT':
-        console.log(req.body);
-
         activity = {
           ...req.body,
           updatedAt: new Date().getTime(),
         };
-        return res.status(200).json(activity);
+
+        db.collection('activities')
+          .doc(activity.id)
+          .set({ ...activity }, { merge: true })
+          .then(() => res.status(200).json(activity))
+          .catch((error) => res.status(500).json(error));
+        break;
 
       default:
-        return res.status(200).json(activity);
+        res.status(400);
+        break;
     }
   } catch (error) {
-    return res.status(403).json(error);
+    res.status(403).json(error);
   }
 };
 

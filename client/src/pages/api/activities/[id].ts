@@ -1,10 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyIdToken } from '../../../libs/auth/firebaseAdmin';
+import { getInstance } from '../../../libs/db/getInstance';
 
 const activityId = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
+  const db = getInstance();
   const { token } = JSON.parse(req.cookies.auth);
   const {
     query: { id },
@@ -14,13 +16,21 @@ const activityId = async (
     await verifyIdToken(token);
     switch (req.method) {
       case 'DELETE':
-        return res.status(200).json({ id });
+        typeof id === 'string' &&
+          db
+            .collection('activities')
+            .doc(id)
+            .delete()
+            .then(() => res.status(200).json({ id }))
+            .catch((error) => res.status(500).json(error));
+        break;
 
       default:
-        return res.status(200).json({ id });
+        res.status(200).json({ id });
+        break;
     }
   } catch (error) {
-    return res.status(403).json(error);
+    res.status(403).json(error);
   }
 };
 
