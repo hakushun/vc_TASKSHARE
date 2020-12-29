@@ -1,0 +1,107 @@
+@use '../stylesheets/mixin' as mixin;
+
+.root {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 20px 16px 10px;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid mixin.$headerBgColor;
+}
+
+.subheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid mixin.$headerBgColor;
+}
+
+.title {
+  font-size: mixin.rem(26);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(18);
+  }
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+}
+
+.statusText {
+  font-size: mixin.rem(18);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
+
+.statusBar {
+  max-width: 100px;
+
+  @include mixin.mq() {
+    max-width: 80px;
+  }
+}
+
+.subtitle {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
+
+.wrapper {
+  margin-top: 30px;
+  border-bottom: 3px solid mixin.$headerBgColor;
+
+  @include mixin.mq() {
+    margin-top: 20px;
+  }
+}
+
+.inner {
+  padding: 10px 5px;
+}
+
+.projectItem {
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.projectLabel {
+  min-width: 100px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 3px;
+  color: lighten(mixin.$mainTextColor, 20%);
+}

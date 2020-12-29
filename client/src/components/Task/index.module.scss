@@ -1,0 +1,137 @@
+@use '../stylesheets/mixin' as mixin;
+
+.root {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 20px 16px 10px;
+}
+
+.heading {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid mixin.$headerBgColor;
+}
+
+.subheading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid mixin.$headerBgColor;
+}
+
+.title {
+  font-size: mixin.rem(26);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(18);
+  }
+}
+
+.status {
+  display: flex;
+  padding: 3px 25px;
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  color: mixin.$bgColor;
+  border-radius: 20px;
+  background-color: mixin.$primaryColor;
+  justify-content: center;
+  align-items: center;
+
+  @include mixin.mq() {
+    padding: 2px 25px;
+    font-size: mixin.rem(16);
+  }
+}
+
+.statusListWrapper {
+  position: absolute;
+  // .headingのborder-bottom分を加味
+  top: calc(100% + 5px);
+  right: 0;
+  visibility: hidden;
+  min-width: 170px;
+  padding: 15px;
+  transition: all 0.7s;
+  transform: translateY(-20px);
+  opacity: 0;
+  border-radius: 10px;
+  background-color: mixin.$statusListColor;
+
+  &.isOpened {
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 10px;
+
+  .link {
+    text-decoration: underline;
+    color: mixin.$primaryColor;
+
+    @include mixin.mq() {
+      font-size: mixin.rem(14);
+    }
+  }
+}
+
+.subtitle {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
+
+.wrapper {
+  margin-top: 30px;
+  border-bottom: 3px solid mixin.$headerBgColor;
+
+  @include mixin.mq() {
+    margin-top: 20px;
+  }
+}
+
+.inner {
+  padding: 10px 5px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.label {
+  min-width: 100px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0 3px;
+  color: lighten(mixin.$mainTextColor, 20%);
+}

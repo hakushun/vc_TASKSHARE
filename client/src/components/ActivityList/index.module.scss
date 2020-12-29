@@ -1,0 +1,62 @@
+@use '../stylesheets/mixin' as mixin;
+
+.wrapper {
+  padding: 10px 0;
+}
+
+.item {
+  &:not(:first-child) {
+    margin-top: 10px;
+    border-top: 2px solid mixin.$headerBgColor;
+  }
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  font-size: mixin.rem(14);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(12);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  color: lighten(mixin.$mainTextColor, 20%);
+}
+
+.commentWrapper {
+  padding: 5px 10px;
+}
+
+.comment {
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.empty {
+  text-align: center;
+}
+
+.actionWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  width: 20px;
+
+  &:not(:first-child) {
+    margin-left: 5px;
+  }
+}

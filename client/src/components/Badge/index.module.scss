@@ -1,0 +1,17 @@
+@use '../stylesheets/mixin' as mixin;
+
+.badge {
+  margin-left: 5px;
+  padding: 0 5px;
+  font-size: mixin.rem(14);
+  color: mixin.$bgColor;
+  border-radius: 10px;
+}
+
+.required {
+  background-color: mixin.$errorColor;
+}
+
+.optional {
+  background-color: mixin.$warningColor;
+}

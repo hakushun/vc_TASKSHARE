@@ -1,0 +1,58 @@
+@use '../stylesheets/mixin' as mixin;
+
+.nav {
+  position: absolute;
+  z-index: mixin.$z_bargermenu;
+  top: 100%;
+  right: 0;
+  visibility: hidden;
+  width: 220px;
+  transition: all 0.7s;
+  transform: translateY(-20px);
+  opacity: 0;
+  border: 3px solid mixin.$bgColor;
+  border-radius: 10px;
+  background-color: mixin.$headerBgColor;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.35);
+
+  &.isOpened {
+    visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.navItem {
+  &:not(:first-child) {
+    margin-top: 15px;
+  }
+}
+
+.navLink {
+  display: block;
+  padding: 10px 20px;
+  font-size: mixin.rem(18);
+  font-weight: bold;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: darken(mixin.$headerBgColor, 10%);
+  }
+
+  &:active {
+    background-color: mixin.$headerBgColor;
+    box-shadow: inset 0 0 5px 5px darken(mixin.$headerBgColor, 10%);
+  }
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}

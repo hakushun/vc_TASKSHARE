@@ -1,0 +1,30 @@
+@use '../stylesheets/mixin' as mixin;
+
+.statusList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.statusItem {
+  display: flex;
+  width: 100%;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.statusButton {
+  padding: 5px 0;
+  transition: all 0.3s;
+  border: 5px solid mixin.$bgColor;
+  border-radius: 20px;
+  background-color: mixin.$bgColor;
+  flex: 1;
+
+  &:hover {
+    background-color: mixin.$statusListColor;
+  }
+}

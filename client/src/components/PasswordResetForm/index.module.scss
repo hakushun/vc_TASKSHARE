@@ -1,0 +1,116 @@
+@use '../stylesheets/mixin' as mixin;
+
+.root {
+  position: absolute;
+  z-index: mixin.$z_form;
+  top: 50%;
+  left: 50%;
+  overflow-y: auto;
+  width: min(90vw, 500px);
+  padding: 30px 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background-color: mixin.$bgColor;
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+}
+
+.form {
+  max-width: 375px;
+  margin: 10px auto 0;
+  padding: 0 16px;
+
+  & > fieldset {
+    border: none;
+
+    & > legend {
+      margin: 0 auto;
+    }
+  }
+}
+
+.title {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(18);
+  }
+}
+
+.inputWrapper {
+  margin-top: 15px;
+}
+
+.labelWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  display: block;
+  font-size: mixin.rem(18);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
+
+.input {
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px 8px;
+  font-size: mixin.rem(16);
+  border: 1px solid mixin.$mainTextColor;
+  border-radius: 3px;
+}
+
+.error {
+  height: 1.5em;
+  font-size: mixin.rem(16);
+  color: mixin.$errorColor;
+}
+
+.actionWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 45px;
+  margin-top: 10px;
+
+  @include mixin.mq() {
+    margin-top: 5px;
+  }
+}
+
+.action {
+  padding: 5px 15px;
+  font-size: mixin.rem(18);
+  color: mixin.$bgColor;
+  border: 3px solid mixin.$primaryColor;
+  border-radius: 3px;
+  background-color: mixin.$primaryColor;
+  box-shadow: 0 3px 5px 0 mixin.$mainTextColor;
+
+  @include mixin.mq() {
+    padding: 5px 10px;
+    font-size: mixin.rem(16);
+  }
+
+  &:hover,
+  &:focus {
+    color: mixin.$primaryColor;
+    border: 3px solid mixin.$primaryColor;
+    background-color: mixin.$bgColor;
+  }
+
+  &:active {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+}
