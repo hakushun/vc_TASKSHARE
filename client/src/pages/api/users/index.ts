@@ -1,11 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyIdToken } from '../../../libs/auth/firebaseAdmin';
+import { getInstance } from '../../../libs/db/getInstance';
+import { Userdata } from '../../../redux/modules/users';
 
 const users = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
-  let user = {};
+  const db = getInstance();
+  let user: Userdata;
+  let target;
 
   switch (req.method) {
     case 'POST':
@@ -14,7 +18,17 @@ const users = async (
         createdAt: new Date().getTime(),
         updatedAt: new Date().getTime(),
       };
-      return res.status(200).json(user);
+
+      // すでに登録済みであれば、DBへの登録はしないでreturn
+      target = await db.collection('users').doc(user.id).get();
+      if (target.exists) break;
+
+      db.collection('users')
+        .doc(user.id)
+        .set({ ...user })
+        .then(() => res.status(200).json({ ...user }))
+        .catch((error) => res.status(500).json(error));
+      break;
 
     case 'PUT':
       try {
@@ -24,13 +38,21 @@ const users = async (
           ...req.body,
           updatedAt: new Date().getTime(),
         };
-        return res.status(200).json(user);
+
+        db.collection('users')
+          .doc(user.id)
+          .set({ ...user }, { merge: true })
+          .then(() => res.status(200).json({ ...user }))
+          .catch((error) => res.status(500).json(error));
+        break;
       } catch (error) {
-        return res.status(403).json(error);
+        res.status(403).json(error);
+        break;
       }
 
     default:
-      return res.status(200).json(user);
+      res.status(400);
+      break;
   }
 };
 
