@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useFirestore } from '../../libs/db/useFirestore';
 import { remove } from '../../redux/modules/activities';
 import { Activity, edit } from '../../redux/modules/activity';
 import { selectUsers } from '../../redux/modules/users';
@@ -10,6 +11,7 @@ type Props = {
 };
 export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const dispatch = useDispatch();
+  const { fetchActivities } = useFirestore();
   const users = useSelector(selectUsers);
 
   const handleEdit = (id: string) => {
@@ -18,6 +20,12 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const handleRemove = (id: string) => {
     dispatch(remove({ id }));
   };
+
+  useEffect(() => {
+    fetchActivities();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Presentational
       activities={activities}
