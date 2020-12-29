@@ -37,6 +37,8 @@ type Error = {
 };
 const actionCreator = actionCreatorFactory();
 
+export const getProjects = actionCreator<Project[]>('GET_PROJECTS');
+
 export const createActions = actionCreator.async<CreatePayload, Project, Error>(
   'CREATE_PROJECT',
 );
@@ -69,6 +71,10 @@ export const remove = (body: RemovePayload): StepAction =>
 const INITIAL_STATE: Projects = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(getProjects, (state, payload) => ({
+    ...state,
+    list: [...payload],
+  }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
   .case(createActions.done, (state, { result }) => ({
     ...state,
