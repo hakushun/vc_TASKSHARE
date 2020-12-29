@@ -1,12 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { verifyIdToken } from '../../../libs/auth/firebaseAdmin';
+import { getInstance } from '../../../libs/db/getInstance';
+import { Project } from '../../../redux/modules/project';
 
 const projects = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> => {
+  const db = getInstance();
   const { token, id } = JSON.parse(req.cookies.auth);
-  let project = {};
+  let project: Project;
 
   try {
     await verifyIdToken(token);
@@ -15,24 +18,53 @@ const projects = async (
         project = {
           ...req.body,
           userId: id,
-          id: new Date().getTime().toString(),
           createdAt: new Date().getTime(),
           updatedAt: new Date().getTime(),
         };
-        return res.status(200).json(project);
+
+        db.collection('projects')
+          .add({ ...project })
+          .then((docRef) => {
+            project = {
+              ...project,
+              id: docRef.id,
+            };
+            db.collection('projects')
+              .doc(docRef.id)
+              .update({
+                id: docRef.id,
+              })
+              .then(() => {
+                res.status(200).json(project);
+              })
+              .catch((error) => {
+                res.status(500).json(error);
+              });
+          })
+          .catch((error) => {
+            res.status(500).json(error);
+          });
+        break;
 
       case 'PUT':
         project = {
           ...req.body,
           updatedAt: new Date().getTime(),
         };
-        return res.status(200).json(project);
+
+        db.collection('projects')
+          .doc(project.id)
+          .set({ ...project }, { merge: true })
+          .then(() => res.status(200).json(project))
+          .catch((error) => res.status(500).json(error));
+        break;
 
       default:
-        return res.status(200).json(project);
+        res.status(400);
+        break;
     }
   } catch (error) {
-    return res.status(403).json(error);
+    res.status(403).json(error);
   }
 };
 
