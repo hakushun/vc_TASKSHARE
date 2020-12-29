@@ -34,6 +34,8 @@ type Error = {
 };
 const actionCreator = actionCreatorFactory();
 
+export const getActivities = actionCreator<Activity[]>('GET_ACTIVITIES');
+
 export const createActions = actionCreator.async<
   CreatePayload,
   Activity,
@@ -70,6 +72,10 @@ export const remove = (body: RemovePayload): StepAction =>
 const INITIAL_STATE: Activities = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(getActivities, (state, payload) => ({
+    ...state,
+    list: [...payload],
+  }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
   .case(createActions.done, (state, { result }) => ({
     ...state,
