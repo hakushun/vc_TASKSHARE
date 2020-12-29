@@ -28,6 +28,8 @@ type Error = {
 };
 const actionCreator = actionCreatorFactory();
 
+export const getUsers = actionCreator<Userdata[]>('GET_USERS');
+
 export const createActions = actionCreator.async<UserPayload, Userdata, Error>(
   'CREATE_USER',
 );
@@ -60,6 +62,10 @@ export const remove = (body: RemovePayload): StepAction =>
 const INITIAL_STATE: Users = { list: [], isLoading: false };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
+  .case(getUsers, (state, payload) => ({
+    ...state,
+    list: [...payload],
+  }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
   .case(createActions.done, (state, { result }) => ({
     ...state,
