@@ -3,11 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { logoutUser } from '../../redux/modules/user';
-import { removeUserCookie } from './userCookies';
+import { removeUserCookie, setUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
 import initFirebase from '../../libs/auth/initFirebase';
 import { alertError } from './alertError';
 import { create } from '../../redux/modules/users';
+import { mapAuthData } from './mapUserData';
 
 // TODO: 型修正
 export const useAuth = (): any => {
@@ -24,7 +25,16 @@ export const useAuth = (): any => {
     setIsLoading(true);
     try {
       const { user } = await firebase.auth().signInWithPopup(googleProvider);
-      dispatch(create({ id: user!.uid, username: user!.displayName || '' }));
+
+      if (!user) return;
+
+      const authData = await mapAuthData(user);
+      setUserCookie(authData);
+
+      dispatch(
+        create({ id: user.uid, username: user.displayName || 'undefined' }),
+      );
+
       router.push('/mypage');
       setIsLoading(false);
     } catch (error) {
@@ -44,9 +54,16 @@ export const useAuth = (): any => {
       const { user } = await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password);
+
+      if (!user) return;
+
+      const authData = await mapAuthData(user);
+      setUserCookie(authData);
+
       dispatch(
-        create({ id: user!.uid, username: user!.displayName || 'undefined' }),
+        create({ id: user.uid, username: user.displayName || 'undefined' }),
       );
+
       router.push('/mypage');
       setIsLoading(false);
     } catch (error) {
