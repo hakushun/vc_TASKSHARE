@@ -42,6 +42,13 @@ export const selectIsAuth = createSelector(
 );
 
 export const selectUser = createSelector(
-  [(state: RootState) => state.ui.user],
-  (user) => user,
+  [
+    (state: RootState) => state.ui.user,
+    (state: RootState) => state.resources.users.list,
+  ],
+  (user, users) => {
+    const target = users.find((usr) => usr.id === user.id);
+    if (!target) return { id: '', username: '', createdAt: 0, updatedAt: 0 };
+    return target;
+  },
 );
