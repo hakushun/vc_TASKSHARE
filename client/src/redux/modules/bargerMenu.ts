@@ -21,7 +21,7 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   }))
   .case(logoutUser, (state) => ({
     ...state,
-    bargerMenu: !state.bargerMenu,
+    bargerMenu: false,
   }));
 
 export default reducer;
