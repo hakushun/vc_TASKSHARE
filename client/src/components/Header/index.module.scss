@@ -6,7 +6,6 @@
 }
 
 .inner {
-  position: relative;
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
@@ -52,8 +51,25 @@
 
   @include mixin.mq() {
     width: 120px;
-    height: 30px;
+    height: 40px;
     background-image: url("/images/logo_s.png");
+  }
+}
+
+.menu {
+  display: none;
+  width: 44px;
+  height: 44px;
+  vertical-align: middle;
+
+  @include mixin.mq() {
+    display: block;
+  }
+}
+
+.nav {
+  @include mixin.mq() {
+    display: none;
   }
 }
 
