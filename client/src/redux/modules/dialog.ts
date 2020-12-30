@@ -5,15 +5,23 @@ import { RootState } from './reducers';
 import {
   createActions as createProjectActions,
   updateActions as updateProjectActions,
+  removeActions as removeProjectActions,
 } from './projects';
 import {
   createActions as createTaskActions,
   updateActions as updateTaskActions,
+  removeActions as removeTaskActions,
 } from './tasks';
 import {
   createActions as createActivityActions,
   updateActions as updateActivityActions,
+  removeActions as removeActivityActions,
 } from './activities';
+import {
+  createActions as createUserActions,
+  removeActions as removeUserActions,
+  updateActions as updateUserActions,
+} from './users';
 
 const actionCreator = actionCreatorFactory();
 
@@ -49,6 +57,27 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     message: {
       title,
       description,
+    },
+  }))
+  .case(createUserActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
+    },
+  }))
+  .case(updateUserActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
+    },
+  }))
+  .case(removeUserActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
     },
   }))
   .case(createProjectActions.failed, (_state, { error }) => ({
@@ -87,6 +116,27 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     },
   }))
   .case(updateActivityActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
+    },
+  }))
+  .case(removeProjectActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
+    },
+  }))
+  .case(removeTaskActions.failed, (_state, { error }) => ({
+    isOpened: true,
+    message: {
+      title: error.name,
+      description: error.message,
+    },
+  }))
+  .case(removeActivityActions.failed, (_state, { error }) => ({
     isOpened: true,
     message: {
       title: error.name,

@@ -17,6 +17,7 @@ import {
 } from './activities';
 import { RootState } from './reducers';
 import { add as addTask, edit as editTask } from './task';
+import { removeActions } from './users';
 
 const actionCreator = actionCreatorFactory();
 
@@ -60,6 +61,10 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(toggleDeleteForm, (state, payload) => ({
     ...state,
     deleteForm: payload,
+  }))
+  .case(removeActions.done, (state) => ({
+    ...state,
+    deleteForm: false,
   }))
   .case(toggleResetPasswordForm, (state, payload) => ({
     ...state,
