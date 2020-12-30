@@ -2,15 +2,15 @@ import clsx from 'clsx';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
 import { composeValidators, isRequired } from '../../libs/validations';
-import { User } from '../../redux/modules/user';
+import { Userdata } from '../../redux/modules/users';
 import { DeleteForm } from '../DeleteForm';
 import { Loading } from '../Loading';
 import styles from './index.module.scss';
 
 type Props = {
-  initialValues: User;
+  initialValues: Userdata;
   isLoading: boolean;
-  handleUpdate: (_value: User) => void;
+  handleUpdate: (_value: Userdata) => void;
   openModal: () => void;
 };
 export const Profile: React.VFC<Props> = ({

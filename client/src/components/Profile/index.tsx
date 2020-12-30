@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
 import { useUser } from '../../libs/auth/useUser';
 import { toggleDeleteForm } from '../../redux/modules/modal';
-import { selectUser, User } from '../../redux/modules/user';
+import { selectUser } from '../../redux/modules/user';
+import { Userdata } from '../../redux/modules/users';
 import { Profile as Presentational } from './Profile';
 
 const Component: React.VFC = () => {
@@ -11,8 +12,8 @@ const Component: React.VFC = () => {
   const user = useSelector(selectUser);
   const { isLoading, updateUsername } = useUser();
 
-  const handleUpdate = (value: User) => {
-    updateUsername(value.username);
+  const handleUpdate = (value: Userdata) => {
+    updateUsername(value);
   };
   const openModal = () => {
     dispatch(toggleDeleteForm(true));

@@ -6,7 +6,7 @@ import { emitError } from '../../redux/modules/dialog';
 import initFirebase from './initFirebase';
 import { alertError } from './alertError';
 import { removeUserCookie } from './userCookies';
-import { remove, update } from '../../redux/modules/users';
+import { remove, update, Userdata } from '../../redux/modules/users';
 
 // TODO: 型修正
 export const useUser = (): any => {
@@ -17,7 +17,7 @@ export const useUser = (): any => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const updateUsername = async (username: string) => {
+  const updateUsername = async (userdata: Userdata) => {
     setIsLoading(true);
     const user = firebase.auth().currentUser;
 
@@ -26,8 +26,8 @@ export const useUser = (): any => {
       return;
     }
     try {
-      await user.updateProfile({ displayName: username });
-      dispatch(update({ id: user.uid, username }));
+      await user.updateProfile({ displayName: userdata.username });
+      dispatch(update({ ...userdata }));
       setIsLoading(false);
     } catch (error) {
       dispatch(emitError(alertError(error)));
