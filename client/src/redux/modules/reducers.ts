@@ -4,6 +4,7 @@ import users from './users';
 import dialog from './dialog';
 import dropdown from './dropdown';
 import modal from './modal';
+import bargerMenu from './bargerMenu';
 import sort from './sort';
 import project from './project';
 import projects from './projects';
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     dialog,
     dropdown,
     modal,
+    bargerMenu,
     sort,
     project,
     task,
