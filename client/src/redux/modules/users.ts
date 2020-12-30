@@ -8,16 +8,22 @@ import { deleteUser, postUser, putUser } from '../../libs/axios';
 export type Userdata = {
   id: string;
   username: string;
-  createdAt?: number;
-  updatedAt?: number;
+  createdAt: number;
+  updatedAt: number;
 };
 type Users = {
   list: Userdata[];
   isLoading: boolean;
 };
-export type UserPayload = {
+export type CreatePayload = {
   id: string;
   username: string;
+};
+export type UpdatePayload = {
+  id: string;
+  username: string;
+  createdAt: number;
+  updatedAt: number;
 };
 export type RemovePayload = {
   id: string;
@@ -30,19 +36,23 @@ const actionCreator = actionCreatorFactory();
 
 export const getUsers = actionCreator<Userdata[]>('GET_USERS');
 
-export const createActions = actionCreator.async<UserPayload, Userdata, Error>(
-  'CREATE_USER',
-);
-export const create = (body: UserPayload): StepAction =>
+export const createActions = actionCreator.async<
+  CreatePayload,
+  Userdata,
+  Error
+>('CREATE_USER');
+export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postUser(body), [
     ({ data }) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
-export const updateActions = actionCreator.async<UserPayload, Userdata, Error>(
-  'UPDATE_USER',
-);
-export const update = (body: UserPayload): StepAction =>
+export const updateActions = actionCreator.async<
+  UpdatePayload,
+  Userdata,
+  Error
+>('UPDATE_USER');
+export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putUser(body), [
     ({ data }) => updateActions.done({ params: body, result: data }),
     (error) => updateActions.failed({ params: body, error }),
