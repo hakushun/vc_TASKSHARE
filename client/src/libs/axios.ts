@@ -26,6 +26,19 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+export const postLogin = async (data: {
+  id: string;
+  email: string | null;
+  token: string;
+}): Promise<void> => {
+  instance.post(`${baseUrl}/auth/login`, data);
+};
+
+export const postLogout = async (): Promise<void> => {
+  instance.post(`${baseUrl}/auth/logout`);
+};
 export const postProject = async (data: CreateProject): Promise<void> =>
   instance.post('/api/projects', data);
 
