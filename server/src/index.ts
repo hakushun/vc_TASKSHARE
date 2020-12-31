@@ -33,9 +33,10 @@ export const createNestServer = async (expressInstance) => {
   app.use(cookieParser());
   app.use(helmet());
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: configService.get<string>('BASE_URL'),
     allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, preflight',
-    credentials: true
+    credentials: true,
+    methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
   });
 
   return app.init();
