@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { emitError } from '../../redux/modules/dialog';
 import initFirebase from './initFirebase';
 import { alertError } from './alertError';
-import { removeUserCookie } from './userCookies';
 import { remove, update, Userdata } from '../../redux/modules/users';
+import { postLogout } from '../axios';
 
 // TODO: 型修正
 export const useUser = (): any => {
@@ -60,7 +60,7 @@ export const useUser = (): any => {
       dispatch(remove({ id: user.uid }));
       await user.delete();
       router.push('/');
-      removeUserCookie();
+      await postLogout();
       setIsLoading(false);
     } catch (error) {
       dispatch(emitError(alertError(error)));

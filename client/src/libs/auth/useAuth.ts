@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { logoutUser } from '../../redux/modules/user';
-import { removeUserCookie, setUserCookie } from './userCookies';
 import { emitError } from '../../redux/modules/dialog';
 import initFirebase from '../../libs/auth/initFirebase';
 import { alertError } from './alertError';
 import { create } from '../../redux/modules/users';
 import { mapAuthData } from './mapUserData';
+import { postLogin, postLogout } from '../axios';
 
 // TODO: 型修正
 export const useAuth = (): any => {
@@ -29,7 +29,7 @@ export const useAuth = (): any => {
       if (!user) return;
 
       const authData = await mapAuthData(user);
-      setUserCookie(authData);
+      await postLogin(authData);
 
       dispatch(
         create({ id: user.uid, username: user.displayName || 'undefined' }),
@@ -58,7 +58,7 @@ export const useAuth = (): any => {
       if (!user) return;
 
       const authData = await mapAuthData(user);
-      setUserCookie(authData);
+      await postLogin(authData);
 
       dispatch(
         create({ id: user.uid, username: user.displayName || 'undefined' }),
@@ -80,7 +80,15 @@ export const useAuth = (): any => {
     const { email, password } = value;
 
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
+      const { user } = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+
+      if (!user) return;
+
+      const authData = await mapAuthData(user);
+      await postLogin(authData);
+
       router.push('/mypage');
       setIsLoading(false);
     } catch (error) {
@@ -89,18 +97,16 @@ export const useAuth = (): any => {
     }
   };
 
-  const logout = async (): Promise<void> =>
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        removeUserCookie();
-        dispatch(logoutUser());
-        router.push('/');
-      })
-      .catch((error) => {
-        dispatch(emitError(alertError(error)));
-      });
+  const logout = async (): Promise<void> => {
+    try {
+      await firebase.auth().signOut();
+      await postLogout();
+      dispatch(logoutUser());
+      router.push('/');
+    } catch (error) {
+      dispatch(emitError(alertError(error)));
+    }
+  };
 
   return { isLoading, signinWithGoogle, signup, signin, logout };
 };

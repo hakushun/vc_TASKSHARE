@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { removeUserCookie, setUserCookie } from '../libs/auth/userCookies';
 import { mapAuthData, mapUserData } from '../libs/auth/mapUserData';
 import { authUser, selectIsAuth } from '../redux/modules/user';
 import { PageLoader } from '../components/PageLoader';
 import { useFirestore } from '../libs/db/useFirestore';
+import { postLogin, postLogout } from '../libs/axios';
 
 export const withAuth = (Component: React.FC): React.FC => (
   props: any,
@@ -24,9 +24,9 @@ export const withAuth = (Component: React.FC): React.FC => (
         const userData = mapUserData(usr);
         dispatch(authUser(userData));
         const authData = await mapAuthData(usr);
-        setUserCookie(authData);
+        await postLogin(authData);
       } else {
-        removeUserCookie();
+        await postLogout();
         dispatch(authUser(null));
         router.push('/');
       }
