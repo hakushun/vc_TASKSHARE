@@ -15,8 +15,9 @@ import {
   UpdatePayload as UpdateTask,
 } from '../redux/modules/tasks';
 import {
+  CreatePayload as CreateUser,
   RemovePayload as RemoveUser,
-  UserPayload,
+  UpdatePayload as UpdateUser,
 } from '../redux/modules/users';
 
 const instance = axios.create({
@@ -39,38 +40,39 @@ export const postLogin = async (data: {
 export const postLogout = async (): Promise<void> => {
   instance.post(`${baseUrl}/auth/logout`);
 };
+
 export const postProject = async (data: CreateProject): Promise<void> =>
-  instance.post('/api/projects', data);
+  instance.post(`${baseUrl}/projects`, data);
 
 export const postTask = async (data: CreateTask): Promise<void> =>
-  instance.post('/api/tasks', data);
+  instance.post(`${baseUrl}/tasks`, data);
 
 export const postActivity = async (data: CreateActivity): Promise<void> =>
-  instance.post('/api/activities', data);
+  instance.post(`${baseUrl}/activities`, data);
 
-export const postUser = async (data: UserPayload): Promise<void> =>
-  instance.post('/api/users', data);
+export const postUser = async (data: CreateUser): Promise<void> =>
+  instance.post(`${baseUrl}/users`, data);
 
 export const putProject = async (data: UpdateProject): Promise<void> =>
-  instance.put('/api/projects', data);
+  instance.put(`${baseUrl}/projects`, data);
 
 export const putTask = async (data: UpdateTask): Promise<void> =>
-  instance.put('/api/tasks', data);
+  instance.put(`${baseUrl}/tasks`, data);
 
 export const putActivity = async (data: UpdateActivity): Promise<void> =>
-  instance.put('/api/activities', data);
+  instance.put(`${baseUrl}/activities`, data);
 
-export const putUser = async (data: UserPayload): Promise<void> =>
-  instance.put('/api/users', data);
+export const putUser = async (data: UpdateUser): Promise<void> =>
+  instance.put(`${baseUrl}/users`, data);
 
 export const deleteProject = async ({ id }: RemoveProject): Promise<void> =>
-  instance.delete(`/api/projects/${id}`);
+  instance.delete(`${baseUrl}/projects/${id}`);
 
 export const deleteTask = async ({ id }: RemoveTask): Promise<void> =>
-  instance.delete(`/api/tasks/${id}`);
+  instance.delete(`${baseUrl}/tasks/${id}`);
 
 export const deleteActivity = async ({ id }: RemoveActivity): Promise<void> =>
-  instance.delete(`/api/activities/${id}`);
+  instance.delete(`${baseUrl}/activities/${id}`);
 
 export const deleteUser = async ({ id }: RemoveUser): Promise<void> =>
-  instance.delete(`/api/users/${id}`);
+  instance.delete(`${baseUrl}/users/${id}`);
