@@ -74,6 +74,26 @@ export const putProject = async (data: UpdateProject): Promise<void> => {
 };
 export const deleteProject = async (data: RemoveProject): Promise<void> => {
   await db.collection('projects').doc(data.id).delete();
+  await db
+    .collection('tasks')
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        if (doc.data().projectId === data.id) {
+          doc.ref.delete();
+        }
+      });
+    });
+  await db
+    .collection('activities')
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        if (doc.data().projectId === data.id) {
+          doc.ref.delete();
+        }
+      });
+    });
 };
 
 // CRUD Tasks
@@ -98,6 +118,16 @@ export const putTask = async (data: UpdateTask): Promise<void> => {
 };
 export const deleteTask = async (data: RemoveTask): Promise<void> => {
   await db.collection('tasks').doc(data.id).delete();
+  await db
+    .collection('activities')
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        if (doc.data().taskId === data.id) {
+          doc.ref.delete();
+        }
+      });
+    });
 };
 
 // CRUD Activities
