@@ -23,10 +23,14 @@ type FocusPayload = {
   id: string;
   projectId: string;
 };
+type AddPayload = {
+  userId: string;
+  projectId?: string;
+};
 const actionCreator = actionCreatorFactory();
 
 export const focus = actionCreator<FocusPayload>('FOCUS_TASK');
-export const add = actionCreator<{ projectId: string } | null>('ADD_TASK');
+export const add = actionCreator<AddPayload>('ADD_TASK');
 export const edit = actionCreator<{ id: string }>('EDIT_TASK');
 
 const INITIAL_STATE: Task = {
@@ -44,13 +48,11 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     id: payload.id,
     projectId: payload.projectId,
   }))
-  .case(add, (_state, payload) => {
-    if (!payload) return { ...INITIAL_STATE };
-    return {
-      ...INITIAL_STATE,
-      projectId: payload.projectId,
-    };
-  })
+  .case(add, (_state, payload) => ({
+    ...INITIAL_STATE,
+    projectId: payload.projectId || '',
+    userId: payload.userId,
+  }))
   .case(edit, (state, payload) => ({
     ...state,
     id: payload.id,

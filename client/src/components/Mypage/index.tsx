@@ -19,7 +19,7 @@ const Component: React.VFC = () => {
     dispatch(addProject({ userId: user.id }));
   };
   const handleAddTask = () => {
-    dispatch(addTask(null));
+    dispatch(addTask({ userId: user.id }));
   };
   return (
     <Presentational
