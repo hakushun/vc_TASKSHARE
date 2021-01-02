@@ -33,7 +33,7 @@ const Component: React.VFC = () => {
     dispatch(addTask({ projectId, userId: user.id }));
   };
   const hadleAddActivity = (projectId: string) => {
-    dispatch(addActivity({ projectId }));
+    dispatch(addActivity({ projectId, userId: user.id }));
   };
   const handleRemoveProject = (id: string) => {
     dispatch(remove({ id }));

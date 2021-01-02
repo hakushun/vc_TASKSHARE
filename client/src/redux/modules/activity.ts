@@ -15,9 +15,11 @@ export interface Activity {
 export type AddPayload =
   | {
       projectId: string;
+      userId: string;
     }
   | {
       taskId: string;
+      userId: string;
     };
 const actionCreator = actionCreatorFactory();
 

@@ -45,7 +45,7 @@ const Component: React.VFC = () => {
     dispatch(editTask({ id }));
   };
   const hadleAddActivity = (taskId: string) => {
-    dispatch(addActivity({ taskId }));
+    dispatch(addActivity({ taskId, userId: user.id }));
   };
   const handleRemoveTask = (id: string) => {
     dispatch(remove({ id }));
