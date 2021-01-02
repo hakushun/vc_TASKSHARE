@@ -22,12 +22,12 @@ export const Header: React.VFC<Props> = ({ isAuth, logout, handletoggle }) => (
             <>
               <li className={styles.navItem}>
                 <Link href="/signin">
-                  <a className={styles.navLink}>SignIn</a>
+                  <a className={styles.navLink}>LOGIN</a>
                 </Link>
               </li>
               <li className={styles.navItem}>
                 <Link href="/signup">
-                  <a className={styles.navLink}>SignUp</a>
+                  <a className={styles.navLink}>SIGNUP</a>
                 </Link>
               </li>
             </>
