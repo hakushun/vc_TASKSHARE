@@ -12,3 +12,29 @@
   align-items: center;
   margin-top: 100px;
 }
+
+.linkWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 15px;
+  font-size: mixin.rem(20);
+  border-radius: 5px;
+  background-color: mixin.$headerBgColor;
+
+  &:hover {
+    background-color: darken(mixin.$headerBgColor, 10%);
+  }
+
+  &:active {
+    background-color: mixin.$headerBgColor;
+    box-shadow: inset 0 0 5px 5px darken(mixin.$headerBgColor, 10%);
+  }
+}
