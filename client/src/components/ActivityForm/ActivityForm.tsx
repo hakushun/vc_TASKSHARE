@@ -92,7 +92,7 @@ export const ActivityForm: React.VFC<Props> = ({
                   type="submit"
                   disabled={isLoading}
                   className={styles.action}>
-                  {initialValues.id ? 'Update' : 'Create'}
+                  {initialValues.id ? 'Update Activity' : 'Create Activity'}
                 </button>
               )}
             </div>

@@ -216,7 +216,7 @@ export const TaskForm: React.VFC<Props> = ({
                   type="submit"
                   disabled={isLoading}
                   className={styles.action}>
-                  {initialValues.id ? 'Update' : 'Create'}
+                  {initialValues.id ? 'Update Task' : 'Create Task'}
                 </button>
               )}
             </div>
