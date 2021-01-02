@@ -18,6 +18,7 @@ export type CreatePayload = {
   dueDate: string;
   description: string;
   status: TaskStatus;
+  userId: string;
 };
 export type UpdatePayload = {
   id: string;
@@ -42,18 +43,22 @@ const actionCreator = actionCreatorFactory();
 
 export const getTasks = actionCreator<Task[]>('GET_TASKS');
 
-export const createActions = actionCreator.async<CreatePayload, Task, Error>(
-  'CREATE_TASK',
-);
+export const createActions = actionCreator.async<
+  CreatePayload,
+  undefined,
+  Error
+>('CREATE_TASK');
 export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postTask(body), [
     (data) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
-export const updateActions = actionCreator.async<UpdatePayload, Task, Error>(
-  'UPDATE_TASK',
-);
+export const updateActions = actionCreator.async<
+  UpdatePayload,
+  undefined,
+  Error
+>('UPDATE_TASK');
 export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putTask(body), [
     (data) => updateActions.done({ params: body, result: data }),
@@ -62,7 +67,7 @@ export const update = (body: UpdatePayload): StepAction =>
 
 export const removeActions = actionCreator.async<
   RemovePayload,
-  RemovePayload,
+  undefined,
   Error
 >('REMOVE_TASK');
 export const remove = (body: RemovePayload): StepAction =>
