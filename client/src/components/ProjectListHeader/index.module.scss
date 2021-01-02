@@ -2,11 +2,11 @@
 
 .inner {
   display: flex;
-  padding: 0 10px;
-  border-radius: 20px;
-  background-color: lighten(mixin.$headerBgColor, 10%);
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  background-color: lighten(mixin.$headerBgColor, 10%);
+  border-radius: 20px;
 
   @include mixin.mq() {
     font-size: mixin.rem(14);
@@ -15,15 +15,15 @@
 
 .progress {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-width: 85px;
 }
 
 .openTask {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-width: 110px;
 }
 

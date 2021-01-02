@@ -2,14 +2,14 @@
 
 .home {
   max-width: 750px;
-  margin: 0 auto;
   padding: 20px 16px 10px;
+  margin: 0 auto;
 }
 
 .inner {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin-top: 100px;
 }
 
@@ -22,12 +22,12 @@
 
 .link {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 5px 15px;
   font-size: mixin.rem(20);
-  border-radius: 5px;
   background-color: mixin.$headerBgColor;
+  border-radius: 5px;
 
   &:hover {
     background-color: darken(mixin.$headerBgColor, 10%);

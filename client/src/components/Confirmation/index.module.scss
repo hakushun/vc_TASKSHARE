@@ -2,16 +2,16 @@
 
 .confirmation {
   position: absolute;
-  z-index: mixin.$z_form;
   top: 50%;
   left: 50%;
-  overflow-y: auto;
+  z-index: mixin.$z_form;
   width: min(90vw, 500px);
   height: min(80vh, 300px);
   padding: 30px 16px;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
+  overflow-y: auto;
   background-color: mixin.$bgColor;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
 }
 
 .close {
@@ -35,19 +35,19 @@
 
 .message {
   display: flex;
+  flex: 1;
   align-items: center;
   margin-top: 15px;
   font-size: mixin.rem(18);
-  flex: 1;
 }
 
 .actionWrapper {
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   width: 100%;
   min-height: 45px;
   margin-top: 20px;
-  justify-content: space-evenly;
-  align-items: center;
 }
 
 .action {
@@ -68,14 +68,14 @@
   }
 
   &:active {
-    transform: translateY(3px);
     box-shadow: none;
+    transform: translateY(3px);
   }
 }
 
 .delete {
-  border: 3px solid mixin.$primaryColor;
   background-color: mixin.$primaryColor;
+  border: 3px solid mixin.$primaryColor;
 
   &:hover,
   &:focus {
@@ -85,8 +85,8 @@
 }
 
 .cancel {
-  border: 3px solid mixin.$primaryLightColor;
   background-color: mixin.$primaryLightColor;
+  border: 3px solid mixin.$primaryLightColor;
 
   &:hover,
   &:focus {

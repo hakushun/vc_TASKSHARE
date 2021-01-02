@@ -2,9 +2,9 @@
 
 .statusList {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
 .statusItem {
@@ -17,12 +17,12 @@
 }
 
 .statusButton {
+  flex: 1;
   padding: 5px 0;
-  transition: all 0.3s;
+  background-color: mixin.$bgColor;
   border: 5px solid mixin.$bgColor;
   border-radius: 20px;
-  background-color: mixin.$bgColor;
-  flex: 1;
+  transition: all 0.3s;
 
   &:hover {
     background-color: mixin.$statusListColor;

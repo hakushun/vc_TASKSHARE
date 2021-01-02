@@ -2,8 +2,8 @@
 
 .form {
   max-width: 375px;
-  margin: 10px auto 0;
   padding: 0 16px;
+  margin: 10px auto 0;
 
   & > fieldset {
     border: none;
@@ -38,8 +38,8 @@
 
 .input {
   width: 100%;
-  margin-top: 5px;
   padding: 5px 8px;
+  margin-top: 5px;
   font-size: mixin.rem(16);
   border: 1px solid mixin.$mainTextColor;
   border-radius: 3px;
@@ -53,8 +53,8 @@
 
 .actionWrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 45px;
   margin-top: 10px;
 
@@ -67,9 +67,9 @@
   padding: 5px 15px;
   font-size: mixin.rem(18);
   color: mixin.$bgColor;
+  background-color: mixin.$primaryColor;
   border: 3px solid mixin.$primaryColor;
   border-radius: 3px;
-  background-color: mixin.$primaryColor;
   box-shadow: 0 3px 5px 0 mixin.$mainTextColor;
 
   @include mixin.mq() {
@@ -80,25 +80,26 @@
   &:hover,
   &:focus {
     color: mixin.$primaryColor;
-    border: 3px solid mixin.$primaryColor;
     background-color: mixin.$bgColor;
+    border: 3px solid mixin.$primaryColor;
   }
 
   &:active {
-    transform: translateY(3px);
     box-shadow: none;
+    transform: translateY(3px);
   }
 }
 
 .provider {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin-top: 20px;
 }
 
 .google {
   display: flex;
+  align-items: center;
   max-width: 220px;
   min-height: 40px;
   padding: 8px 16px;
@@ -106,7 +107,6 @@
   text-align: left;
   background-color: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  align-items: center;
 }
 
 .googleImg {
