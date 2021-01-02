@@ -1,5 +1,10 @@
 import { getInstance } from './getInstance';
 import {
+  CreatePayload as CreateActivity,
+  RemovePayload as RemoveActivity,
+  UpdatePayload as UpdateActivity,
+} from '../../redux/modules/activities';
+import {
   CreatePayload as CreateProject,
   RemovePayload as RemoveProject,
   UpdatePayload as UpdateProject,
@@ -94,4 +99,28 @@ export const putTask = async (data: UpdateTask): Promise<void> => {
 };
 export const deleteTask = async (data: RemoveTask): Promise<void> => {
   await db.collection('tasks').doc(data.id).delete();
+};
+
+// CRUD Activities
+export const postActivity = async (data: CreateActivity): Promise<void> => {
+  const activity = {
+    ...data,
+    createdAt: new Date().getTime(),
+    updatedAt: new Date().getTime(),
+  };
+  const docRef = await db.collection('activities').add({ ...activity });
+  await db.collection('activities').doc(docRef.id).update({ id: docRef.id });
+};
+export const putActivity = async (data: UpdateActivity): Promise<void> => {
+  const activity = {
+    ...data,
+    updatedAt: new Date().getTime(),
+  };
+  await db
+    .collection('activities')
+    .doc(activity.id)
+    .set({ ...activity }, { merge: true });
+};
+export const deleteActivity = async (data: RemoveActivity): Promise<void> => {
+  await db.collection('activities').doc(data.id).delete();
 };
