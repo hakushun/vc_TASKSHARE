@@ -17,7 +17,7 @@ export const Confirmation: React.VFC<Props> = ({
   handleClose,
 }) => (
   <Overlay>
-    <section className={styles.comfirmation}>
+    <section className={styles.confirmation}>
       <button
         type="button"
         aria-label="閉じる"
@@ -26,7 +26,7 @@ export const Confirmation: React.VFC<Props> = ({
         <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
       </button>
       <div className={styles.inner}>
-        <div className={styles.title}>Delete Comfirmation</div>
+        <div className={styles.title}>Delete Confirmation</div>
         <div className={styles.message}>
           Are you sure you want to delete this item?
         </div>
