@@ -7,8 +7,6 @@ import { emitError } from '../../redux/modules/dialog';
 import initFirebase from '../../libs/auth/initFirebase';
 import { alertError } from './alertError';
 import { create } from '../../redux/modules/users';
-import { mapAuthData } from './mapUserData';
-import { postLogin, postLogout } from '../axios';
 
 // TODO: 型修正
 export const useAuth = (): any => {
@@ -27,9 +25,6 @@ export const useAuth = (): any => {
       const { user } = await firebase.auth().signInWithPopup(googleProvider);
 
       if (!user) return;
-
-      const authData = await mapAuthData(user);
-      await postLogin(authData);
 
       dispatch(
         create({ id: user.uid, username: user.displayName || 'undefined' }),
@@ -57,9 +52,6 @@ export const useAuth = (): any => {
 
       if (!user) return;
 
-      const authData = await mapAuthData(user);
-      await postLogin(authData);
-
       dispatch(
         create({ id: user.uid, username: user.displayName || 'undefined' }),
       );
@@ -86,9 +78,6 @@ export const useAuth = (): any => {
 
       if (!user) return;
 
-      const authData = await mapAuthData(user);
-      await postLogin(authData);
-
       router.push('/mypage');
       setIsLoading(false);
     } catch (error) {
@@ -100,7 +89,6 @@ export const useAuth = (): any => {
   const logout = async (): Promise<void> => {
     try {
       await firebase.auth().signOut();
-      await postLogout();
       dispatch(logoutUser());
       router.push('/');
     } catch (error) {
