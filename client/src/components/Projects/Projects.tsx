@@ -28,7 +28,7 @@ export const Projects: React.VFC<Props> = ({
           onClick={() => handleAddProject()}>
           <img
             src="/images/icon-circle-plus.svg"
-            alt="タスクを追加する"
+            alt="プロジェクトを追加する"
             width="30"
             height="30"
           />
