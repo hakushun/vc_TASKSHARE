@@ -17,12 +17,6 @@ export const withAuth = (Component: React.FC): React.FC => (
   const isAuth = useSelector(selectIsAuth);
   const db = getInstance();
 
-  db.collection('users').onSnapshot((snapshot) => {
-    const users: Userdata[] = [];
-    snapshot.forEach((doc) => users.push(doc.data() as Userdata));
-    dispatch(getUsers(users));
-  });
-
   useEffect(() => {
     const cancelAuthListener = firebase.auth().onIdTokenChanged(async (usr) => {
       if (usr) {
@@ -33,6 +27,13 @@ export const withAuth = (Component: React.FC): React.FC => (
         router.push('/');
       }
     });
+
+    db.collection('users').onSnapshot((snapshot) => {
+      const users: Userdata[] = [];
+      snapshot.forEach((doc) => users.push(doc.data() as Userdata));
+      dispatch(getUsers(users));
+    });
+
     return () => {
       cancelAuthListener();
     };
