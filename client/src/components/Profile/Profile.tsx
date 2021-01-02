@@ -60,6 +60,8 @@ export const Profile: React.VFC<Props> = ({
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
                       )}
+                      required
+                      aria-required
                       {...input}
                     />
                   </div>

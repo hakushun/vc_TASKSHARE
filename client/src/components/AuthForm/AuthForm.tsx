@@ -52,6 +52,8 @@ export const AuthForm: React.VFC<Props> = ({
                   placeholder="Email"
                   disabled={isLoading}
                   className={styles.input}
+                  required
+                  aria-required
                   {...input}
                 />
                 <div className={styles.error}>
@@ -83,6 +85,8 @@ export const AuthForm: React.VFC<Props> = ({
                   }
                   disabled={isLoading}
                   className={styles.input}
+                  required
+                  aria-required
                   {...input}
                 />
                 <div className={styles.error}>

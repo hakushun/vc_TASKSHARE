@@ -78,6 +78,8 @@ export const ActivityForm: React.VFC<Props> = ({
                       )}
                       disabled={isLoading}
                       maxLength={3000}
+                      required
+                      aria-required
                       {...input}
                     />
                   )}

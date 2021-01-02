@@ -73,6 +73,8 @@ export const TaskForm: React.VFC<Props> = ({
                           styles.selectbox,
                           meta.touched && meta.error && styles.hasError,
                         )}
+                        required
+                        aria-required
                         {...input}>
                         <option value="">Choose a Project</option>
                         {projects.map((project) => (
@@ -113,6 +115,8 @@ export const TaskForm: React.VFC<Props> = ({
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
                       )}
+                      required
+                      aria-required
                       {...input}
                     />
                   </div>
@@ -142,6 +146,8 @@ export const TaskForm: React.VFC<Props> = ({
                           styles.selectbox,
                           meta.touched && meta.error && styles.hasError,
                         )}
+                        required
+                        aria-required
                         {...input}>
                         <option value="">Assign to User</option>
                         {users.map((user) => (
@@ -180,6 +186,8 @@ export const TaskForm: React.VFC<Props> = ({
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
                       )}
+                      required
+                      aria-required
                       {...input}
                     />
                   </div>

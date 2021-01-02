@@ -73,6 +73,8 @@ export const ProjectForm: React.VFC<Props> = ({
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
                       )}
+                      required
+                      aria-required
                       {...input}
                     />
                   </div>
@@ -102,6 +104,8 @@ export const ProjectForm: React.VFC<Props> = ({
                           styles.selectbox,
                           meta.touched && meta.error && styles.hasError,
                         )}
+                        required
+                        aria-required
                         {...input}>
                         <option value="">Choose a Owner</option>
                         {users.map((user) => (
@@ -140,6 +144,8 @@ export const ProjectForm: React.VFC<Props> = ({
                         styles.input,
                         meta.touched && meta.error && styles.hasError,
                       )}
+                      required
+                      aria-required
                       {...input}
                     />
                   </div>
