@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInstance } from '../../libs/db/getInstance';
-import { getActivities, remove } from '../../redux/modules/activities';
+import {
+  getActivities,
+  remove,
+  selectIsLoading,
+} from '../../redux/modules/activities';
 import { Activity, edit } from '../../redux/modules/activity';
+import { toggleConfirmation } from '../../redux/modules/modal';
 import { selectUser } from '../../redux/modules/user';
 import { selectUsers } from '../../redux/modules/users';
 import { ActivityList as Presentational } from './ActivityList';
@@ -14,6 +19,7 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
   const db = getInstance();
 
   const handleEdit = (id: string) => {
@@ -21,6 +27,9 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   };
   const handleRemove = (id: string) => {
     dispatch(remove({ id }));
+  };
+  const openConfirmation = () => {
+    dispatch(toggleConfirmation(true));
   };
 
   useEffect(() => {
@@ -37,8 +46,10 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
       activities={activities}
       users={users}
       user={user}
+      isLoading={isLoading}
       handleEdit={handleEdit}
       handleRemove={handleRemove}
+      openConfirmation={openConfirmation}
     />
   );
 };

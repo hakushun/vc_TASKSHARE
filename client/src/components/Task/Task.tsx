@@ -13,6 +13,7 @@ import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
 import { Userdata } from '../../redux/modules/users';
+import { Confirmation } from '../Confirmation';
 
 type Props = {
   isOpened: boolean;
@@ -22,12 +23,14 @@ type Props = {
   relatedActivities: Activity[];
   assignUer: Userdata | undefined;
   user: Userdata;
+  isLoading: boolean;
   toggleList: () => void;
   handleFocus: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleEditTask: (_id: string) => void;
   hadleAddActivity: (_taskId: string) => void;
   handleRemoveTask: (_id: string) => void;
+  openConfirmation: () => void;
 };
 export const Task: React.VFC<Props> = ({
   isOpened,
@@ -37,16 +40,23 @@ export const Task: React.VFC<Props> = ({
   relatedActivities,
   assignUer,
   user,
+  isLoading,
   handleFocus,
   toggleList,
   hadleAddTask,
   hadleEditTask,
   hadleAddActivity,
   handleRemoveTask,
+  openConfirmation,
 }) => (
   <>
     <TaskForm />
     <ActivityForm />
+    <Confirmation
+      isLoading={isLoading}
+      id={task.id!}
+      handleRemove={handleRemoveTask}
+    />
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{task.title}</h2>
@@ -129,7 +139,7 @@ export const Task: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.delete}
-            onClick={() => handleRemoveTask(task.id!)}>
+            onClick={() => openConfirmation()}>
             Delete
             <img
               src="/images/icon-trash.svg"

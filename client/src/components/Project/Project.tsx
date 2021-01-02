@@ -11,6 +11,7 @@ import { getStaringDate } from '../../libs/date';
 import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
 import { Userdata } from '../../redux/modules/users';
+import { Confirmation } from '../Confirmation';
 
 type Props = {
   project: typeProject;
@@ -18,10 +19,12 @@ type Props = {
   relatedActivities: Activity[];
   owner: Userdata | undefined;
   user: Userdata;
+  isLoading: boolean;
   hadleEditProject: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleAddActivity: (_projectId: string) => void;
   handleRemoveProject: (_id: string) => void;
+  openConfirmation: () => void;
 };
 export const Project: React.VFC<Props> = ({
   project,
@@ -29,15 +32,22 @@ export const Project: React.VFC<Props> = ({
   relatedActivities,
   owner,
   user,
+  isLoading,
   hadleEditProject,
   hadleAddTask,
   hadleAddActivity,
   handleRemoveProject,
+  openConfirmation,
 }) => (
   <>
     <ProjectForm />
     <TaskForm />
     <ActivityForm />
+    <Confirmation
+      isLoading={isLoading}
+      id={project.id!}
+      handleRemove={handleRemoveProject}
+    />
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{project.title}</h2>
@@ -105,7 +115,7 @@ export const Project: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.delete}
-            onClick={() => handleRemoveProject(project.id!)}>
+            onClick={() => openConfirmation()}>
             Delete
             <img
               src="/images/icon-trash.svg"
