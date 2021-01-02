@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { getStaringDate } from '../../libs/date';
+import { removeActions } from './projects';
 import { RootState } from './reducers';
 import { focus as focusTask } from './task';
 
@@ -19,7 +20,7 @@ export interface Project {
 const actionCreator = actionCreatorFactory();
 
 export const focus = actionCreator<{ id: string }>('FOCUS_PROJECT');
-export const add = actionCreator('ADD_PROJECT');
+export const add = actionCreator<{ userId: string }>('ADD_PROJECT');
 export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 
 const INITIAL_STATE: Project = {
@@ -34,7 +35,10 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     ...state,
     id: payload.id,
   }))
-  .case(add, () => ({ ...INITIAL_STATE }))
+  .case(add, (_state, payload) => ({
+    ...INITIAL_STATE,
+    userId: payload.userId,
+  }))
   .case(edit, (state, payload) => ({
     ...state,
     id: payload.id,
@@ -42,7 +46,8 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(focusTask, (state, payload) => ({
     ...state,
     id: payload.projectId,
-  }));
+  }))
+  .case(removeActions.done, () => ({ ...INITIAL_STATE }));
 
 export default reducer;
 
@@ -53,7 +58,7 @@ export const selectProject = createSelector(
   ],
   (project, projects) => {
     const target = projects.find((prj) => prj.id === project.id);
-    if (!target) return { ...INITIAL_STATE };
+    if (!target) return { ...project };
     return target;
   },
 );
