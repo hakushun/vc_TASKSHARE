@@ -112,6 +112,7 @@ export const AuthForm: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.google}
+            aria-label="Sign In with Google account"
             onClick={() => signinWithGoogle()}>
             <img
               className={styles.googleImg}
