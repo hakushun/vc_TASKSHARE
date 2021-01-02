@@ -2,7 +2,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { deleteActivity, postActivity } from '../../libs/db/crud';
+import { deleteActivity, postActivity, putActivity } from '../../libs/db/crud';
 import { Activity } from './activity';
 import { RootState } from './reducers';
 
@@ -54,7 +54,7 @@ export const updateActions = actionCreator.async<
   Error
 >('UPDATE_ACTIVITY');
 export const update = (body: UpdatePayload): StepAction =>
-  steps(updateActions.started(body), () => postActivity(body), [
+  steps(updateActions.started(body), () => putActivity(body), [
     (data) => updateActions.done({ params: body, result: data }),
     (error) => updateActions.failed({ params: body, error }),
   ]);
