@@ -38,7 +38,6 @@ export const postUser = async (data: CreateUser): Promise<void> => {
     .doc(data.id)
     .set({ ...user });
 };
-
 export const putUser = async (data: UpdateUser): Promise<void> => {
   const user = {
     ...data,
@@ -49,10 +48,10 @@ export const putUser = async (data: UpdateUser): Promise<void> => {
     .doc(user.id)
     .set({ ...user }, { merge: true });
 };
-
 export const deleteUser = async (data: RemoveUser): Promise<void> => {
   await db.collection('users').doc(data.id).delete();
 };
+
 // CRUD Projects
 export const postProject = async (data: CreateProject): Promise<void> => {
   const project = {
