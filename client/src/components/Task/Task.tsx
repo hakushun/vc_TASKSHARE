@@ -50,17 +50,23 @@ export const Task: React.VFC<Props> = ({
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{task.title}</h2>
-        <button className={styles.status} onClick={() => toggleList()}>
-          {toStringStatus(task.status)}
-        </button>
-        <div
-          aria-hidden={!isOpened}
-          className={clsx(
-            styles.statusListWrapper,
-            isOpened && styles.isOpened,
-          )}>
-          <TaskStatusList />
-        </div>
+        {user.id === task.userId || user.id === task.assignTo ? (
+          <>
+            <button className={styles.status} onClick={() => toggleList()}>
+              {toStringStatus(task.status)}
+            </button>
+            <div
+              aria-hidden={!isOpened}
+              className={clsx(
+                styles.statusListWrapper,
+                isOpened && styles.isOpened,
+              )}>
+              <TaskStatusList />
+            </div>
+          </>
+        ) : (
+          <div className={styles.status}>{toStringStatus(task.status)}</div>
+        )}
       </div>
       <div className={styles.linkWrapper}>
         <Link href={`/projects/${task.projectId}`}>
@@ -75,17 +81,19 @@ export const Task: React.VFC<Props> = ({
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Task Overview</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleEditTask(task.id!)}>
-            <img
-              src="/images/icon-edit.svg"
-              alt="タスクを編集する"
-              width="30"
-              height="30"
-            />
-          </button>
+          {(user.id === task.userId || user.id === task.assignTo) && (
+            <button
+              type="button"
+              className={styles.action}
+              onClick={() => hadleEditTask(task.id!)}>
+              <img
+                src="/images/icon-edit.svg"
+                alt="タスクを編集する"
+                width="30"
+                height="30"
+              />
+            </button>
+          )}
         </div>
         <div className={styles.inner}>
           <dl className={styles.item}>

@@ -55,17 +55,19 @@ export const Project: React.VFC<Props> = ({
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Project Overview</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleEditProject(project.id!)}>
-            <img
-              src="/images/icon-edit.svg"
-              alt="プロジェクトを編集する"
-              width="30"
-              height="30"
-            />
-          </button>
+          {(user.id === project.userId || user.id === project.ownerId) && (
+            <button
+              type="button"
+              className={styles.action}
+              onClick={() => hadleEditProject(project.id!)}>
+              <img
+                src="/images/icon-edit.svg"
+                alt="プロジェクトを編集する"
+                width="30"
+                height="30"
+              />
+            </button>
+          )}
         </div>
         <div className={styles.inner}>
           <dl className={styles.projectItem}>
