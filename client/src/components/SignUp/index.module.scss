@@ -1,0 +1,12 @@
+@use '../stylesheets/mixin' as mixin;
+
+.annotation {
+  margin-top: 20px;
+  padding: 0 16px;
+  text-align: center;
+
+  & > a {
+    text-decoration: underline;
+    color: mixin.$primaryColor;
+  }
+}
