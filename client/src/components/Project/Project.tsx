@@ -17,6 +17,7 @@ type Props = {
   relatedTasks: Task[];
   relatedActivities: Activity[];
   owner: Userdata | undefined;
+  user: Userdata;
   hadleEditProject: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleAddActivity: (_projectId: string) => void;
@@ -27,6 +28,7 @@ export const Project: React.VFC<Props> = ({
   relatedTasks,
   relatedActivities,
   owner,
+  user,
   hadleEditProject,
   hadleAddTask,
   hadleAddActivity,
@@ -96,20 +98,22 @@ export const Project: React.VFC<Props> = ({
           </dl>
         </div>
       </div>
-      <div>
-        <button
-          type="button"
-          className={styles.delete}
-          onClick={() => handleRemoveProject(project.id!)}>
-          Delete
-          <img
-            src="/images/icon-trash.svg"
-            alt="プロジェクトを削除する"
-            width="20"
-            height="20"
-          />
-        </button>
-      </div>
+      {(user.id === project.userId || user.id === project.ownerId) && (
+        <div>
+          <button
+            type="button"
+            className={styles.delete}
+            onClick={() => handleRemoveProject(project.id!)}>
+            Delete
+            <img
+              src="/images/icon-trash.svg"
+              alt="プロジェクトを削除する"
+              width="20"
+              height="20"
+            />
+          </button>
+        </div>
+      )}
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Task List</h3>

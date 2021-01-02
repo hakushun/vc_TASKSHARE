@@ -7,12 +7,14 @@ import styles from './index.module.scss';
 type Props = {
   activities: Activity[];
   users: Userdata[];
+  user: Userdata;
   handleEdit: (_id: string) => void;
   handleRemove: (_id: string) => void;
 };
 export const ActivityList: React.VFC<Props> = ({
   activities,
   users,
+  user,
   handleEdit,
   handleRemove,
 }) => (
@@ -37,30 +39,32 @@ export const ActivityList: React.VFC<Props> = ({
                     {getStaringTimestamp(activity.updatedAt!)}
                   </span>
                 </div>
-                <div className={styles.actionWrapper}>
-                  <button
-                    type="button"
-                    className={styles.action}
-                    onClick={() => handleEdit(activity.id!)}>
-                    <img
-                      src="/images/icon-edit.svg"
-                      alt="編集する"
-                      width="20"
-                      height="20"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.action}
-                    onClick={() => handleRemove(activity.id!)}>
-                    <img
-                      src="/images/icon-trash.svg"
-                      alt="削除する"
-                      width="20"
-                      height="20"
-                    />
-                  </button>
-                </div>
+                {user.id === activity.userId && (
+                  <div className={styles.actionWrapper}>
+                    <button
+                      type="button"
+                      className={styles.action}
+                      onClick={() => handleEdit(activity.id!)}>
+                      <img
+                        src="/images/icon-edit.svg"
+                        alt="編集する"
+                        width="20"
+                        height="20"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.action}
+                      onClick={() => handleRemove(activity.id!)}>
+                      <img
+                        src="/images/icon-trash.svg"
+                        alt="削除する"
+                        width="20"
+                        height="20"
+                      />
+                    </button>
+                  </div>
+                )}
               </div>
               <div className={styles.commentWrapper}>
                 <p className={styles.comment}>{activity.comment}</p>

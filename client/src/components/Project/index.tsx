@@ -55,6 +55,7 @@ const Component: React.VFC = () => {
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           owner={owner}
+          user={user}
           hadleEditProject={hadleEditProject}
           hadleAddTask={hadleAddTask}
           hadleAddActivity={hadleAddActivity}

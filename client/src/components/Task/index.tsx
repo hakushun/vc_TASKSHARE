@@ -70,6 +70,7 @@ const Component: React.VFC = () => {
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           assignUer={assignUer}
+          user={user}
           toggleList={toggleList}
           handleFocus={handleFocus}
           hadleAddTask={hadleAddTask}
