@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Overlay } from '../Overlay';
+import { Overlay } from '../_atoms/Overlay';
 import { CloseButton } from '../_atoms/CloseButton';
 import styles from './index.module.scss';
 
