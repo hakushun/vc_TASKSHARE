@@ -2,13 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './index.module.scss';
 import { BargerMenu } from '../BargerMenu';
+import { MenuButton } from '../_atoms/MenuButton';
 
 type Props = {
   isAuth: boolean;
   logout: () => Promise<void>;
-  handletoggle: () => void;
 };
-export const Header: React.VFC<Props> = ({ isAuth, logout, handletoggle }) => (
+export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
   <header className={styles.header}>
     <div className={styles.inner}>
       <h1 className={styles.title}>
@@ -60,18 +60,7 @@ export const Header: React.VFC<Props> = ({ isAuth, logout, handletoggle }) => (
           )}
         </ul>
       </nav>
-      <button
-        className={styles.menuButton}
-        type="button"
-        onClick={() => handletoggle()}>
-        <img
-          src="/images/icon-menu.svg"
-          alt="メニューボタン"
-          width="44"
-          height="44"
-          className={styles.menu}
-        />
-      </button>
+      <MenuButton />
       <BargerMenu />
     </div>
   </header>
