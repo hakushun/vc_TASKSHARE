@@ -1,0 +1,15 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  position: relative;
+  border-bottom: 3px solid mixin.$headerBgColor;
+}
+
+.title {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
