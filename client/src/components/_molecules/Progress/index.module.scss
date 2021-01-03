@@ -1,0 +1,26 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+.text {
+  font-size: mixin.rem(18);
+
+  @include mixin.mq() {
+    font-size: mixin.rem(16);
+  }
+}
+
+.bar {
+  max-width: 100px;
+
+  @include mixin.mq() {
+    max-width: 80px;
+  }
+}
