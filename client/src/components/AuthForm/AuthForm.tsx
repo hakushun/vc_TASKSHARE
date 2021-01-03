@@ -1,11 +1,9 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import { Loading } from '../_atoms/Loading';
-import { InputLabel } from '../_atoms/InputLabel';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
-import { TextInput } from '../_atoms/TextInput';
-import { RequiredBadge } from '../_atoms/RequiredBadge';
+import { TextField } from '../_molecules/TextField';
 
 type Props = {
   type: 'signup' | 'signin';
@@ -26,38 +24,26 @@ export const AuthForm: React.VFC<Props> = ({
       <FormWrapper
         title={type === 'signup' ? 'Sign Up' : 'Log In'}
         onSubmit={handleSubmit}>
-        <div className={styles.inputWrapper}>
-          <div className={styles.labelWrapper}>
-            <InputLabel id="email" label="Email" />
-            <RequiredBadge />
-          </div>
-          <TextInput
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            disabled={isLoading}
-            required
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <div className={styles.labelWrapper}>
-            <InputLabel id="password" label="Password" />
-            <RequiredBadge />
-          </div>
-          <TextInput
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Password"
-            disabled={isLoading}
-            autoComplete={
-              type === 'signup' ? 'new-password' : 'current-password'
-            }
-            minLength={6}
-            required
-          />
-        </div>
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          disabled={isLoading}
+          required
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          disabled={isLoading}
+          autoComplete={type === 'signup' ? 'new-password' : 'current-password'}
+          minLength={6}
+          required
+        />
         <div className={styles.actionWrapper}>
           {isLoading ? (
             <Loading />

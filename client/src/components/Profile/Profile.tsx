@@ -6,9 +6,7 @@ import { Loading } from '../_atoms/Loading';
 import { DeleteButton } from '../_atoms/DeleteButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
-import { TextInput } from '../_atoms/TextInput';
-import { InputLabel } from '../_atoms/InputLabel';
-import { RequiredBadge } from '../_atoms/RequiredBadge';
+import { TextField } from '../_molecules/TextField';
 
 type Props = {
   initialValues: Userdata;
@@ -31,21 +29,16 @@ export const Profile: React.VFC<Props> = ({
         initialValues={initialValues}
         render={({ handleSubmit }) => (
           <FormWrapper title="Profile" onSubmit={handleSubmit}>
-            <div className={styles.inputWrapper}>
-              <div className={styles.labelWrapper}>
-                <InputLabel id="profile_username" label="User name" />
-                <RequiredBadge />
-              </div>
-              <TextInput
-                type="text"
-                name="username"
-                id="profile_username"
-                placeholder="User name"
-                disabled={isLoading}
-                maxLength={50}
-                required
-              />
-            </div>
+            <TextField
+              label="User name"
+              type="text"
+              name="username"
+              id="profile_username"
+              placeholder="User name"
+              disabled={isLoading}
+              maxLength={50}
+              required
+            />
             <div className={styles.actionWrapper}>
               {isLoading ? (
                 <Loading />

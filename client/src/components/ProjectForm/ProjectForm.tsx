@@ -13,7 +13,7 @@ import { Textarea } from '../_atoms/Textarea';
 import { Selectbox } from '../_atoms/Selectbox';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
-import { TextInput } from '../_atoms/TextInput';
+import { TextField } from '../_molecules/TextField';
 
 type Props = {
   initialValues: Project;
@@ -39,21 +39,16 @@ export const ProjectForm: React.VFC<Props> = ({
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <FormWrapper title="Project Form" onSubmit={handleSubmit}>
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="project_title" label="Title" />
-              <RequiredBadge />
-            </div>
-            <TextInput
-              type="text"
-              name="title"
-              id="project_title"
-              placeholder="Project Title"
-              disabled={isLoading}
-              maxLength={100}
-              required
-            />
-          </div>
+          <TextField
+            label="Title"
+            type="text"
+            name="title"
+            id="project_title"
+            placeholder="Project Title"
+            disabled={isLoading}
+            maxLength={100}
+            required
+          />
           <div className={styles.inputWrapper}>
             <div className={styles.labelWrapper}>
               <InputLabel id="project_owner" label="Owner" />
@@ -68,34 +63,24 @@ export const ProjectForm: React.VFC<Props> = ({
               ))}
             </Selectbox>
           </div>
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="project_startDate" label="Start date" />
-              <RequiredBadge />
-            </div>
-            <TextInput
-              type="date"
-              name="startDate"
-              id="project_startDate"
-              placeholder="Start date"
-              disabled={isLoading}
-              required
-            />
-          </div>
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="project_dueDate" label="Due date" />
-              <RequiredBadge />
-            </div>
-            <TextInput
-              type="date"
-              name="dueDate"
-              id="project_dueDate"
-              placeholder="Due date"
-              disabled={isLoading}
-              required
-            />
-          </div>
+          <TextField
+            label="Start date"
+            type="date"
+            name="startDate"
+            id="project_startDate"
+            placeholder="Start date"
+            disabled={isLoading}
+            required
+          />
+          <TextField
+            label="Due date"
+            type="date"
+            name="dueDate"
+            id="project_dueDate"
+            placeholder="Due date"
+            disabled={isLoading}
+            required
+          />
           <div className={styles.inputWrapper}>
             <div className={styles.labelWrapper}>
               <InputLabel id="project_detail" label="Detail" />
