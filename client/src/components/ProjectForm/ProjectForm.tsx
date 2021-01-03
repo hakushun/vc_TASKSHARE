@@ -6,13 +6,11 @@ import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
 import { Userdata } from '../../redux/modules/users';
 import { CloseButton } from '../_atoms/CloseButton';
-import { RequiredBadge } from '../_atoms/RequiredBadge';
-import { InputLabel } from '../_atoms/InputLabel';
-import { Selectbox } from '../_atoms/Selectbox';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextField } from '../_molecules/TextField';
 import { TextareaField } from '../_molecules/TextareaField';
+import { SelectboxField } from '../_molecules/SelectboxField';
 
 type Props = {
   initialValues: Project;
@@ -48,20 +46,18 @@ export const ProjectForm: React.VFC<Props> = ({
             maxLength={100}
             required
           />
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="project_owner" label="Owner" />
-              <RequiredBadge />
-            </div>
-            <Selectbox name="ownerId" id="project_owner">
-              <option value="">Choose a Owner</option>
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.username}
-                </option>
-              ))}
-            </Selectbox>
-          </div>
+          <SelectboxField
+            id="project_owner"
+            label="Owner"
+            name="ownerId"
+            required>
+            <option value="">Choose a Owner</option>
+            {users.map((user) => (
+              <option key={user.id} value={user.id}>
+                {user.username}
+              </option>
+            ))}
+          </SelectboxField>
           <TextField
             label="Start date"
             type="date"
