@@ -1,7 +1,5 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
-import clsx from 'clsx';
-import { composeValidators, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
@@ -10,6 +8,7 @@ import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { InputLabel } from '../_atoms/InputLabel';
+import { Textarea } from '../_atoms/Textarea';
 
 type Props = {
   initialValues: Activity;
@@ -53,31 +52,13 @@ export const ActivityForm: React.VFC<Props> = ({
                   <InputLabel id="activity_comment" label="Comment" />
                   <RequiredBadge />
                 </div>
-                <Field
+                <Textarea
                   name="comment"
-                  validate={composeValidators(isRequired)}
-                  subscription={{
-                    value: true,
-                    active: true,
-                    error: true,
-                    touched: true,
-                  }}>
-                  {({ input, meta }) => (
-                    <textarea
-                      id="activity_comment"
-                      placeholder="Comment"
-                      className={clsx(
-                        styles.textarea,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      disabled={isLoading}
-                      maxLength={3000}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                  )}
-                </Field>
+                  id="activity_comment"
+                  placeholder="Comment"
+                  disabled={isLoading}
+                  required
+                />
               </div>
             </fieldset>
             <div className={styles.actionWrapper}>

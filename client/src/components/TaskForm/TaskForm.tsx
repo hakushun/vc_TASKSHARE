@@ -13,6 +13,7 @@ import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
+import { Textarea } from '../_atoms/Textarea';
 
 type Props = {
   initialValues: Task;
@@ -217,20 +218,13 @@ export const TaskForm: React.VFC<Props> = ({
                   <InputLabel id="task_description" label="Description" />
                   <OptionalBadge />
                 </div>
-                <Field
+                <Textarea
                   name="description"
-                  component="textarea"
                   id="task_description"
                   placeholder="Task Description"
                   disabled={isLoading}
-                  className={styles.textarea}
-                  maxLength="3000"
-                  subscription={{
-                    value: true,
-                    active: true,
-                    error: true,
-                    touched: true,
-                  }}></Field>
+                  required={false}
+                />
               </div>
             </fieldset>
             <div className={styles.actionWrapper}>
