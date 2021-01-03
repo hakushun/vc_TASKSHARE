@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInstance } from '../../libs/db/getInstance';
-import { focus, Project } from '../../redux/modules/project';
+import { Project } from '../../redux/modules/project';
 import { getProjects } from '../../redux/modules/projects';
 import { Task } from '../../redux/modules/task';
 import { getTasks } from '../../redux/modules/tasks';
@@ -15,10 +15,6 @@ type Props = {
 export const ProjectList: React.VFC<Props> = ({ context, projects, tasks }) => {
   const dispatch = useDispatch();
   const db = getInstance();
-
-  const handleFocus = (id: string) => {
-    dispatch(focus({ id }));
-  };
 
   useEffect(() => {
     db.collection('projects').onSnapshot((snapshot) => {
@@ -34,12 +30,5 @@ export const ProjectList: React.VFC<Props> = ({ context, projects, tasks }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <Presentational
-      context={context}
-      projects={projects}
-      tasks={tasks}
-      handleFocus={handleFocus}
-    />
-  );
+  return <Presentational context={context} projects={projects} tasks={tasks} />;
 };
