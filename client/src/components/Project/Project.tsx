@@ -16,6 +16,7 @@ import { Confirmation } from '../Confirmation';
 import { AddButton } from '../_atoms/AddButton';
 import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
 import { EditButton } from '../_atoms/EditButton';
+import { DeleteButton } from '../_atoms/DeleteButton';
 
 type Props = {
   project: typeProject;
@@ -124,20 +125,7 @@ export const Project: React.VFC<Props> = ({
         </div>
       </div>
       {(user.id === project.userId || user.id === project.ownerId) && (
-        <div>
-          <button
-            type="button"
-            className={styles.delete}
-            onClick={() => openConfirmation()}>
-            Delete
-            <img
-              src="/images/icon-trash.svg"
-              alt="プロジェクトを削除する"
-              width="20"
-              height="20"
-            />
-          </button>
-        </div>
+        <DeleteButton target="プロジェクト" handleOpen={openConfirmation} />
       )}
       <div className={styles.wrapper}>
         <SubHeadingWithBorder title="Task List">

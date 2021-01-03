@@ -130,11 +130,3 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.delete {
-  display: flex;
-  align-items: center;
-  padding: 0 3px;
-  margin-left: auto;
-  color: lighten(mixin.$mainTextColor, 20%);
-}

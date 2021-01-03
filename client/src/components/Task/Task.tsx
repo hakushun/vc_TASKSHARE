@@ -17,6 +17,7 @@ import { Confirmation } from '../Confirmation';
 import { AddButton } from '../_atoms/AddButton';
 import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
 import { EditButton } from '../_atoms/EditButton';
+import { DeleteButton } from '../_atoms/DeleteButton';
 
 type Props = {
   isOpened: boolean;
@@ -147,20 +148,7 @@ export const Task: React.VFC<Props> = ({
         </div>
       </div>
       {(user.id === task.userId || user.id === task.assignTo) && (
-        <div>
-          <button
-            type="button"
-            className={styles.delete}
-            onClick={() => openConfirmation()}>
-            Delete
-            <img
-              src="/images/icon-trash.svg"
-              alt="タスクを削除する"
-              width="20"
-              height="20"
-            />
-          </button>
-        </div>
+        <DeleteButton target="タスク" handleOpen={openConfirmation} />
       )}
       <div className={styles.wrapper}>
         <SubHeadingWithBorder title={`Task List in ${project.title}`}>

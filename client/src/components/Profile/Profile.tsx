@@ -5,6 +5,7 @@ import { composeValidators, isRequired } from '../../libs/validations';
 import { Userdata } from '../../redux/modules/users';
 import { DeleteForm } from '../DeleteForm';
 import { Loading } from '../Loading';
+import { DeleteButton } from '../_atoms/DeleteButton';
 import styles from './index.module.scss';
 
 type Props = {
@@ -83,20 +84,7 @@ export const Profile: React.VFC<Props> = ({
           </form>
         )}
       />
-      <div>
-        <button
-          type="button"
-          className={styles.delete}
-          onClick={() => openModal()}>
-          Delete
-          <img
-            src="/images/icon-trash.svg"
-            alt="アカウントを削除する"
-            width="20"
-            height="20"
-          />
-        </button>
-      </div>
+      <DeleteButton target="アカウント" handleOpen={openModal} />
     </section>
   </>
 );
