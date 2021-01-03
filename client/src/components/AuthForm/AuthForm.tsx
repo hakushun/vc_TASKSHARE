@@ -4,19 +4,14 @@ import { Loading } from '../_atoms/Loading';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
 import { TextField } from '../_molecules/TextField';
+import { GoogleButton } from '../_atoms/GoogleButton';
 
 type Props = {
   type: 'signup' | 'signin';
   isLoading: boolean;
   onSubmit: (_value: { email: string; password: string }) => void;
-  signinWithGoogle: () => void;
 };
-export const AuthForm: React.VFC<Props> = ({
-  type,
-  isLoading,
-  onSubmit,
-  signinWithGoogle,
-}) => (
+export const AuthForm: React.VFC<Props> = ({ type, isLoading, onSubmit }) => (
   <Form
     onSubmit={onSubmit}
     subscription={{ submitting: true }}
@@ -57,20 +52,7 @@ export const AuthForm: React.VFC<Props> = ({
           )}
         </div>
         <div className={styles.provider}>
-          <button
-            type="button"
-            className={styles.google}
-            aria-label="Sign In with Google account"
-            onClick={() => signinWithGoogle()}>
-            <img
-              className={styles.googleImg}
-              alt="Google icon"
-              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-              width="18"
-              height="18"
-            />
-            <span className={styles.googleText}>Sign in with Google</span>
-          </button>
+          <GoogleButton />
         </div>
       </FormWrapper>
     )}
