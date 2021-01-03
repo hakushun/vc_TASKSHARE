@@ -1,7 +1,5 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form';
-import clsx from 'clsx';
-import { composeValidators, isRequired } from '../../libs/validations';
+import { Form } from 'react-final-form';
 import { Loading } from '../_atoms/Loading';
 import styles from './index.module.scss';
 import { Project } from '../../redux/modules/project';
@@ -15,6 +13,7 @@ import { Textarea } from '../_atoms/Textarea';
 import { Selectbox } from '../_atoms/Selectbox';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
+import { TextInput } from '../_atoms/TextInput';
 
 type Props = {
   initialValues: Project;
@@ -40,38 +39,21 @@ export const ProjectForm: React.VFC<Props> = ({
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <FormWrapper title="Project Form" onSubmit={handleSubmit}>
-          <Field
-            name="title"
-            validate={composeValidators(isRequired)}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="project_title" label="Title" />
-                  <RequiredBadge />
-                </div>
-                <input
-                  id="project_title"
-                  type="text"
-                  placeholder="Project Title"
-                  disabled={isLoading}
-                  maxLength={100}
-                  className={clsx(
-                    styles.input,
-                    meta.touched && meta.error && styles.hasError,
-                  )}
-                  required
-                  aria-required
-                  {...input}
-                />
-              </div>
-            )}
-          </Field>
+          <div className={styles.inputWrapper}>
+            <div className={styles.labelWrapper}>
+              <InputLabel id="project_title" label="Title" />
+              <RequiredBadge />
+            </div>
+            <TextInput
+              type="text"
+              name="title"
+              id="project_title"
+              placeholder="Project Title"
+              disabled={isLoading}
+              maxLength={100}
+              required
+            />
+          </div>
           <div className={styles.inputWrapper}>
             <div className={styles.labelWrapper}>
               <InputLabel id="project_owner" label="Owner" />
@@ -86,68 +68,34 @@ export const ProjectForm: React.VFC<Props> = ({
               ))}
             </Selectbox>
           </div>
-          <Field
-            name="startDate"
-            validate={composeValidators(isRequired)}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="project_startDate" label="Start date" />
-                  <RequiredBadge />
-                </div>
-                <input
-                  id="project_startDate"
-                  type="date"
-                  placeholder="Project Start date"
-                  disabled={isLoading}
-                  className={clsx(
-                    styles.input,
-                    meta.touched && meta.error && styles.hasError,
-                  )}
-                  required
-                  aria-required
-                  {...input}
-                />
-              </div>
-            )}
-          </Field>
-          <Field
-            name="dueDate"
-            validate={composeValidators(isRequired)}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="project_dueDate" label="Due date" />
-                  <RequiredBadge />
-                </div>
-                <input
-                  id="project_dueDate"
-                  type="date"
-                  placeholder="Project Due date"
-                  disabled={isLoading}
-                  className={clsx(
-                    styles.input,
-                    meta.touched && meta.error && styles.hasError,
-                  )}
-                  required
-                  aria-required
-                  {...input}
-                />
-              </div>
-            )}
-          </Field>
+          <div className={styles.inputWrapper}>
+            <div className={styles.labelWrapper}>
+              <InputLabel id="project_startDate" label="Start date" />
+              <RequiredBadge />
+            </div>
+            <TextInput
+              type="date"
+              name="startDate"
+              id="project_startDate"
+              placeholder="Start date"
+              disabled={isLoading}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <div className={styles.labelWrapper}>
+              <InputLabel id="project_dueDate" label="Due date" />
+              <RequiredBadge />
+            </div>
+            <TextInput
+              type="date"
+              name="dueDate"
+              id="project_dueDate"
+              placeholder="Due date"
+              disabled={isLoading}
+              required
+            />
+          </div>
           <div className={styles.inputWrapper}>
             <div className={styles.labelWrapper}>
               <InputLabel id="project_detail" label="Detail" />

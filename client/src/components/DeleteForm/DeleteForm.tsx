@@ -1,17 +1,13 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form';
+import { Form } from 'react-final-form';
 import styles from './index.module.scss';
-import {
-  composeValidators,
-  isEmail,
-  isRequired,
-  minValue,
-} from '../../libs/validations';
 import { Loading } from '../_atoms/Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { InputLabel } from '../_atoms/InputLabel';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
+import { TextInput } from '../_atoms/TextInput';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
 
 type Props = {
   isLoading: boolean;
@@ -30,63 +26,36 @@ export const DeleteForm: React.VFC<Props> = ({
       subscription={{ submitting: true }}
       render={({ handleSubmit }) => (
         <FormWrapper title="Delete Account Form" onSubmit={handleSubmit}>
-          <Field
-            name="email"
-            validate={composeValidators(isRequired, isEmail)}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <InputLabel id="email" label="Email" />
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Email"
-                  disabled={isLoading}
-                  className={styles.input}
-                  required
-                  aria-required
-                  {...input}
-                />
-                <div className={styles.error}>
-                  {meta.touched && meta.error && meta.error}
-                </div>
-              </div>
-            )}
-          </Field>
-          <Field
-            name="password"
-            validate={composeValidators(isRequired, minValue(6))}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <InputLabel id="password" label="Password" />
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  autoComplete="current-password"
-                  disabled={isLoading}
-                  className={styles.input}
-                  required
-                  aria-required
-                  {...input}
-                />
-                <div className={styles.error}>
-                  {meta.touched && meta.error && meta.error}
-                </div>
-              </div>
-            )}
-          </Field>
+          <div className={styles.inputWrapper}>
+            <div className={styles.labelWrapper}>
+              <InputLabel id="email" label="Email" />
+              <RequiredBadge />
+            </div>
+            <TextInput
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              disabled={isLoading}
+              required
+            />
+          </div>
+          <div className={styles.inputWrapper}>
+            <div className={styles.labelWrapper}>
+              <InputLabel id="password" label="Password" />
+              <RequiredBadge />
+            </div>
+            <TextInput
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              disabled={isLoading}
+              autoComplete="current-password"
+              minLength={6}
+              required
+            />
+          </div>
           <div className={styles.actionWrapper}>
             {isLoading ? (
               <Loading />

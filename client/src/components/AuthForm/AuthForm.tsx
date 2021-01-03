@@ -1,15 +1,11 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form';
-import {
-  composeValidators,
-  isEmail,
-  isRequired,
-  minValue,
-} from '../../libs/validations';
+import { Form } from 'react-final-form';
 import { Loading } from '../_atoms/Loading';
 import { InputLabel } from '../_atoms/InputLabel';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
+import { TextInput } from '../_atoms/TextInput';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
 
 type Props = {
   type: 'signup' | 'signin';
@@ -30,65 +26,38 @@ export const AuthForm: React.VFC<Props> = ({
       <FormWrapper
         title={type === 'signup' ? 'Sign Up' : 'Log In'}
         onSubmit={handleSubmit}>
-        <Field
-          name="email"
-          validate={composeValidators(isRequired, isEmail)}
-          subscription={{
-            value: true,
-            active: true,
-            error: true,
-            touched: true,
-          }}>
-          {({ input, meta }) => (
-            <div className={styles.inputWrapper}>
-              <InputLabel id="email" label="Email" />
-              <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                disabled={isLoading}
-                className={styles.input}
-                required
-                aria-required
-                {...input}
-              />
-              <div className={styles.error}>
-                {meta.touched && meta.error && meta.error}
-              </div>
-            </div>
-          )}
-        </Field>
-        <Field
-          name="password"
-          validate={composeValidators(isRequired, minValue(6))}
-          subscription={{
-            value: true,
-            active: true,
-            error: true,
-            touched: true,
-          }}>
-          {({ input, meta }) => (
-            <div className={styles.inputWrapper}>
-              <InputLabel id="password" label="Password" />
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                autoComplete={
-                  type === 'signup' ? 'new-password' : 'current-password'
-                }
-                disabled={isLoading}
-                className={styles.input}
-                required
-                aria-required
-                {...input}
-              />
-              <div className={styles.error}>
-                {meta.touched && meta.error && meta.error}
-              </div>
-            </div>
-          )}
-        </Field>
+        <div className={styles.inputWrapper}>
+          <div className={styles.labelWrapper}>
+            <InputLabel id="email" label="Email" />
+            <RequiredBadge />
+          </div>
+          <TextInput
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            disabled={isLoading}
+            required
+          />
+        </div>
+        <div className={styles.inputWrapper}>
+          <div className={styles.labelWrapper}>
+            <InputLabel id="password" label="Password" />
+            <RequiredBadge />
+          </div>
+          <TextInput
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            disabled={isLoading}
+            autoComplete={
+              type === 'signup' ? 'new-password' : 'current-password'
+            }
+            minLength={6}
+            required
+          />
+        </div>
         <div className={styles.actionWrapper}>
           {isLoading ? (
             <Loading />

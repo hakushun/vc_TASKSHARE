@@ -1,36 +1,12 @@
 @use '../stylesheets/mixin' as mixin;
 
 .inputWrapper {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .labelWrapper {
   display: flex;
   align-items: center;
-}
-
-.label {
-  display: block;
-  font-size: mixin.rem(18);
-
-  @include mixin.mq() {
-    font-size: mixin.rem(16);
-  }
-}
-
-.input {
-  width: 100%;
-  padding: 5px 8px;
-  margin-top: 5px;
-  font-size: mixin.rem(16);
-  border: 1px solid mixin.$mainTextColor;
-  border-radius: 3px;
-}
-
-.error {
-  height: 1.5em;
-  font-size: mixin.rem(16);
-  color: mixin.$errorColor;
 }
 
 .actionWrapper {
