@@ -6,31 +6,6 @@
   margin: 0 auto;
 }
 
-.status {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5px;
-  font-weight: bold;
-}
-
-.statusText {
-  font-size: mixin.rem(18);
-
-  @include mixin.mq() {
-    font-size: mixin.rem(16);
-  }
-}
-
-.statusBar {
-  max-width: 100px;
-
-  @include mixin.mq() {
-    max-width: 80px;
-  }
-}
-
 .wrapper {
   margin-top: 30px;
   border-bottom: 3px solid mixin.$headerBgColor;

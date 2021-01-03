@@ -7,7 +7,6 @@ import { ProjectForm } from '../ProjectForm';
 import { TaskForm } from '../TaskForm';
 import { TaskList } from '../TaskList';
 import styles from './index.module.scss';
-import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
 import { Userdata } from '../../redux/modules/users';
 import { Confirmation } from '../Confirmation';
@@ -17,6 +16,7 @@ import { EditButton } from '../_atoms/EditButton';
 import { DeleteButton } from '../_atoms/DeleteButton';
 import { HeadingWithBorder } from '../_molecules/HeadingWithBorder';
 import { ProjectOverview } from '../_molecules/ProjectOverview';
+import { Progress } from '../_molecules/Progress';
 
 type Props = {
   project: typeProject;
@@ -53,16 +53,7 @@ export const Project: React.VFC<Props> = ({
     />
     <section className={styles.root}>
       <HeadingWithBorder title={project.title}>
-        <div className={styles.status}>
-          <span className={styles.statusText}>{`${calculateProgress(
-            relatedTasks,
-            project.id!,
-          )}%`}</span>
-          <progress
-            className={styles.statusBar}
-            value={calculateProgress(relatedTasks, project.id!)}
-            max="100"></progress>
-        </div>
+        <Progress relatedTasks={relatedTasks} projectId={project.id!} />
       </HeadingWithBorder>
       <div className={styles.wrapper}>
         <SubHeadingWithBorder title="Project Overview">
