@@ -22,8 +22,10 @@ export const SignIn: React.VFC<Props> = ({
 }) => (
   <>
     <PasswordResetForm />
-    <AuthForm type="signin" isLoading={isLoading} onSubmit={signin} />
     {isOpend && <Dialog message={message} />}
+    <section className={styles.wrapper}>
+      <AuthForm type="signin" isLoading={isLoading} onSubmit={signin} />
+    </section>
     <div className={styles.annotation}>
       If you do not have an account, please{' '}
       <Link href="signup">

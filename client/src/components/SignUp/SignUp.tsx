@@ -19,7 +19,9 @@ export const SignUp: React.VFC<Props> = ({
 }) => (
   <>
     {isOpend && <Dialog message={message} />}
-    <AuthForm type="signup" isLoading={isLoading} onSubmit={signup} />
+    <section className={styles.wrapper}>
+      <AuthForm type="signup" isLoading={isLoading} onSubmit={signup} />
+    </section>
     <div className={styles.annotation}>
       If you have an account, please{' '}
       <Link href="signin">
