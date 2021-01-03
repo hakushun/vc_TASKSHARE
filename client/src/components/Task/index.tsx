@@ -21,7 +21,10 @@ import {
   selectRelatedTasks,
 } from '../../redux/modules/tasks';
 import { selectUser } from '../../redux/modules/user';
-import { selectAssignUser } from '../../redux/modules/users';
+import {
+  selectAssignUser,
+  selectUserCreateTask,
+} from '../../redux/modules/users';
 import { PageLoader } from '../PageLoader';
 import { Task as Presentational } from './Task';
 
@@ -34,6 +37,7 @@ const Component: React.VFC = () => {
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedTask);
   const assignUer = useSelector(selectAssignUser);
+  const createUer = useSelector(selectUserCreateTask);
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
@@ -79,6 +83,7 @@ const Component: React.VFC = () => {
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           assignUer={assignUer}
+          createUer={createUer}
           user={user}
           isLoading={isLoading}
           toggleList={toggleList}
