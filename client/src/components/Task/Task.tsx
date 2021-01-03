@@ -19,6 +19,7 @@ import { EditButton } from '../_atoms/EditButton';
 import { DeleteButton } from '../_atoms/DeleteButton';
 import { HeadingWithBorder } from '../_molecules/HeadingWithBorder';
 import { TaskOverview } from '../_molecules/TaskOverview';
+import { StatusButton } from '../_atoms/StatusButton';
 
 type Props = {
   isOpened: boolean;
@@ -28,7 +29,6 @@ type Props = {
   relatedActivities: Activity[];
   user: Userdata;
   isLoading: boolean;
-  toggleList: () => void;
   handleFocus: (_id: string) => void;
   handleAddTask: (_projectId: string) => void;
   handleEditTask: (_id: string) => void;
@@ -45,7 +45,6 @@ export const Task: React.VFC<Props> = ({
   user,
   isLoading,
   handleFocus,
-  toggleList,
   handleAddTask,
   handleEditTask,
   handleAddActivity,
@@ -64,9 +63,7 @@ export const Task: React.VFC<Props> = ({
       <HeadingWithBorder title={task.title}>
         {user.id === task.userId || user.id === task.assignTo ? (
           <>
-            <button className={styles.status} onClick={() => toggleList()}>
-              {toStringStatus(task.status)}
-            </button>
+            <StatusButton />
             <div
               aria-hidden={!isOpened}
               className={clsx(

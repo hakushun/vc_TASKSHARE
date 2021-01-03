@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { withAuth } from '../../helpers/withAuth';
 import { selectActivitiesRelatedTask } from '../../redux/modules/activities';
 import { add as addActivity } from '../../redux/modules/activity';
-import {
-  selectStatusList,
-  toggleStatusList,
-} from '../../redux/modules/dropdown';
+import { selectStatusList } from '../../redux/modules/dropdown';
 import { toggleConfirmation } from '../../redux/modules/modal';
 import { focus, selectProjectByTask } from '../../redux/modules/project';
 import {
@@ -36,9 +33,6 @@ const Component: React.VFC = () => {
   const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const toggleList = () => {
-    dispatch(toggleStatusList());
-  };
   const handleFocus = (id: string) => {
     dispatch(focus({ id }));
   };
@@ -78,7 +72,6 @@ const Component: React.VFC = () => {
           relatedActivities={relatedActivities}
           user={user}
           isLoading={isLoading}
-          toggleList={toggleList}
           handleFocus={handleFocus}
           handleAddTask={handleAddTask}
           handleEditTask={handleEditTask}
