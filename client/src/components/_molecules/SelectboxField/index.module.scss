@@ -1,0 +1,10 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  margin-top: 20px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+}
