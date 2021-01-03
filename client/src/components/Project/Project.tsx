@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { Task } from '../../redux/modules/task';
 import { Project as typeProject } from '../../redux/modules/project';
 import { ActivityForm } from '../ActivityForm';
@@ -18,6 +19,7 @@ type Props = {
   relatedTasks: Task[];
   relatedActivities: Activity[];
   owner: Userdata | undefined;
+  createUser: Userdata | undefined;
   user: Userdata;
   isLoading: boolean;
   hadleEditProject: (_id: string) => void;
@@ -31,6 +33,7 @@ export const Project: React.VFC<Props> = ({
   relatedTasks,
   relatedActivities,
   owner,
+  createUser,
   user,
   isLoading,
   hadleEditProject,
@@ -80,32 +83,44 @@ export const Project: React.VFC<Props> = ({
           )}
         </div>
         <div className={styles.inner}>
-          <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>Detail</dt>
-            <dd className={styles.projectDescription}>{project.detail}</dd>
+          <dl className={clsx(styles.item, styles.description)}>
+            <dt className={styles.label}>Detail</dt>
+            <dd className={styles.detail}>: {project.detail}</dd>
           </dl>
-          <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>Owner</dt>
-            <dd className={styles.projectDescription}>
-              {owner?.username || 'undefined'}
+          <dl className={clsx(styles.item, styles.owner)}>
+            <dt className={styles.label}>Owner</dt>
+            <dd className={styles.definition}>
+              : {owner?.username || 'undefined'}
             </dd>
           </dl>
-          <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>Due Date</dt>
-            <dd className={styles.projectDescription}>
-              {getStringDate(project.dueDate)}
+          <dl className={clsx(styles.item, styles.createdBy)}>
+            <dt className={styles.label}>Created By</dt>
+            <dd className={styles.definition}>
+              : {createUser?.username || 'undefined'}
             </dd>
           </dl>
-          <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>Created at</dt>
-            <dd className={styles.projectDescription}>
-              {getStringDate(project.createdAt!)}
+          <dl className={clsx(styles.item, styles.startDate)}>
+            <dt className={styles.label}>Start Date</dt>
+            <dd className={styles.definition}>
+              : {getStringDate(project.startDate)}
             </dd>
           </dl>
-          <dl className={styles.projectItem}>
-            <dt className={styles.projectLabel}>Updated at</dt>
-            <dd className={styles.projectDescription}>
-              {getStringDate(project.updatedAt!)}
+          <dl className={clsx(styles.item, styles.dueDate)}>
+            <dt className={styles.label}>Due Date</dt>
+            <dd className={styles.definition}>
+              : {getStringDate(project.dueDate)}
+            </dd>
+          </dl>
+          <dl className={clsx(styles.item, styles.createdAt)}>
+            <dt className={styles.label}>Created at</dt>
+            <dd className={styles.definition}>
+              : {getStringDate(project.createdAt!)}
+            </dd>
+          </dl>
+          <dl className={clsx(styles.item, styles.updatedAt)}>
+            <dt className={styles.label}>Updated at</dt>
+            <dd className={styles.definition}>
+              : {getStringDate(project.updatedAt!)}
             </dd>
           </dl>
         </div>

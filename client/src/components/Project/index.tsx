@@ -13,7 +13,10 @@ import { remove, selectIsLoading } from '../../redux/modules/projects';
 import { add as addTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { selectUser } from '../../redux/modules/user';
-import { selectOwner } from '../../redux/modules/users';
+import {
+  selectOwner,
+  selectUserCreateProject,
+} from '../../redux/modules/users';
 import { PageLoader } from '../PageLoader';
 import { Project as Presentational } from './Project';
 
@@ -24,6 +27,7 @@ const Component: React.VFC = () => {
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedProject);
   const owner = useSelector(selectOwner);
+  const createUser = useSelector(selectUserCreateProject);
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
@@ -60,6 +64,7 @@ const Component: React.VFC = () => {
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           owner={owner}
+          createUser={createUser}
           user={user}
           isLoading={isLoading}
           hadleEditProject={hadleEditProject}
