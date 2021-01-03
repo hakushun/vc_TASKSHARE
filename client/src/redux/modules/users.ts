@@ -131,6 +131,18 @@ export const selectAssignUser = createSelector(
   },
 );
 
+export const selectUserCreateTask = createSelector(
+  [
+    (state: RootState) => state.resources.users.list,
+    (state: RootState) => state.resources.tasks.list,
+    (state: RootState) => state.ui.task,
+  ],
+  (users, tasks, task) => {
+    const target = tasks.find((tsk) => tsk.id === task.id);
+    return users.find((user) => user.id === target?.userId);
+  },
+);
+
 // 関数
 export const getCommenter = (users: Userdata[], id: string): string => {
   const user = users.find((usr) => usr.id === id);
