@@ -85,42 +85,42 @@ export const Project: React.VFC<Props> = ({
         <div className={styles.inner}>
           <dl className={clsx(styles.item, styles.description)}>
             <dt className={styles.label}>Detail</dt>
-            <dd className={styles.detail}>: {project.detail}</dd>
+            <dd className={styles.detail}>{project.detail}</dd>
           </dl>
           <dl className={clsx(styles.item, styles.owner)}>
             <dt className={styles.label}>Owner</dt>
             <dd className={styles.definition}>
-              : {owner?.username || 'undefined'}
+              {owner?.username || 'undefined'}
             </dd>
           </dl>
           <dl className={clsx(styles.item, styles.createdBy)}>
             <dt className={styles.label}>Created By</dt>
             <dd className={styles.definition}>
-              : {createUser?.username || 'undefined'}
+              {createUser?.username || 'undefined'}
             </dd>
           </dl>
           <dl className={clsx(styles.item, styles.startDate)}>
             <dt className={styles.label}>Start Date</dt>
             <dd className={styles.definition}>
-              : {getStringDate(project.startDate)}
+              {getStringDate(project.startDate)}
             </dd>
           </dl>
           <dl className={clsx(styles.item, styles.dueDate)}>
             <dt className={styles.label}>Due Date</dt>
             <dd className={styles.definition}>
-              : {getStringDate(project.dueDate)}
+              {getStringDate(project.dueDate)}
             </dd>
           </dl>
           <dl className={clsx(styles.item, styles.createdAt)}>
             <dt className={styles.label}>Created at</dt>
             <dd className={styles.definition}>
-              : {getStringDate(project.createdAt!)}
+              {getStringDate(project.createdAt!)}
             </dd>
           </dl>
           <dl className={clsx(styles.item, styles.updatedAt)}>
             <dt className={styles.label}>Updated at</dt>
             <dd className={styles.definition}>
-              : {getStringDate(project.updatedAt!)}
+              {getStringDate(project.updatedAt!)}
             </dd>
           </dl>
         </div>
