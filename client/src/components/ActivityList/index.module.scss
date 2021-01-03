@@ -23,15 +23,6 @@
   }
 }
 
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
-.date {
-  color: lighten(mixin.$mainTextColor, 20%);
-}
-
 .commentWrapper {
   padding: 5px 10px;
 }

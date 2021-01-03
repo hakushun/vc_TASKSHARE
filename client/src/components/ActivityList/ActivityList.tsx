@@ -1,13 +1,12 @@
 import React from 'react';
-import { getStringTimestamp } from '../../libs/date';
 import { Activity } from '../../redux/modules/activity';
-import { getCommenter, Userdata } from '../../redux/modules/users';
+import { Userdata } from '../../redux/modules/users';
 import { Confirmation } from '../Confirmation';
+import { ActivityInfo } from '../_molecules/ActivityInfo';
 import styles from './index.module.scss';
 
 type Props = {
   activities: Activity[];
-  users: Userdata[];
   user: Userdata;
   isLoading: boolean;
   handleEdit: (_id: string) => void;
@@ -16,7 +15,6 @@ type Props = {
 };
 export const ActivityList: React.VFC<Props> = ({
   activities,
-  users,
   user,
   isLoading,
   handleEdit,
@@ -42,14 +40,10 @@ export const ActivityList: React.VFC<Props> = ({
               />
               <li className={styles.item} key={activity.id}>
                 <div className={styles.itemHeader}>
-                  <div className={styles.info}>
-                    <span className={styles.name}>
-                      {getCommenter(users, activity.userId!)}
-                    </span>
-                    <span className={styles.date}>
-                      {getStringTimestamp(activity.updatedAt!)}
-                    </span>
-                  </div>
+                  <ActivityInfo
+                    userId={activity.userId!}
+                    updatedAt={activity.updatedAt!}
+                  />
                   {user.id === activity.userId && (
                     <div className={styles.actionWrapper}>
                       <button

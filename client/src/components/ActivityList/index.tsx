@@ -9,7 +9,6 @@ import {
 import { Activity, edit } from '../../redux/modules/activity';
 import { toggleConfirmation } from '../../redux/modules/modal';
 import { selectUser } from '../../redux/modules/user';
-import { selectUsers } from '../../redux/modules/users';
 import { ActivityList as Presentational } from './ActivityList';
 
 type Props = {
@@ -17,7 +16,6 @@ type Props = {
 };
 export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const dispatch = useDispatch();
-  const users = useSelector(selectUsers);
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const db = getInstance();
@@ -44,7 +42,6 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   return (
     <Presentational
       activities={activities}
-      users={users}
       user={user}
       isLoading={isLoading}
       handleEdit={handleEdit}
