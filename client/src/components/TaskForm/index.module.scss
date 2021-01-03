@@ -14,13 +14,6 @@
   transform: translate(-50%, -50%);
 }
 
-.close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: flex;
-}
-
 .form {
   & > fieldset {
     border: none;
@@ -49,31 +42,11 @@
   align-items: center;
 }
 
-.label {
-  font-size: mixin.rem(18);
-  font-weight: bold;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(16);
-  }
-}
-
 .input {
   width: 100%;
   padding: 5px 8px;
   margin-top: 5px;
   font-size: mixin.rem(16);
-  border: 1px solid mixin.$mainTextColor;
-  border-radius: 3px;
-}
-
-.textarea {
-  width: 100%;
-  min-height: 100px;
-  padding: 5px 8px;
-  margin-top: 5px;
-  font-size: mixin.rem(16);
-  resize: vertical;
   border: 1px solid mixin.$mainTextColor;
   border-radius: 3px;
 }
