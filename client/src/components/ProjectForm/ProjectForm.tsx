@@ -119,6 +119,41 @@ export const ProjectForm: React.VFC<Props> = ({
                 </div>
               </div>
               <Field
+                name="startDate"
+                validate={composeValidators(isRequired)}
+                subscription={{
+                  value: true,
+                  active: true,
+                  error: true,
+                  touched: true,
+                }}>
+                {({ input, meta }) => (
+                  <div className={styles.inputWrapper}>
+                    <div className={styles.labelWrapper}>
+                      <label
+                        htmlFor="project_startDate"
+                        className={styles.label}>
+                        Start date
+                      </label>
+                      <Required />
+                    </div>
+                    <input
+                      id="project_startDate"
+                      type="date"
+                      placeholder="Project Start date"
+                      disabled={isLoading}
+                      className={clsx(
+                        styles.input,
+                        meta.touched && meta.error && styles.hasError,
+                      )}
+                      required
+                      aria-required
+                      {...input}
+                    />
+                  </div>
+                )}
+              </Field>
+              <Field
                 name="dueDate"
                 validate={composeValidators(isRequired)}
                 subscription={{
