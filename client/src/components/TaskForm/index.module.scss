@@ -58,39 +58,6 @@
   }
 }
 
-.selectboxWrapper {
-  position: relative;
-  margin-top: 5px;
-
-  &::before {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    width: 0;
-    height: 0;
-    padding: 0;
-    pointer-events: none;
-    content: '';
-    border-top: 7px solid #333;
-    border-right: 7px solid transparent;
-    border-left: 7px solid transparent;
-    transform: translateY(-50%);
-  }
-}
-// 文字が切れてしまう
-.selectbox {
-  width: 100%;
-  padding: 10px 8px;
-  font-size: mixin.rem(16);
-  border: 1px solid mixin.$mainTextColor;
-  border-radius: 3px;
-  appearance: none;
-
-  @include mixin.mq() {
-    padding: 5px 8px;
-  }
-}
-
 .input {
   width: 100%;
   padding: 5px 8px;

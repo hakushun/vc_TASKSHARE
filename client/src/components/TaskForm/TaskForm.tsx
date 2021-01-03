@@ -14,6 +14,7 @@ import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
 import { Textarea } from '../_atoms/Textarea';
+import { Selectbox } from '../_atoms/Selectbox';
 
 type Props = {
   initialValues: Task;
@@ -51,36 +52,14 @@ export const TaskForm: React.VFC<Props> = ({
                   <InputLabel id="task_project" label="Project" />
                   <RequiredBadge />
                 </div>
-                <div className={styles.selectboxWrapper}>
-                  <Field
-                    name="projectId"
-                    validate={composeValidators(isRequired)}
-                    subscription={{
-                      value: true,
-                      active: true,
-                      error: true,
-                      touched: true,
-                    }}>
-                    {({ input, meta }) => (
-                      <select
-                        id="task_project"
-                        className={clsx(
-                          styles.selectbox,
-                          meta.touched && meta.error && styles.hasError,
-                        )}
-                        required
-                        aria-required
-                        {...input}>
-                        <option value="">Choose a Project</option>
-                        {projects.map((project) => (
-                          <option key={project.id} value={project.id}>
-                            {project.title}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </Field>
-                </div>
+                <Selectbox name="projectId" id="task_project">
+                  <option value="">Choose a Owner</option>
+                  {projects.map((project) => (
+                    <option key={project.id} value={project.id}>
+                      {project.title}
+                    </option>
+                  ))}
+                </Selectbox>
               </div>
               <Field
                 name="title"
@@ -120,36 +99,14 @@ export const TaskForm: React.VFC<Props> = ({
                   <InputLabel id="task_assignTo" label="Assgin to" />
                   <RequiredBadge />
                 </div>
-                <div className={styles.selectboxWrapper}>
-                  <Field
-                    name="assignTo"
-                    validate={composeValidators(isRequired)}
-                    subscription={{
-                      value: true,
-                      active: true,
-                      error: true,
-                      touched: true,
-                    }}>
-                    {({ input, meta }) => (
-                      <select
-                        id="task_assignTo"
-                        className={clsx(
-                          styles.selectbox,
-                          meta.touched && meta.error && styles.hasError,
-                        )}
-                        required
-                        aria-required
-                        {...input}>
-                        <option value="">Assign to User</option>
-                        {users.map((user) => (
-                          <option key={user.id} value={user.id}>
-                            {user.username}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </Field>
-                </div>
+                <Selectbox name="assignTo" id="task_assignTo">
+                  <option value="">Choose a Owner</option>
+                  {users.map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.username}
+                    </option>
+                  ))}
+                </Selectbox>
               </div>
               <Field
                 name="startDate"

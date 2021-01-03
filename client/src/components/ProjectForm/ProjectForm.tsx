@@ -13,6 +13,7 @@ import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
 import { Textarea } from '../_atoms/Textarea';
+import { Selectbox } from '../_atoms/Selectbox';
 
 type Props = {
   initialValues: Project;
@@ -80,36 +81,14 @@ export const ProjectForm: React.VFC<Props> = ({
                   <InputLabel id="project_owner" label="Owner" />
                   <RequiredBadge />
                 </div>
-                <div className={styles.selectboxWrapper}>
-                  <Field
-                    name="ownerId"
-                    validate={composeValidators(isRequired)}
-                    subscription={{
-                      value: true,
-                      active: true,
-                      error: true,
-                      touched: true,
-                    }}>
-                    {({ input, meta }) => (
-                      <select
-                        id="project_owner"
-                        className={clsx(
-                          styles.selectbox,
-                          meta.touched && meta.error && styles.hasError,
-                        )}
-                        required
-                        aria-required
-                        {...input}>
-                        <option value="">Choose a Owner</option>
-                        {users.map((user) => (
-                          <option key={user.id} value={user.id}>
-                            {user.username}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </Field>
-                </div>
+                <Selectbox name="ownerId" id="project_owner">
+                  <option value="">Choose a Owner</option>
+                  {users.map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.username}
+                    </option>
+                  ))}
+                </Selectbox>
               </div>
               <Field
                 name="startDate"
