@@ -7,6 +7,7 @@ import { Loading } from '../Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { InputLabel } from '../_atoms/InputLabel';
+import { FormWrapper } from '../_molecules/FormWrapper';
 
 type Props = {
   closeModal: () => void;
@@ -23,41 +24,36 @@ export const PasswordResetForm: React.VFC<Props> = ({
         onSubmit={handleReset}
         subscription={{ submitting: true }}
         render={({ handleSubmit, submitting }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <fieldset>
-              <legend>
-                <h2 className={styles.title}>Password Reset Form</h2>
-              </legend>
-              <Field
-                name="email"
-                validate={composeValidators(isRequired, isEmail)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="email" label="Email" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder="Email"
-                      disabled={submitting}
-                      className={styles.input}
-                      {...input}
-                    />
-                    <div className={styles.error}>
-                      {meta.touched && meta.error && meta.error}
-                    </div>
+          <FormWrapper title="Password Reset Form" onSubmit={handleSubmit}>
+            <Field
+              name="email"
+              validate={composeValidators(isRequired, isEmail)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="email" label="Email" />
+                    <RequiredBadge />
                   </div>
-                )}
-              </Field>
-            </fieldset>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    disabled={submitting}
+                    className={styles.input}
+                    {...input}
+                  />
+                  <div className={styles.error}>
+                    {meta.touched && meta.error && meta.error}
+                  </div>
+                </div>
+              )}
+            </Field>
             <div className={styles.actionWrapper}>
               {submitting ? (
                 <Loading />
@@ -70,7 +66,7 @@ export const PasswordResetForm: React.VFC<Props> = ({
                 </button>
               )}
             </div>
-          </form>
+          </FormWrapper>
         )}
       />
     </section>

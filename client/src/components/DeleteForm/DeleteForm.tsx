@@ -11,6 +11,7 @@ import {
 import { Loading } from '../Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { InputLabel } from '../_atoms/InputLabel';
+import { FormWrapper } from '../_molecules/FormWrapper';
 
 type Props = {
   isLoading: boolean;
@@ -29,69 +30,64 @@ export const DeleteForm: React.VFC<Props> = ({
         onSubmit={handleRemove}
         subscription={{ submitting: true }}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <fieldset>
-              <legend>
-                <h2 className={styles.title}>Delete Account Form</h2>
-              </legend>
-              <Field
-                name="email"
-                validate={composeValidators(isRequired, isEmail)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <InputLabel id="email" label="Email" />
-                    <input
-                      id="email"
-                      type="email"
-                      placeholder="Email"
-                      disabled={isLoading}
-                      className={styles.input}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                    <div className={styles.error}>
-                      {meta.touched && meta.error && meta.error}
-                    </div>
+          <FormWrapper title="Delete Account Form" onSubmit={handleSubmit}>
+            <Field
+              name="email"
+              validate={composeValidators(isRequired, isEmail)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <InputLabel id="email" label="Email" />
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    disabled={isLoading}
+                    className={styles.input}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                  <div className={styles.error}>
+                    {meta.touched && meta.error && meta.error}
                   </div>
-                )}
-              </Field>
-              <Field
-                name="password"
-                validate={composeValidators(isRequired, minValue(6))}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <InputLabel id="password" label="Password" />
-                    <input
-                      id="password"
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="current-password"
-                      disabled={isLoading}
-                      className={styles.input}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                    <div className={styles.error}>
-                      {meta.touched && meta.error && meta.error}
-                    </div>
+                </div>
+              )}
+            </Field>
+            <Field
+              name="password"
+              validate={composeValidators(isRequired, minValue(6))}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <InputLabel id="password" label="Password" />
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    disabled={isLoading}
+                    className={styles.input}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                  <div className={styles.error}>
+                    {meta.touched && meta.error && meta.error}
                   </div>
-                )}
-              </Field>
-            </fieldset>
+                </div>
+              )}
+            </Field>
             <div className={styles.actionWrapper}>
               {isLoading ? (
                 <Loading />
@@ -104,7 +100,7 @@ export const DeleteForm: React.VFC<Props> = ({
                 </button>
               )}
             </div>
-          </form>
+          </FormWrapper>
         )}
       />
     </section>

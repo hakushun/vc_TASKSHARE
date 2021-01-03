@@ -6,28 +6,6 @@
   margin: 0 auto;
 }
 
-.form {
-  max-width: 500px;
-  margin: 0 auto;
-
-  & > fieldset {
-    border: none;
-
-    & > legend {
-      margin: 0 auto;
-    }
-  }
-}
-
-.title {
-  font-size: mixin.rem(20);
-  font-weight: bold;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(18);
-  }
-}
-
 .inputWrapper {
   margin-top: 20px;
 }

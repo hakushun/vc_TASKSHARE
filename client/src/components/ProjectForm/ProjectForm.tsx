@@ -14,6 +14,7 @@ import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
 import { Textarea } from '../_atoms/Textarea';
 import { Selectbox } from '../_atoms/Selectbox';
+import { FormWrapper } from '../_molecules/FormWrapper';
 
 type Props = {
   initialValues: Project;
@@ -39,133 +40,128 @@ export const ProjectForm: React.VFC<Props> = ({
         subscription={{ submitting: true }}
         initialValues={initialValues}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <fieldset>
-              <legend>
-                <h2 className={styles.title}>Project Form</h2>
-              </legend>
-              <Field
-                name="title"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="project_title" label="Title" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="project_title"
-                      type="text"
-                      placeholder="Project Title"
-                      disabled={isLoading}
-                      maxLength={100}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
+          <FormWrapper title="Project Form" onSubmit={handleSubmit}>
+            <Field
+              name="title"
+              validate={composeValidators(isRequired)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="project_title" label="Title" />
+                    <RequiredBadge />
                   </div>
-                )}
-              </Field>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="project_owner" label="Owner" />
-                  <RequiredBadge />
+                  <input
+                    id="project_title"
+                    type="text"
+                    placeholder="Project Title"
+                    disabled={isLoading}
+                    maxLength={100}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
                 </div>
-                <Selectbox name="ownerId" id="project_owner">
-                  <option value="">Choose a Owner</option>
-                  {users.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.username}
-                    </option>
-                  ))}
-                </Selectbox>
+              )}
+            </Field>
+            <div className={styles.inputWrapper}>
+              <div className={styles.labelWrapper}>
+                <InputLabel id="project_owner" label="Owner" />
+                <RequiredBadge />
               </div>
-              <Field
-                name="startDate"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="project_startDate" label="Start date" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="project_startDate"
-                      type="date"
-                      placeholder="Project Start date"
-                      disabled={isLoading}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
+              <Selectbox name="ownerId" id="project_owner">
+                <option value="">Choose a Owner</option>
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.username}
+                  </option>
+                ))}
+              </Selectbox>
+            </div>
+            <Field
+              name="startDate"
+              validate={composeValidators(isRequired)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="project_startDate" label="Start date" />
+                    <RequiredBadge />
                   </div>
-                )}
-              </Field>
-              <Field
-                name="dueDate"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="project_dueDate" label="Due date" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="project_dueDate"
-                      type="date"
-                      placeholder="Project Due date"
-                      disabled={isLoading}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                  </div>
-                )}
-              </Field>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="project_detail" label="Detail" />
-                  <OptionalBadge />
+                  <input
+                    id="project_startDate"
+                    type="date"
+                    placeholder="Project Start date"
+                    disabled={isLoading}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
                 </div>
-                <Textarea
-                  name="detail"
-                  id="project_detail"
-                  placeholder="Project Detail"
-                  disabled={isLoading}
-                  required={false}
-                />
+              )}
+            </Field>
+            <Field
+              name="dueDate"
+              validate={composeValidators(isRequired)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="project_dueDate" label="Due date" />
+                    <RequiredBadge />
+                  </div>
+                  <input
+                    id="project_dueDate"
+                    type="date"
+                    placeholder="Project Due date"
+                    disabled={isLoading}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                </div>
+              )}
+            </Field>
+            <div className={styles.inputWrapper}>
+              <div className={styles.labelWrapper}>
+                <InputLabel id="project_detail" label="Detail" />
+                <OptionalBadge />
               </div>
-            </fieldset>
+              <Textarea
+                name="detail"
+                id="project_detail"
+                placeholder="Project Detail"
+                disabled={isLoading}
+                required={false}
+              />
+            </div>
             <div className={styles.actionWrapper}>
               {isLoading ? (
                 <Loading />
@@ -178,7 +174,7 @@ export const ProjectForm: React.VFC<Props> = ({
                 </button>
               )}
             </div>
-          </form>
+          </FormWrapper>
         )}
       />
     </section>

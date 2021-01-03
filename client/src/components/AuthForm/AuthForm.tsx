@@ -8,6 +8,7 @@ import {
 } from '../../libs/validations';
 import { Loading } from '../Loading';
 import { InputLabel } from '../_atoms/InputLabel';
+import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
 
 type Props = {
@@ -26,73 +27,68 @@ export const AuthForm: React.VFC<Props> = ({
     onSubmit={onSubmit}
     subscription={{ submitting: true }}
     render={({ handleSubmit }) => (
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <fieldset>
-          <legend>
-            <h2 className={styles.title}>
-              {type === 'signup' ? 'Sign Up' : 'Log In'}
-            </h2>
-          </legend>
-          <Field
-            name="email"
-            validate={composeValidators(isRequired, isEmail)}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <InputLabel id="email" label="Email" />
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Email"
-                  disabled={isLoading}
-                  className={styles.input}
-                  required
-                  aria-required
-                  {...input}
-                />
-                <div className={styles.error}>
-                  {meta.touched && meta.error && meta.error}
-                </div>
+      <FormWrapper
+        title={type === 'signup' ? 'Sign Up' : 'Log In'}
+        onSubmit={handleSubmit}>
+        <Field
+          name="email"
+          validate={composeValidators(isRequired, isEmail)}
+          subscription={{
+            value: true,
+            active: true,
+            error: true,
+            touched: true,
+          }}>
+          {({ input, meta }) => (
+            <div className={styles.inputWrapper}>
+              <InputLabel id="email" label="Email" />
+              <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                disabled={isLoading}
+                className={styles.input}
+                required
+                aria-required
+                {...input}
+              />
+              <div className={styles.error}>
+                {meta.touched && meta.error && meta.error}
               </div>
-            )}
-          </Field>
-          <Field
-            name="password"
-            validate={composeValidators(isRequired, minValue(6))}
-            subscription={{
-              value: true,
-              active: true,
-              error: true,
-              touched: true,
-            }}>
-            {({ input, meta }) => (
-              <div className={styles.inputWrapper}>
-                <InputLabel id="password" label="Password" />
-                <input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  autoComplete={
-                    type === 'signup' ? 'new-password' : 'current-password'
-                  }
-                  disabled={isLoading}
-                  className={styles.input}
-                  required
-                  aria-required
-                  {...input}
-                />
-                <div className={styles.error}>
-                  {meta.touched && meta.error && meta.error}
-                </div>
+            </div>
+          )}
+        </Field>
+        <Field
+          name="password"
+          validate={composeValidators(isRequired, minValue(6))}
+          subscription={{
+            value: true,
+            active: true,
+            error: true,
+            touched: true,
+          }}>
+          {({ input, meta }) => (
+            <div className={styles.inputWrapper}>
+              <InputLabel id="password" label="Password" />
+              <input
+                id="password"
+                type="password"
+                placeholder="Password"
+                autoComplete={
+                  type === 'signup' ? 'new-password' : 'current-password'
+                }
+                disabled={isLoading}
+                className={styles.input}
+                required
+                aria-required
+                {...input}
+              />
+              <div className={styles.error}>
+                {meta.touched && meta.error && meta.error}
               </div>
-            )}
-          </Field>
-        </fieldset>
+            </div>
+          )}
+        </Field>
         <div className={styles.actionWrapper}>
           {isLoading ? (
             <Loading />
@@ -121,7 +117,7 @@ export const AuthForm: React.VFC<Props> = ({
             <span className={styles.googleText}>Sign in with Google</span>
           </button>
         </div>
-      </form>
+      </FormWrapper>
     )}
   />
 );

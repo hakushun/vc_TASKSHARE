@@ -15,6 +15,7 @@ import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
 import { Textarea } from '../_atoms/Textarea';
 import { Selectbox } from '../_atoms/Selectbox';
+import { FormWrapper } from '../_molecules/FormWrapper';
 
 type Props = {
   initialValues: Task;
@@ -42,148 +43,143 @@ export const TaskForm: React.VFC<Props> = ({
         initialValues={initialValues}
         subscription={{ submitting: true }}
         render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <fieldset>
-              <legend>
-                <h2 className={styles.title}>Task Form</h2>
-              </legend>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="task_project" label="Project" />
-                  <RequiredBadge />
-                </div>
-                <Selectbox name="projectId" id="task_project">
-                  <option value="">Choose a Owner</option>
-                  {projects.map((project) => (
-                    <option key={project.id} value={project.id}>
-                      {project.title}
-                    </option>
-                  ))}
-                </Selectbox>
+          <FormWrapper title="Task Form" onSubmit={handleSubmit}>
+            <div className={styles.inputWrapper}>
+              <div className={styles.labelWrapper}>
+                <InputLabel id="task_project" label="Project" />
+                <RequiredBadge />
               </div>
-              <Field
-                name="title"
-                validate={composeValidators(isRequired)}
+              <Selectbox name="projectId" id="task_project">
+                <option value="">Choose a Owner</option>
+                {projects.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.title}
+                  </option>
+                ))}
+              </Selectbox>
+            </div>
+            <Field
+              name="title"
+              validate={composeValidators(isRequired)}
+              disabled={isLoading}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="task_title" label="Title" />
+                    <RequiredBadge />
+                  </div>
+                  <input
+                    id="task_title"
+                    type="text"
+                    placeholder="Task Title"
+                    disabled={isLoading}
+                    maxLength={100}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                </div>
+              )}
+            </Field>
+            <div className={styles.inputWrapper}>
+              <div className={styles.labelWrapper}>
+                <InputLabel id="task_assignTo" label="Assgin to" />
+                <RequiredBadge />
+              </div>
+              <Selectbox name="assignTo" id="task_assignTo">
+                <option value="">Choose a Owner</option>
+                {users.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.username}
+                  </option>
+                ))}
+              </Selectbox>
+            </div>
+            <Field
+              name="startDate"
+              validate={composeValidators(isRequired)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="task_startDate" label="Start date" />
+                    <RequiredBadge />
+                  </div>
+                  <input
+                    id="task_startDate"
+                    type="date"
+                    placeholder="Task Start date"
+                    disabled={isLoading}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                </div>
+              )}
+            </Field>
+            <Field
+              name="dueDate"
+              validate={composeValidators(isRequired)}
+              subscription={{
+                value: true,
+                active: true,
+                error: true,
+                touched: true,
+              }}>
+              {({ input, meta }) => (
+                <div className={styles.inputWrapper}>
+                  <div className={styles.labelWrapper}>
+                    <InputLabel id="task_dueDate" label="Due date" />
+                    <RequiredBadge />
+                  </div>
+                  <input
+                    id="task_dueDate"
+                    type="date"
+                    placeholder="Task Due date"
+                    disabled={isLoading}
+                    className={clsx(
+                      styles.input,
+                      meta.touched && meta.error && styles.hasError,
+                    )}
+                    required
+                    aria-required
+                    {...input}
+                  />
+                </div>
+              )}
+            </Field>
+            <div className={styles.inputWrapper}>
+              <div className={styles.labelWrapper}>
+                <InputLabel id="task_description" label="Description" />
+                <OptionalBadge />
+              </div>
+              <Textarea
+                name="description"
+                id="task_description"
+                placeholder="Task Description"
                 disabled={isLoading}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="task_title" label="Title" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="task_title"
-                      type="text"
-                      placeholder="Task Title"
-                      disabled={isLoading}
-                      maxLength={100}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                  </div>
-                )}
-              </Field>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="task_assignTo" label="Assgin to" />
-                  <RequiredBadge />
-                </div>
-                <Selectbox name="assignTo" id="task_assignTo">
-                  <option value="">Choose a Owner</option>
-                  {users.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user.username}
-                    </option>
-                  ))}
-                </Selectbox>
-              </div>
-              <Field
-                name="startDate"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="task_startDate" label="Start date" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="task_startDate"
-                      type="date"
-                      placeholder="Task Start date"
-                      disabled={isLoading}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                  </div>
-                )}
-              </Field>
-              <Field
-                name="dueDate"
-                validate={composeValidators(isRequired)}
-                subscription={{
-                  value: true,
-                  active: true,
-                  error: true,
-                  touched: true,
-                }}>
-                {({ input, meta }) => (
-                  <div className={styles.inputWrapper}>
-                    <div className={styles.labelWrapper}>
-                      <InputLabel id="task_dueDate" label="Due date" />
-                      <RequiredBadge />
-                    </div>
-                    <input
-                      id="task_dueDate"
-                      type="date"
-                      placeholder="Task Due date"
-                      disabled={isLoading}
-                      className={clsx(
-                        styles.input,
-                        meta.touched && meta.error && styles.hasError,
-                      )}
-                      required
-                      aria-required
-                      {...input}
-                    />
-                  </div>
-                )}
-              </Field>
-              <div className={styles.inputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <InputLabel id="task_description" label="Description" />
-                  <OptionalBadge />
-                </div>
-                <Textarea
-                  name="description"
-                  id="task_description"
-                  placeholder="Task Description"
-                  disabled={isLoading}
-                  required={false}
-                />
-              </div>
-            </fieldset>
+                required={false}
+              />
+            </div>
             <div className={styles.actionWrapper}>
               {isLoading ? (
                 <Loading />
@@ -196,7 +192,7 @@ export const TaskForm: React.VFC<Props> = ({
                 </button>
               )}
             </div>
-          </form>
+          </FormWrapper>
         )}
       />
     </section>
