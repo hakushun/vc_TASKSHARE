@@ -28,7 +28,7 @@ export const Projects: React.VFC<Props> = ({
       <ProjectList context="open" projects={openProjects} tasks={tasks} />
     </section>
     <section className={styles.wrpper}>
-      <Heading title="Open Close List" />
+      <Heading title="Close Project List" />
       <ProjectList context="close" projects={closeProjects} tasks={tasks} />
     </section>
   </>
