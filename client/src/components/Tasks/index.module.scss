@@ -19,12 +19,3 @@
     font-size: mixin.rem(20);
   }
 }
-
-.action {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  display: flex;
-  align-items: center;
-  transform: translateY(-50%);
-}

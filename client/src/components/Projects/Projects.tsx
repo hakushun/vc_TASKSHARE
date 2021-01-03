@@ -3,6 +3,7 @@ import { Project } from '../../redux/modules/project';
 import { Task } from '../../redux/modules/task';
 import { ProjectForm } from '../ProjectForm';
 import { ProjectList } from '../ProjectList';
+import { AddButton } from '../_atoms/AddButton';
 import styles from './index.module.scss';
 
 type Props = {
@@ -22,17 +23,7 @@ export const Projects: React.VFC<Props> = ({
     <section className={styles.wrpper}>
       <div className={styles.heading}>
         <h2 className={styles.title}>Open Project List</h2>
-        <button
-          type="button"
-          className={styles.action}
-          onClick={() => handleAddProject()}>
-          <img
-            src="/images/icon-circle-plus.svg"
-            alt="プロジェクトを追加する"
-            width="30"
-            height="30"
-          />
-        </button>
+        <AddButton target="プロジェクト" handleAdd={handleAddProject} />
       </div>
       <ProjectList context="open" projects={openProjects} tasks={tasks} />
     </section>
