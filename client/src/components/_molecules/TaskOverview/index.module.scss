@@ -1,0 +1,76 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.inner {
+  display: grid;
+  grid-template-areas:
+    "description description"
+    "assignTo createdBy"
+    "startDate dueDate"
+    "createdAt updatedAt";
+  grid-template-columns: 50% 50%;
+  gap: 10px 0;
+  padding: 10px 5px;
+
+  @include mixin.mq() {
+    grid-template-areas:
+      "description"
+      "assignTo"
+      "createdBy"
+      "startDate"
+      "dueDate"
+      "createdAt"
+      "updatedAt";
+    grid-template-columns: 100%;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.description {
+  grid-area: description;
+}
+
+.assignTo {
+  grid-area: assignTo;
+}
+
+.createdBy {
+  grid-area: createdBy;
+}
+
+.startDate {
+  grid-area: startDate;
+}
+
+.dueDate {
+  grid-area: dueDate;
+}
+
+.createdAt {
+  grid-area: createdAt;
+}
+
+.updatedAt {
+  grid-area: updatedAt;
+}
+
+.label {
+  min-width: 100px;
+}
+
+.detail {
+  white-space: pre-wrap;
+}
+
+.definition {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
