@@ -1,0 +1,39 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  position: relative;
+  margin-top: 5px;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    padding: 0;
+    pointer-events: none;
+    content: '';
+    border-top: 7px solid #333;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    transform: translateY(-50%);
+  }
+}
+
+.selectbox {
+  width: 100%;
+  padding: 10px 8px;
+  font-size: mixin.rem(16);
+  border: 1px solid mixin.$mainTextColor;
+  border-radius: 3px;
+  appearance: none;
+
+  @include mixin.mq() {
+    padding: 5px 8px;
+  }
+}
+
+.hasError {
+  background-color: lighten(mixin.$errorColor, 20%);
+  box-shadow: 0 0 6px 0 rgba(255, 51, 51, 0.7);
+}
