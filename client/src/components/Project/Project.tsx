@@ -17,6 +17,7 @@ import { AddButton } from '../_atoms/AddButton';
 import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
 import { EditButton } from '../_atoms/EditButton';
 import { DeleteButton } from '../_atoms/DeleteButton';
+import { HeadingWithBorder } from '../_molecules/HeadingWithBorder';
 
 type Props = {
   project: typeProject;
@@ -56,8 +57,7 @@ export const Project: React.VFC<Props> = ({
       handleRemove={handleRemoveProject}
     />
     <section className={styles.root}>
-      <div className={styles.heading}>
-        <h2 className={styles.title}>{project.title}</h2>
+      <HeadingWithBorder title={project.title}>
         <div className={styles.status}>
           <span className={styles.statusText}>{`${calculateProgress(
             relatedTasks,
@@ -68,7 +68,7 @@ export const Project: React.VFC<Props> = ({
             value={calculateProgress(relatedTasks, project.id!)}
             max="100"></progress>
         </div>
-      </div>
+      </HeadingWithBorder>
       <div className={styles.wrapper}>
         <SubHeadingWithBorder title="Project Overview">
           {(user.id === project.userId || user.id === project.ownerId) && (

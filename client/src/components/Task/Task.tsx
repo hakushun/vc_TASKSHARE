@@ -18,6 +18,7 @@ import { AddButton } from '../_atoms/AddButton';
 import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
 import { EditButton } from '../_atoms/EditButton';
 import { DeleteButton } from '../_atoms/DeleteButton';
+import { HeadingWithBorder } from '../_molecules/HeadingWithBorder';
 
 type Props = {
   isOpened: boolean;
@@ -64,8 +65,7 @@ export const Task: React.VFC<Props> = ({
       handleRemove={handleRemoveTask}
     />
     <section className={styles.root}>
-      <div className={styles.heading}>
-        <h2 className={styles.title}>{task.title}</h2>
+      <HeadingWithBorder title={task.title}>
         {user.id === task.userId || user.id === task.assignTo ? (
           <>
             <button className={styles.status} onClick={() => toggleList()}>
@@ -83,7 +83,7 @@ export const Task: React.VFC<Props> = ({
         ) : (
           <div className={styles.status}>{toStringStatus(task.status)}</div>
         )}
-      </div>
+      </HeadingWithBorder>
       <div className={styles.linkWrapper}>
         <Link href={`/projects/${task.projectId}`}>
           <a

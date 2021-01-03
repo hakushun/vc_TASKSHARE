@@ -6,22 +6,6 @@
   margin: 0 auto;
 }
 
-.heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 5px solid mixin.$headerBgColor;
-}
-
-.title {
-  font-size: mixin.rem(26);
-  font-weight: bold;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(18);
-  }
-}
-
 .status {
   display: flex;
   flex-direction: column;
