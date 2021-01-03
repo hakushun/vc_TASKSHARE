@@ -13,10 +13,6 @@ import { remove, selectIsLoading } from '../../redux/modules/projects';
 import { add as addTask } from '../../redux/modules/task';
 import { selectRelatedTasks } from '../../redux/modules/tasks';
 import { selectUser } from '../../redux/modules/user';
-import {
-  selectOwner,
-  selectUserCreateProject,
-} from '../../redux/modules/users';
 import { PageLoader } from '../_atoms/PageLoader';
 import { Project as Presentational } from './Project';
 
@@ -26,8 +22,6 @@ const Component: React.VFC = () => {
   const project = useSelector(selectProject);
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedProject);
-  const owner = useSelector(selectOwner);
-  const createUser = useSelector(selectUserCreateProject);
   const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
@@ -63,8 +57,6 @@ const Component: React.VFC = () => {
           project={project}
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
-          owner={owner}
-          createUser={createUser}
           user={user}
           isLoading={isLoading}
           handleEditProject={handleEditProject}
