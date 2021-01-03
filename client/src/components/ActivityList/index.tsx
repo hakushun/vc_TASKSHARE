@@ -7,7 +7,6 @@ import {
   selectIsLoading,
 } from '../../redux/modules/activities';
 import { Activity } from '../../redux/modules/activity';
-import { selectUser } from '../../redux/modules/user';
 import { ActivityList as Presentational } from './ActivityList';
 
 type Props = {
@@ -15,7 +14,6 @@ type Props = {
 };
 export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const isLoading = useSelector(selectIsLoading);
   const db = getInstance();
 
@@ -35,7 +33,6 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   return (
     <Presentational
       activities={activities}
-      user={user}
       isLoading={isLoading}
       handleRemove={handleRemove}
     />

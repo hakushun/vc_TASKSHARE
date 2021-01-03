@@ -11,18 +11,6 @@
   }
 }
 
-.itemHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  font-size: mixin.rem(14);
-
-  @include mixin.mq() {
-    font-size: mixin.rem(12);
-  }
-}
-
 .commentWrapper {
   padding: 5px 10px;
 }
