@@ -21,8 +21,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,ts,tsx}": [
-      "lint:eslint",
-      "lint:prettier"
+      "eslint --fix'./src/**/*.{ts,tsx}'",
+      "prettier --write './src/**/*.{ts,tsx}'"
     ],
     "src/**/*.{css,scss}": [
       "stylelint --fix './src/**/*.{css,scss}'"
