@@ -12,6 +12,7 @@ import { Userdata } from '../../redux/modules/users';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { OptionalBadge } from '../_atoms/OptionalBadge';
+import { InputLabel } from '../_atoms/InputLabel';
 
 type Props = {
   initialValues: Task;
@@ -46,9 +47,7 @@ export const TaskForm: React.VFC<Props> = ({
               </legend>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="task_project" className={styles.label}>
-                    Project
-                  </label>
+                  <InputLabel id="task_project" label="Project" />
                   <RequiredBadge />
                 </div>
                 <div className={styles.selectboxWrapper}>
@@ -95,9 +94,7 @@ export const TaskForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="task_title" className={styles.label}>
-                        Title
-                      </label>
+                      <InputLabel id="task_title" label="Title" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -119,9 +116,7 @@ export const TaskForm: React.VFC<Props> = ({
               </Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="task_assignTo" className={styles.label}>
-                    Assgin to
-                  </label>
+                  <InputLabel id="task_assignTo" label="Assgin to" />
                   <RequiredBadge />
                 </div>
                 <div className={styles.selectboxWrapper}>
@@ -167,9 +162,7 @@ export const TaskForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="task_startDate" className={styles.label}>
-                        Start date
-                      </label>
+                      <InputLabel id="task_startDate" label="Start date" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -200,9 +193,7 @@ export const TaskForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="task_dueDate" className={styles.label}>
-                        Due date
-                      </label>
+                      <InputLabel id="task_dueDate" label="Due date" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -223,9 +214,7 @@ export const TaskForm: React.VFC<Props> = ({
               </Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="task_description" className={styles.label}>
-                    Description
-                  </label>
+                  <InputLabel id="task_description" label="Description" />
                   <OptionalBadge />
                 </div>
                 <Field

@@ -11,6 +11,7 @@ import { Userdata } from '../../redux/modules/users';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { OptionalBadge } from '../_atoms/OptionalBadge';
+import { InputLabel } from '../_atoms/InputLabel';
 
 type Props = {
   initialValues: Project;
@@ -53,9 +54,7 @@ export const ProjectForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="project_title" className={styles.label}>
-                        Title
-                      </label>
+                      <InputLabel id="project_title" label="Title" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -77,9 +76,7 @@ export const ProjectForm: React.VFC<Props> = ({
               </Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="project_owner" className={styles.label}>
-                    Owner
-                  </label>
+                  <InputLabel id="project_owner" label="Owner" />
                   <RequiredBadge />
                 </div>
                 <div className={styles.selectboxWrapper}>
@@ -125,11 +122,7 @@ export const ProjectForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label
-                        htmlFor="project_startDate"
-                        className={styles.label}>
-                        Start date
-                      </label>
+                      <InputLabel id="project_startDate" label="Start date" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -160,9 +153,7 @@ export const ProjectForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="project_dueDate" className={styles.label}>
-                        Due date
-                      </label>
+                      <InputLabel id="project_dueDate" label="Due date" />
                       <RequiredBadge />
                     </div>
                     <input
@@ -183,9 +174,7 @@ export const ProjectForm: React.VFC<Props> = ({
               </Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="project_detail" className={styles.label}>
-                    Detail
-                  </label>
+                  <InputLabel id="project_detail" label="Detail" />
                   <OptionalBadge />
                 </div>
                 <Field

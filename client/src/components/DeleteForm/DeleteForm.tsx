@@ -10,6 +10,7 @@ import {
 } from '../../libs/validations';
 import { Loading } from '../Loading';
 import { CloseButton } from '../_atoms/CloseButton';
+import { InputLabel } from '../_atoms/InputLabel';
 
 type Props = {
   isLoading: boolean;
@@ -44,9 +45,7 @@ export const DeleteForm: React.VFC<Props> = ({
                 }}>
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
-                    <label htmlFor="email" className={styles.label}>
-                      Email
-                    </label>
+                    <InputLabel id="email" label="Email" />
                     <input
                       id="email"
                       type="email"
@@ -74,9 +73,7 @@ export const DeleteForm: React.VFC<Props> = ({
                 }}>
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
-                    <label htmlFor="password" className={styles.label}>
-                      Password
-                    </label>
+                    <InputLabel id="password" label="Password" />
                     <input
                       id="password"
                       type="password"

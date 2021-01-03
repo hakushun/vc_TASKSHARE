@@ -7,6 +7,7 @@ import {
   minValue,
 } from '../../libs/validations';
 import { Loading } from '../Loading';
+import { InputLabel } from '../_atoms/InputLabel';
 import styles from './index.module.scss';
 
 type Props = {
@@ -43,9 +44,7 @@ export const AuthForm: React.VFC<Props> = ({
             }}>
             {({ input, meta }) => (
               <div className={styles.inputWrapper}>
-                <label htmlFor="email" className={styles.label}>
-                  Email
-                </label>
+                <InputLabel id="email" label="Email" />
                 <input
                   id="email"
                   type="email"
@@ -73,9 +72,7 @@ export const AuthForm: React.VFC<Props> = ({
             }}>
             {({ input, meta }) => (
               <div className={styles.inputWrapper}>
-                <label htmlFor="password" className={styles.label}>
-                  Password
-                </label>
+                <InputLabel id="password" label="Password" />
                 <input
                   id="password"
                   type="password"

@@ -9,6 +9,7 @@ import { Activity } from '../../redux/modules/activity';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
+import { InputLabel } from '../_atoms/InputLabel';
 
 type Props = {
   initialValues: Activity;
@@ -49,9 +50,7 @@ export const ActivityForm: React.VFC<Props> = ({
                 className={styles.hidden}></Field>
               <div className={styles.inputWrapper}>
                 <div className={styles.labelWrapper}>
-                  <label htmlFor="activity_comment" className={styles.label}>
-                    Comment
-                  </label>
+                  <InputLabel id="activity_comment" label="Comment" />
                   <RequiredBadge />
                 </div>
                 <Field

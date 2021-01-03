@@ -6,6 +6,7 @@ import { composeValidators, isEmail, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
+import { InputLabel } from '../_atoms/InputLabel';
 
 type Props = {
   closeModal: () => void;
@@ -17,7 +18,7 @@ export const PasswordResetForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <CloseButton handleClose={closeModal} />¥
+      <CloseButton handleClose={closeModal} />
       <Form
         onSubmit={handleReset}
         subscription={{ submitting: true }}
@@ -39,9 +40,7 @@ export const PasswordResetForm: React.VFC<Props> = ({
                 {({ input, meta }) => (
                   <div className={styles.inputWrapper}>
                     <div className={styles.labelWrapper}>
-                      <label htmlFor="email" className={styles.label}>
-                        Email
-                      </label>
+                      <InputLabel id="email" label="Email" />
                       <RequiredBadge />
                     </div>
                     <input
