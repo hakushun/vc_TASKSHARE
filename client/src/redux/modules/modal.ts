@@ -6,14 +6,17 @@ import { add as addProject, edit as editProject } from './project';
 import {
   createActions as createProjectActions,
   updateActions as updateProjectActions,
+  removeActions as removeProjectActions,
 } from './projects';
 import {
   createActions as createTaskActions,
   updateActions as updateTaskActions,
+  removeActions as removeTaskActions,
 } from './tasks';
 import {
   createActions as createActivityActions,
   updateActions as updateActivityActions,
+  removeActions as removeActivityActions,
 } from './activities';
 import { RootState } from './reducers';
 import { add as addTask, edit as editTask } from './task';
@@ -30,6 +33,7 @@ export const toggleDeleteForm = actionCreator<boolean>('TOGGLE_DELETE_FORM');
 export const toggleResetPasswordForm = actionCreator<boolean>(
   'TOGGLE_RESET_PASSWORD_FORM',
 );
+export const toggleConfirmation = actionCreator<boolean>('TOGGLE_CONFIRMATION');
 
 const INITIAL_STATE: {
   projectForm: boolean;
@@ -37,12 +41,14 @@ const INITIAL_STATE: {
   activityForm: boolean;
   deleteForm: boolean;
   resetPasswordForm: boolean;
+  confirmation: boolean;
 } = {
   projectForm: false,
   taskForm: false,
   activityForm: false,
   deleteForm: false,
   resetPasswordForm: false,
+  confirmation: false,
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -117,6 +123,22 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
   .case(updateActivityActions.done, (state) => ({
     ...state,
     activityForm: false,
+  }))
+  .case(toggleConfirmation, (state, payload) => ({
+    ...state,
+    confirmation: payload,
+  }))
+  .case(removeProjectActions.done, (state) => ({
+    ...state,
+    confirmation: false,
+  }))
+  .case(removeTaskActions.done, (state) => ({
+    ...state,
+    confirmation: false,
+  }))
+  .case(removeActivityActions.done, (state) => ({
+    ...state,
+    confirmation: false,
   }));
 
 export default reducer;
@@ -140,7 +162,13 @@ export const selectDeleteForm = createSelector(
   [(state: RootState) => state.ui.modal.deleteForm],
   (deleteForm) => deleteForm,
 );
+
 export const selectResetPasswordForm = createSelector(
   [(state: RootState) => state.ui.modal.resetPasswordForm],
   (resetPasswordForm) => resetPasswordForm,
+);
+
+export const selectConfirmation = createSelector(
+  [(state: RootState) => state.ui.modal.confirmation],
+  (confirmation) => confirmation,
 );

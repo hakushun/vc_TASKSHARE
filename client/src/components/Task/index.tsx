@@ -8,13 +8,19 @@ import {
   selectStatusList,
   toggleStatusList,
 } from '../../redux/modules/dropdown';
+import { toggleConfirmation } from '../../redux/modules/modal';
 import { focus, selectProjectByTask } from '../../redux/modules/project';
 import {
   add as addTask,
   edit as editTask,
   selectTask,
 } from '../../redux/modules/task';
-import { remove, selectRelatedTasks } from '../../redux/modules/tasks';
+import {
+  remove,
+  selectIsLoading,
+  selectRelatedTasks,
+} from '../../redux/modules/tasks';
+import { selectUser } from '../../redux/modules/user';
 import { selectAssignUser } from '../../redux/modules/users';
 import { PageLoader } from '../PageLoader';
 import { Task as Presentational } from './Task';
@@ -28,6 +34,8 @@ const Component: React.VFC = () => {
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedTask);
   const assignUer = useSelector(selectAssignUser);
+  const user = useSelector(selectUser);
+  const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
 
   const toggleList = () => {
@@ -37,16 +45,19 @@ const Component: React.VFC = () => {
     dispatch(focus({ id }));
   };
   const hadleAddTask = (projectId: string) => {
-    dispatch(addTask({ projectId }));
+    dispatch(addTask({ projectId, userId: user.id }));
   };
   const hadleEditTask = (id: string) => {
     dispatch(editTask({ id }));
   };
   const hadleAddActivity = (taskId: string) => {
-    dispatch(addActivity({ taskId }));
+    dispatch(addActivity({ taskId, userId: user.id }));
   };
   const handleRemoveTask = (id: string) => {
     dispatch(remove({ id }));
+  };
+  const openConfirmation = () => {
+    dispatch(toggleConfirmation(true));
   };
 
   useEffect(() => {
@@ -68,12 +79,15 @@ const Component: React.VFC = () => {
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           assignUer={assignUer}
+          user={user}
+          isLoading={isLoading}
           toggleList={toggleList}
           handleFocus={handleFocus}
           hadleAddTask={hadleAddTask}
           hadleEditTask={hadleEditTask}
           hadleAddActivity={hadleAddActivity}
           handleRemoveTask={handleRemoveTask}
+          openConfirmation={openConfirmation}
         />
       )}
     </>

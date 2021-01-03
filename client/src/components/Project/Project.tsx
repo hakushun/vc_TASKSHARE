@@ -11,31 +11,43 @@ import { getStaringDate } from '../../libs/date';
 import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
 import { Userdata } from '../../redux/modules/users';
+import { Confirmation } from '../Confirmation';
 
 type Props = {
   project: typeProject;
   relatedTasks: Task[];
   relatedActivities: Activity[];
   owner: Userdata | undefined;
+  user: Userdata;
+  isLoading: boolean;
   hadleEditProject: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleAddActivity: (_projectId: string) => void;
   handleRemoveProject: (_id: string) => void;
+  openConfirmation: () => void;
 };
 export const Project: React.VFC<Props> = ({
   project,
   relatedTasks,
   relatedActivities,
   owner,
+  user,
+  isLoading,
   hadleEditProject,
   hadleAddTask,
   hadleAddActivity,
   handleRemoveProject,
+  openConfirmation,
 }) => (
   <>
     <ProjectForm />
     <TaskForm />
     <ActivityForm />
+    <Confirmation
+      isLoading={isLoading}
+      id={project.id!}
+      handleRemove={handleRemoveProject}
+    />
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{project.title}</h2>
@@ -53,17 +65,19 @@ export const Project: React.VFC<Props> = ({
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Project Overview</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleEditProject(project.id!)}>
-            <img
-              src="/images/icon-edit.svg"
-              alt="プロジェクトを編集する"
-              width="30"
-              height="30"
-            />
-          </button>
+          {(user.id === project.userId || user.id === project.ownerId) && (
+            <button
+              type="button"
+              className={styles.action}
+              onClick={() => hadleEditProject(project.id!)}>
+              <img
+                src="/images/icon-edit.svg"
+                alt="プロジェクトを編集する"
+                width="30"
+                height="30"
+              />
+            </button>
+          )}
         </div>
         <div className={styles.inner}>
           <dl className={styles.projectItem}>
@@ -96,20 +110,22 @@ export const Project: React.VFC<Props> = ({
           </dl>
         </div>
       </div>
-      <div>
-        <button
-          type="button"
-          className={styles.delete}
-          onClick={() => handleRemoveProject(project.id!)}>
-          Delete
-          <img
-            src="/images/icon-trash.svg"
-            alt="プロジェクトを削除する"
-            width="20"
-            height="20"
-          />
-        </button>
-      </div>
+      {(user.id === project.userId || user.id === project.ownerId) && (
+        <div>
+          <button
+            type="button"
+            className={styles.delete}
+            onClick={() => openConfirmation()}>
+            Delete
+            <img
+              src="/images/icon-trash.svg"
+              alt="プロジェクトを削除する"
+              width="20"
+              height="20"
+            />
+          </button>
+        </div>
+      )}
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Task List</h3>

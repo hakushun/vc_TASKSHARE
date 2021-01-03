@@ -2,13 +2,39 @@
 
 .home {
   max-width: 750px;
-  margin: 0 auto;
   padding: 20px 16px 10px;
+  margin: 0 auto;
 }
 
 .inner {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin-top: 100px;
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 15px;
+  font-size: mixin.rem(20);
+  background-color: mixin.$headerBgColor;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: darken(mixin.$headerBgColor, 10%);
+  }
+
+  &:active {
+    background-color: mixin.$headerBgColor;
+    box-shadow: inset 0 0 5px 5px darken(mixin.$headerBgColor, 10%);
+  }
 }

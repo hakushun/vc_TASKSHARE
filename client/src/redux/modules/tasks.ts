@@ -5,7 +5,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { Task, TaskStatus } from './task';
 import { RootState } from './reducers';
 import { sortTaskArray } from './sort';
-import { deleteTask, postTask, putTask } from '../../libs/axios';
+import { deleteTask, postTask, putTask } from '../../libs/db/crud';
 
 export interface Tasks {
   list: Task[];
@@ -18,6 +18,7 @@ export type CreatePayload = {
   dueDate: string;
   description: string;
   status: TaskStatus;
+  userId: string;
 };
 export type UpdatePayload = {
   id: string;
@@ -42,32 +43,36 @@ const actionCreator = actionCreatorFactory();
 
 export const getTasks = actionCreator<Task[]>('GET_TASKS');
 
-export const createActions = actionCreator.async<CreatePayload, Task, Error>(
-  'CREATE_TASK',
-);
+export const createActions = actionCreator.async<
+  CreatePayload,
+  undefined,
+  Error
+>('CREATE_TASK');
 export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postTask(body), [
-    ({ data }) => createActions.done({ params: body, result: data }),
+    (data) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
-export const updateActions = actionCreator.async<UpdatePayload, Task, Error>(
-  'UPDATE_TASK',
-);
+export const updateActions = actionCreator.async<
+  UpdatePayload,
+  undefined,
+  Error
+>('UPDATE_TASK');
 export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putTask(body), [
-    ({ data }) => updateActions.done({ params: body, result: data }),
+    (data) => updateActions.done({ params: body, result: data }),
     (error) => updateActions.failed({ params: body, error }),
   ]);
 
 export const removeActions = actionCreator.async<
   RemovePayload,
-  RemovePayload,
+  undefined,
   Error
 >('REMOVE_TASK');
 export const remove = (body: RemovePayload): StepAction =>
   steps(removeActions.started(body), () => deleteTask(body), [
-    ({ data }) => removeActions.done({ params: body, result: data }),
+    (data) => removeActions.done({ params: body, result: data }),
     (error) => removeActions.failed({ params: body, error }),
   ]);
 
@@ -79,29 +84,21 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     list: [...payload],
   }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(createActions.done, (state, { result }) => ({
+  .case(createActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list, result],
   }))
   .case(createActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(updateActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(updateActions.done, (state, { result }) => ({
+  .case(updateActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [
-      ...state.list.map((item) => {
-        if (item.id === result.id) return result;
-        return item;
-      }),
-    ],
   }))
   .case(updateActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(removeActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(removeActions.done, (state, { result }) => ({
+  .case(removeActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list.filter((item) => item.id !== result.id)],
   }))
   .case(removeActions.failed, (state) => ({ ...state, isLoading: false }));
 
@@ -119,7 +116,9 @@ export const selectAssignedTasks = createSelector(
     (state: RootState) => state.ui.user,
   ],
   (tasks, sortKey, user) =>
-    sortTaskArray(tasks, sortKey).filter((task) => task.assignTo === user.id),
+    sortTaskArray(tasks, sortKey).filter(
+      (task) => task.assignTo === user.id && task.status !== 'COMPLETE',
+    ),
 );
 
 export const selectOpenTasks = createSelector(

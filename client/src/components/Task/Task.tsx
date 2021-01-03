@@ -13,6 +13,7 @@ import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
 import { Userdata } from '../../redux/modules/users';
+import { Confirmation } from '../Confirmation';
 
 type Props = {
   isOpened: boolean;
@@ -21,12 +22,15 @@ type Props = {
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
   assignUer: Userdata | undefined;
+  user: Userdata;
+  isLoading: boolean;
   toggleList: () => void;
   handleFocus: (_id: string) => void;
   hadleAddTask: (_projectId: string) => void;
   hadleEditTask: (_id: string) => void;
   hadleAddActivity: (_taskId: string) => void;
   handleRemoveTask: (_id: string) => void;
+  openConfirmation: () => void;
 };
 export const Task: React.VFC<Props> = ({
   isOpened,
@@ -35,30 +39,44 @@ export const Task: React.VFC<Props> = ({
   relatedTasks,
   relatedActivities,
   assignUer,
+  user,
+  isLoading,
   handleFocus,
   toggleList,
   hadleAddTask,
   hadleEditTask,
   hadleAddActivity,
   handleRemoveTask,
+  openConfirmation,
 }) => (
   <>
     <TaskForm />
     <ActivityForm />
+    <Confirmation
+      isLoading={isLoading}
+      id={task.id!}
+      handleRemove={handleRemoveTask}
+    />
     <section className={styles.root}>
       <div className={styles.heading}>
         <h2 className={styles.title}>{task.title}</h2>
-        <button className={styles.status} onClick={() => toggleList()}>
-          {toStringStatus(task.status)}
-        </button>
-        <div
-          aria-hidden={!isOpened}
-          className={clsx(
-            styles.statusListWrapper,
-            isOpened && styles.isOpened,
-          )}>
-          <TaskStatusList />
-        </div>
+        {user.id === task.userId || user.id === task.assignTo ? (
+          <>
+            <button className={styles.status} onClick={() => toggleList()}>
+              {toStringStatus(task.status)}
+            </button>
+            <div
+              aria-hidden={!isOpened}
+              className={clsx(
+                styles.statusListWrapper,
+                isOpened && styles.isOpened,
+              )}>
+              <TaskStatusList />
+            </div>
+          </>
+        ) : (
+          <div className={styles.status}>{toStringStatus(task.status)}</div>
+        )}
       </div>
       <div className={styles.linkWrapper}>
         <Link href={`/projects/${task.projectId}`}>
@@ -73,17 +91,19 @@ export const Task: React.VFC<Props> = ({
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Task Overview</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleEditTask(task.id!)}>
-            <img
-              src="/images/icon-edit.svg"
-              alt="タスクを編集する"
-              width="30"
-              height="30"
-            />
-          </button>
+          {(user.id === task.userId || user.id === task.assignTo) && (
+            <button
+              type="button"
+              className={styles.action}
+              onClick={() => hadleEditTask(task.id!)}>
+              <img
+                src="/images/icon-edit.svg"
+                alt="タスクを編集する"
+                width="30"
+                height="30"
+              />
+            </button>
+          )}
         </div>
         <div className={styles.inner}>
           <dl className={styles.item}>
@@ -114,20 +134,22 @@ export const Task: React.VFC<Props> = ({
           </dl>
         </div>
       </div>
-      <div>
-        <button
-          type="button"
-          className={styles.delete}
-          onClick={() => handleRemoveTask(task.id!)}>
-          Delete
-          <img
-            src="/images/icon-trash.svg"
-            alt="タスクを削除する"
-            width="20"
-            height="20"
-          />
-        </button>
-      </div>
+      {(user.id === task.userId || user.id === task.assignTo) && (
+        <div>
+          <button
+            type="button"
+            className={styles.delete}
+            onClick={() => openConfirmation()}>
+            Delete
+            <img
+              src="/images/icon-trash.svg"
+              alt="タスクを削除する"
+              width="20"
+              height="20"
+            />
+          </button>
+        </div>
+      )}
       <div className={styles.wrapper}>
         <div className={styles.subheading}>
           <h3 className={styles.subtitle}>Task List in {project.title}</h3>

@@ -78,6 +78,8 @@ export const ActivityForm: React.VFC<Props> = ({
                       )}
                       disabled={isLoading}
                       maxLength={3000}
+                      required
+                      aria-required
                       {...input}
                     />
                   )}
@@ -92,7 +94,7 @@ export const ActivityForm: React.VFC<Props> = ({
                   type="submit"
                   disabled={isLoading}
                   className={styles.action}>
-                  {initialValues.id ? 'Update' : 'Create'}
+                  {initialValues.id ? 'Update Activity' : 'Create Activity'}
                 </button>
               )}
             </div>

@@ -29,7 +29,7 @@ export const AuthForm: React.VFC<Props> = ({
         <fieldset>
           <legend>
             <h2 className={styles.title}>
-              {type === 'signup' ? 'Sign Up' : 'Sign In'}
+              {type === 'signup' ? 'Sign Up' : 'Log In'}
             </h2>
           </legend>
           <Field
@@ -52,6 +52,8 @@ export const AuthForm: React.VFC<Props> = ({
                   placeholder="Email"
                   disabled={isLoading}
                   className={styles.input}
+                  required
+                  aria-required
                   {...input}
                 />
                 <div className={styles.error}>
@@ -83,6 +85,8 @@ export const AuthForm: React.VFC<Props> = ({
                   }
                   disabled={isLoading}
                   className={styles.input}
+                  required
+                  aria-required
                   {...input}
                 />
                 <div className={styles.error}>
@@ -100,7 +104,7 @@ export const AuthForm: React.VFC<Props> = ({
               type="submit"
               disabled={isLoading}
               className={styles.action}>
-              {type === 'signup' ? 'Create Account' : 'Sign In'}
+              {type === 'signup' ? 'Create Account' : 'Log In'}
             </button>
           )}
         </div>
@@ -108,6 +112,7 @@ export const AuthForm: React.VFC<Props> = ({
           <button
             type="button"
             className={styles.google}
+            aria-label="Sign In with Google account"
             onClick={() => signinWithGoogle()}>
             <img
               className={styles.googleImg}

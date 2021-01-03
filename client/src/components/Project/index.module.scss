@@ -2,21 +2,21 @@
 
 .root {
   max-width: 750px;
-  margin: 0 auto;
   padding: 20px 16px 10px;
+  margin: 0 auto;
 }
 
 .heading {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 5px solid mixin.$headerBgColor;
 }
 
 .subheading {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 3px solid mixin.$headerBgColor;
 }
 
@@ -32,10 +32,10 @@
 .status {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 0 5px;
   font-weight: bold;
-  justify-content: center;
-  align-items: center;
 }
 
 .statusText {
@@ -80,12 +80,12 @@
   display: flex;
   align-items: center;
 
-  &:not(:first-child) {
-    margin-top: 10px;
-  }
-
   @include mixin.mq() {
     font-size: mixin.rem(14);
+  }
+
+  &:not(:first-child) {
+    margin-top: 10px;
   }
 }
 
@@ -101,7 +101,7 @@
 .delete {
   display: flex;
   align-items: center;
-  margin-left: auto;
   padding: 0 3px;
+  margin-left: auto;
   color: lighten(mixin.$mainTextColor, 20%);
 }

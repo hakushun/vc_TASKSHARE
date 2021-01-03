@@ -2,7 +2,7 @@ import { StepAction, steps } from 'redux-effects-steps';
 import { createSelector } from 'reselect';
 import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { deleteActivity, postActivity, putActivity } from '../../libs/axios';
+import { deleteActivity, postActivity, putActivity } from '../../libs/db/crud';
 import { Activity } from './activity';
 import { RootState } from './reducers';
 
@@ -15,6 +15,7 @@ export type CreatePayload = {
   projectId?: string;
   taskId?: string;
   comment: string;
+  userId: string;
 };
 export type UpdatePayload = {
   id: string;
@@ -38,34 +39,34 @@ export const getActivities = actionCreator<Activity[]>('GET_ACTIVITIES');
 
 export const createActions = actionCreator.async<
   CreatePayload,
-  Activity,
+  undefined,
   Error
 >('CREATE_ACTIVITY');
 export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postActivity(body), [
-    ({ data }) => createActions.done({ params: body, result: data }),
+    (data) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
 export const updateActions = actionCreator.async<
   UpdatePayload,
-  Activity,
+  undefined,
   Error
 >('UPDATE_ACTIVITY');
 export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putActivity(body), [
-    ({ data }) => updateActions.done({ params: body, result: data }),
+    (data) => updateActions.done({ params: body, result: data }),
     (error) => updateActions.failed({ params: body, error }),
   ]);
 
 export const removeActions = actionCreator.async<
   RemovePayload,
-  RemovePayload,
+  undefined,
   Error
 >('REMOVE_ACTIVITY');
 export const remove = (body: RemovePayload): StepAction =>
   steps(removeActions.started(body), () => deleteActivity(body), [
-    ({ data }) => removeActions.done({ params: body, result: data }),
+    (data) => removeActions.done({ params: body, result: data }),
     (error) => removeActions.failed({ params: body, error }),
   ]);
 
@@ -77,29 +78,21 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     list: [...payload],
   }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(createActions.done, (state, { result }) => ({
+  .case(createActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list, result],
   }))
   .case(createActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(updateActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(updateActions.done, (state, { result }) => ({
+  .case(updateActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [
-      ...state.list.map((item) => {
-        if (item.id === result.id) return result;
-        return item;
-      }),
-    ],
   }))
   .case(updateActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(removeActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(removeActions.done, (state, { result }) => ({
+  .case(removeActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list.filter((item) => item.id !== result.id)],
   }))
   .case(removeActions.failed, (state) => ({ ...state, isLoading: false }));
 

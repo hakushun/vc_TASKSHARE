@@ -3,7 +3,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { createSelector } from 'reselect';
 import { RootState } from './reducers';
-import { deleteUser, postUser, putUser } from '../../libs/axios';
+import { deleteUser, postUser, putUser } from '../../libs/db/crud';
 
 export type Userdata = {
   id: string;
@@ -38,34 +38,34 @@ export const getUsers = actionCreator<Userdata[]>('GET_USERS');
 
 export const createActions = actionCreator.async<
   CreatePayload,
-  Userdata,
+  undefined,
   Error
 >('CREATE_USER');
 export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postUser(body), [
-    ({ data }) => createActions.done({ params: body, result: data }),
+    (data) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
 export const updateActions = actionCreator.async<
   UpdatePayload,
-  Userdata,
+  undefined,
   Error
 >('UPDATE_USER');
 export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putUser(body), [
-    ({ data }) => updateActions.done({ params: body, result: data }),
+    (data) => updateActions.done({ params: body, result: data }),
     (error) => updateActions.failed({ params: body, error }),
   ]);
 
 export const removeActions = actionCreator.async<
   RemovePayload,
-  Userdata,
+  undefined,
   Error
 >('REMOVE_USER');
 export const remove = (body: RemovePayload): StepAction =>
   steps(removeActions.started(body), () => deleteUser(body), [
-    ({ data }) => removeActions.done({ params: body, result: data }),
+    (data) => removeActions.done({ params: body, result: data }),
     (error) => removeActions.failed({ params: body, error }),
   ]);
 
@@ -77,29 +77,21 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
     list: [...payload],
   }))
   .case(createActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(createActions.done, (state, { result }) => ({
+  .case(createActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list, result],
   }))
   .case(createActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(updateActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(updateActions.done, (state, { result }) => ({
+  .case(updateActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [
-      ...state.list.map((item) => {
-        if (item.id === result.id) return result;
-        return item;
-      }),
-    ],
   }))
   .case(updateActions.failed, (state) => ({ ...state, isLoading: false }))
   .case(removeActions.started, (state) => ({ ...state, isLoading: true }))
-  .case(removeActions.done, (state, { result }) => ({
+  .case(removeActions.done, (state) => ({
     ...state,
     isLoading: false,
-    list: [...state.list.filter((item) => item.id !== result.id)],
   }))
   .case(removeActions.failed, (state) => ({ ...state, isLoading: false }));
 

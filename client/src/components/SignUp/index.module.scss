@@ -5,8 +5,7 @@
   margin-top: 20px;
   text-align: center;
 
-  & > a,
-  button {
+  & > a {
     color: mixin.$primaryColor;
     text-decoration: underline;
   }

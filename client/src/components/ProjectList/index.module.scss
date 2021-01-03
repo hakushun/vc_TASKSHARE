@@ -5,9 +5,9 @@
 }
 
 .list {
-  overflow-y: auto;
   max-height: 40vh;
   margin-top: 5px;
+  overflow-y: auto;
 
   @include mixin.mq() {
     max-height: 30vh;
@@ -25,8 +25,8 @@
 
 .link {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 10px;
 
   @include mixin.mq() {
@@ -47,15 +47,15 @@
 }
 
 .name {
-  overflow-x: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   flex: 1 1 auto;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .task {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-width: 110px;
 }

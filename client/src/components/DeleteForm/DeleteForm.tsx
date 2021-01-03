@@ -58,6 +58,8 @@ export const DeleteForm: React.VFC<Props> = ({
                       placeholder="Email"
                       disabled={isLoading}
                       className={styles.input}
+                      required
+                      aria-required
                       {...input}
                     />
                     <div className={styles.error}>
@@ -87,6 +89,8 @@ export const DeleteForm: React.VFC<Props> = ({
                       autoComplete="current-password"
                       disabled={isLoading}
                       className={styles.input}
+                      required
+                      aria-required
                       {...input}
                     />
                     <div className={styles.error}>

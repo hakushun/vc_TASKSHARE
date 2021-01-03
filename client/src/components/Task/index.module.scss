@@ -2,22 +2,22 @@
 
 .root {
   max-width: 750px;
-  margin: 0 auto;
   padding: 20px 16px 10px;
+  margin: 0 auto;
 }
 
 .heading {
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 5px solid mixin.$headerBgColor;
 }
 
 .subheading {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 3px solid mixin.$headerBgColor;
 }
 
@@ -32,14 +32,14 @@
 
 .status {
   display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 3px 25px;
   font-size: mixin.rem(20);
   font-weight: bold;
   color: mixin.$bgColor;
-  border-radius: 20px;
   background-color: mixin.$primaryColor;
-  justify-content: center;
-  align-items: center;
+  border-radius: 20px;
 
   @include mixin.mq() {
     padding: 2px 25px;
@@ -52,31 +52,31 @@
   // .headingのborder-bottom分を加味
   top: calc(100% + 5px);
   right: 0;
-  visibility: hidden;
   min-width: 170px;
   padding: 15px;
+  visibility: hidden;
+  background-color: mixin.$statusListColor;
+  border-radius: 10px;
+  opacity: 0;
   transition: all 0.7s;
   transform: translateY(-20px);
-  opacity: 0;
-  border-radius: 10px;
-  background-color: mixin.$statusListColor;
 
   &.isOpened {
     visibility: visible;
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .linkWrapper {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
   margin-top: 10px;
 
   .link {
-    text-decoration: underline;
     color: mixin.$primaryColor;
+    text-decoration: underline;
 
     @include mixin.mq() {
       font-size: mixin.rem(14);
@@ -110,12 +110,12 @@
   display: flex;
   align-items: center;
 
-  &:not(:first-child) {
-    margin-top: 10px;
-  }
-
   @include mixin.mq() {
     font-size: mixin.rem(14);
+  }
+
+  &:not(:first-child) {
+    margin-top: 10px;
   }
 }
 
@@ -131,7 +131,7 @@
 .delete {
   display: flex;
   align-items: center;
-  margin-left: auto;
   padding: 0 3px;
+  margin-left: auto;
   color: lighten(mixin.$mainTextColor, 20%);
 }

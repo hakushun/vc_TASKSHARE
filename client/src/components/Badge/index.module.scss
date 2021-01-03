@@ -1,8 +1,8 @@
 @use '../stylesheets/mixin' as mixin;
 
 .badge {
-  margin-left: 5px;
   padding: 0 5px;
+  margin-left: 5px;
   font-size: mixin.rem(14);
   color: mixin.$bgColor;
   border-radius: 10px;

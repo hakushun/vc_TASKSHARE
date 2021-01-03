@@ -2,20 +2,20 @@
 
 .dialog {
   position: absolute;
-  z-index: mixin.$z_dialog;
   top: 50%;
   left: 50%;
+  z-index: mixin.$z_dialog;
   display: flex;
-  overflow-y: auto;
   flex-direction: column;
+  align-items: center;
   width: min(90vw, 500px);
   height: min(90vh, 300px);
   padding: 25px 20px;
-  transform: translate(-50%, -50%);
+  overflow-y: auto;
+  background: #fffafa;
   border: 2px solid mixin.$mainTextColor;
   border-radius: 5px;
-  background: #fffafa;
-  align-items: center;
+  transform: translate(-50%, -50%);
 }
 
 .title {
@@ -25,8 +25,8 @@
 
 .description {
   display: flex;
-  align-items: center;
   flex: 1 0 auto;
+  align-items: center;
   margin-top: 10px;
   font-size: mixin.rem(18);
   white-space: pre-wrap;
@@ -40,20 +40,20 @@
   padding: 3px 10px;
   font-size: mixin.rem(16);
   color: mixin.$bgColor;
+  background-color: mixin.$primaryLightColor;
   border: 3px solid mixin.$primaryLightColor;
   border-radius: 3px;
-  background-color: mixin.$primaryLightColor;
   box-shadow: 0 3px 5px 0 mixin.$mainTextColor;
 
   &:hover,
   &:focus {
     color: mixin.$primaryLightColor;
-    border: 3px solid mixin.$primaryLightColor;
     background-color: mixin.$bgColor;
+    border: 3px solid mixin.$primaryLightColor;
   }
 
   &:active {
-    transform: translateY(3px);
     box-shadow: none;
+    transform: translateY(3px);
   }
 }
