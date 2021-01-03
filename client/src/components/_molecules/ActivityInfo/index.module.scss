@@ -1,0 +1,10 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  color: lighten(mixin.$mainTextColor, 20%);
+}
