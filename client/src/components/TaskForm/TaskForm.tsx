@@ -11,6 +11,7 @@ import { Task } from '../../redux/modules/task';
 import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/tasks';
 import { Userdata } from '../../redux/modules/users';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   initialValues: Task;
@@ -32,13 +33,7 @@ export const TaskForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => closeTaskModal()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={closeTaskModal} />
       <Form
         onSubmit={initialValues.id ? updateTask : createTask}
         initialValues={initialValues}

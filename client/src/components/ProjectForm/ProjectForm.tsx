@@ -10,6 +10,7 @@ import { Required } from '../Badge/Required';
 import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
 import { Userdata } from '../../redux/modules/users';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   initialValues: Project;
@@ -29,13 +30,7 @@ export const ProjectForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => closeProjectModal()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={closeProjectModal} />
       <Form
         onSubmit={initialValues.id ? updateProject : createProject}
         subscription={{ submitting: true }}

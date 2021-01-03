@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { Overlay } from '../Overlay';
 import styles from './index.module.scss';
 import { Loading } from '../Loading';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   isLoading: boolean;
@@ -18,13 +19,7 @@ export const Confirmation: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.confirmation}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => handleClose()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={handleClose} />
       <div className={styles.inner}>
         <div className={styles.title}>Delete Confirmation</div>
         <div className={styles.message}>

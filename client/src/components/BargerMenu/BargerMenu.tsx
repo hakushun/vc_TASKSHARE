@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { Overlay } from '../Overlay';
+import { CloseButton } from '../_atoms/CloseButton';
 import styles from './index.module.scss';
 
 type Props = {
@@ -15,13 +16,7 @@ export const BargerMenu: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <nav className={styles.nav}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => handletoggle()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton context="menu" handleClose={handletoggle} />
       <ul className={styles.navList}>
         {!isAuth ? (
           <>

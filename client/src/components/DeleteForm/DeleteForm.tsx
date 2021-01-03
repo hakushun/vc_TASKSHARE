@@ -9,6 +9,7 @@ import {
   minValue,
 } from '../../libs/validations';
 import { Loading } from '../Loading';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   isLoading: boolean;
@@ -22,13 +23,7 @@ export const DeleteForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => closeModal()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={closeModal} />
       <Form
         onSubmit={handleRemove}
         subscription={{ submitting: true }}

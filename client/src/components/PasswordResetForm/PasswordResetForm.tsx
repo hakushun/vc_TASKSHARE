@@ -5,6 +5,7 @@ import { Overlay } from '../Overlay';
 import { composeValidators, isEmail, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import { Required } from '../Badge/Required';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   closeModal: () => void;
@@ -16,13 +17,7 @@ export const PasswordResetForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => closeModal()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={closeModal} />¥
       <Form
         onSubmit={handleReset}
         subscription={{ submitting: true }}

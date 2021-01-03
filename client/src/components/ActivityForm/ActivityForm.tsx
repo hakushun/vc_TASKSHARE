@@ -8,6 +8,7 @@ import { Overlay } from '../Overlay';
 import { Required } from '../Badge/Required';
 import { Activity } from '../../redux/modules/activity';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
+import { CloseButton } from '../_atoms/CloseButton';
 
 type Props = {
   initialValues: Activity;
@@ -25,13 +26,7 @@ export const ActivityForm: React.VFC<Props> = ({
 }) => (
   <Overlay>
     <section className={styles.root}>
-      <button
-        type="button"
-        aria-label="閉じる"
-        className={styles.close}
-        onClick={() => closeActivityModal()}>
-        <img src="/images/icon-x.svg" alt="閉じる" width="40" height="40" />
-      </button>
+      <CloseButton handleClose={closeActivityModal} />
       <Form
         onSubmit={initialValues.id ? updateActivity : createActivity}
         initialValues={initialValues}
