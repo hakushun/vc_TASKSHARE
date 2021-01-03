@@ -4,6 +4,7 @@ import { getStringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Task } from '../../redux/modules/task';
 import { TaskListHeader } from '../TaskListHeader';
+import { ListNoItems } from '../_molecules/ListNoItems';
 import styles from './index.module.scss';
 
 type Props = {
@@ -16,11 +17,7 @@ export const TaskList: React.VFC<Props> = ({ context, tasks, handleFocus }) => (
     <TaskListHeader context={context} />
     <ul className={styles.list}>
       {tasks.length === 0 ? (
-        <li className={styles.item}>
-          <div className={styles.link}>
-            <div className={styles.empty}>No Items</div>
-          </div>
-        </li>
+        <ListNoItems />
       ) : (
         <>
           {tasks.map((task) => (

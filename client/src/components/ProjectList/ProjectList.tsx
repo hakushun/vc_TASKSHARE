@@ -7,6 +7,7 @@ import {
   countOpenRelatedTasks,
 } from '../../redux/modules/tasks';
 import { ProjectListHeader } from '../ProjectListHeader';
+import { ListNoItems } from '../_molecules/ListNoItems';
 import styles from './index.module.scss';
 
 type Props = {
@@ -25,11 +26,7 @@ export const ProjectList: React.VFC<Props> = ({
     <ProjectListHeader context={context} />
     <ul className={styles.list}>
       {projects.length === 0 ? (
-        <li className={styles.item}>
-          <div className={styles.link}>
-            <div className={styles.empty}>No Items</div>
-          </div>
-        </li>
+        <ListNoItems />
       ) : (
         <>
           {projects.map((project) => (
