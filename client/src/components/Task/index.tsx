@@ -25,7 +25,7 @@ import {
   selectAssignUser,
   selectUserCreateTask,
 } from '../../redux/modules/users';
-import { PageLoader } from '../PageLoader';
+import { PageLoader } from '../_atoms/PageLoader';
 import { Task as Presentational } from './Task';
 
 const Component: React.VFC = () => {

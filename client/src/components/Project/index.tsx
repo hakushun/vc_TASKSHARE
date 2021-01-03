@@ -17,7 +17,7 @@ import {
   selectOwner,
   selectUserCreateProject,
 } from '../../redux/modules/users';
-import { PageLoader } from '../PageLoader';
+import { PageLoader } from '../_atoms/PageLoader';
 import { Project as Presentational } from './Project';
 
 const Component: React.VFC = () => {

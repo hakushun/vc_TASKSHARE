@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import { mapUserData } from '../libs/auth/mapUserData';
 import { authUser, selectIsAuth } from '../redux/modules/user';
-import { PageLoader } from '../components/PageLoader';
+import { PageLoader } from '../components/_atoms/PageLoader';
 import { getInstance } from '../libs/db/getInstance';
 import { getUsers, Userdata } from '../redux/modules/users';
 
