@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { getStaringDate } from '../../libs/date';
+import { getStringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Task } from '../../redux/modules/task';
 import { TaskListHeader } from '../TaskListHeader';
@@ -36,7 +36,7 @@ export const TaskList: React.VFC<Props> = ({ context, tasks, handleFocus }) => (
                   </div>
                   <div className={styles.name}>{task.title}</div>
                   <div className={styles.duedate}>
-                    {getStaringDate(task.dueDate)}
+                    {getStringDate(task.dueDate)}
                   </div>
                 </a>
               </Link>

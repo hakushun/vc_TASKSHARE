@@ -8,7 +8,7 @@ import { TaskStatusList } from '../TaskStatusList';
 import { TaskForm } from '../TaskForm';
 import { ActivityForm } from '../ActivityForm';
 import { Task as typeTask } from '../../redux/modules/task';
-import { getStaringDate } from '../../libs/date';
+import { getStringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
@@ -117,19 +117,19 @@ export const Task: React.VFC<Props> = ({
           <dl className={styles.item}>
             <dt className={styles.label}>Due Date</dt>
             <dd className={styles.description}>
-              {getStaringDate(task.dueDate)}
+              {getStringDate(task.dueDate)}
             </dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>Created at</dt>
             <dd className={styles.description}>
-              {getStaringDate(task.createdAt!)}
+              {getStringDate(task.createdAt!)}
             </dd>
           </dl>
           <dl className={styles.item}>
             <dt className={styles.label}>Updated at</dt>
             <dd className={styles.description}>
-              {getStaringDate(task.updatedAt!)}
+              {getStringDate(task.updatedAt!)}
             </dd>
           </dl>
         </div>

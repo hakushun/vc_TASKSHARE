@@ -1,5 +1,5 @@
 import React from 'react';
-import { getStaringTimestamp } from '../../libs/date';
+import { getStringTimestamp } from '../../libs/date';
 import { Activity } from '../../redux/modules/activity';
 import { getCommenter, Userdata } from '../../redux/modules/users';
 import { Confirmation } from '../Confirmation';
@@ -47,7 +47,7 @@ export const ActivityList: React.VFC<Props> = ({
                       {getCommenter(users, activity.userId!)}
                     </span>
                     <span className={styles.date}>
-                      {getStaringTimestamp(activity.updatedAt!)}
+                      {getStringTimestamp(activity.updatedAt!)}
                     </span>
                   </div>
                   {user.id === activity.userId && (

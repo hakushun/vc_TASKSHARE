@@ -7,7 +7,7 @@ import { ProjectForm } from '../ProjectForm';
 import { TaskForm } from '../TaskForm';
 import { TaskList } from '../TaskList';
 import styles from './index.module.scss';
-import { getStaringDate } from '../../libs/date';
+import { getStringDate } from '../../libs/date';
 import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
 import { Userdata } from '../../redux/modules/users';
@@ -93,19 +93,19 @@ export const Project: React.VFC<Props> = ({
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>Due Date</dt>
             <dd className={styles.projectDescription}>
-              {getStaringDate(project.dueDate)}
+              {getStringDate(project.dueDate)}
             </dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>Created at</dt>
             <dd className={styles.projectDescription}>
-              {getStaringDate(project.createdAt!)}
+              {getStringDate(project.createdAt!)}
             </dd>
           </dl>
           <dl className={styles.projectItem}>
             <dt className={styles.projectLabel}>Updated at</dt>
             <dd className={styles.projectDescription}>
-              {getStaringDate(project.updatedAt!)}
+              {getStringDate(project.updatedAt!)}
             </dd>
           </dl>
         </div>
