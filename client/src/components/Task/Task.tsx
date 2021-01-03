@@ -14,6 +14,9 @@ import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
 import { Userdata } from '../../redux/modules/users';
 import { Confirmation } from '../Confirmation';
+import { AddButton } from '../_atoms/AddButton';
+import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
+import { EditButton } from '../_atoms/EditButton';
 
 type Props = {
   isOpened: boolean;
@@ -27,9 +30,9 @@ type Props = {
   isLoading: boolean;
   toggleList: () => void;
   handleFocus: (_id: string) => void;
-  hadleAddTask: (_projectId: string) => void;
-  hadleEditTask: (_id: string) => void;
-  hadleAddActivity: (_taskId: string) => void;
+  handleAddTask: (_projectId: string) => void;
+  handleEditTask: (_id: string) => void;
+  handleAddActivity: (_taskId: string) => void;
   handleRemoveTask: (_id: string) => void;
   openConfirmation: () => void;
 };
@@ -45,9 +48,9 @@ export const Task: React.VFC<Props> = ({
   isLoading,
   handleFocus,
   toggleList,
-  hadleAddTask,
-  hadleEditTask,
-  hadleAddActivity,
+  handleAddTask,
+  handleEditTask,
+  handleAddActivity,
   handleRemoveTask,
   openConfirmation,
 }) => (
@@ -91,22 +94,17 @@ export const Task: React.VFC<Props> = ({
         </Link>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Task Overview</h3>
+        <SubHeadingWithBorder title="Task Overview">
           {(user.id === task.userId || user.id === task.assignTo) && (
-            <button
-              type="button"
-              className={styles.action}
-              onClick={() => hadleEditTask(task.id!)}>
-              <img
-                src="/images/icon-edit.svg"
-                alt="タスクを編集する"
-                width="30"
-                height="30"
-              />
-            </button>
+            <EditButton
+              target="タスク"
+              id={task.id!}
+              handleEdit={handleEditTask}
+              width="30"
+              height="30"
+            />
           )}
-        </div>
+        </SubHeadingWithBorder>
         <div className={styles.inner}>
           <dl className={clsx(styles.item, styles.description)}>
             <dt className={styles.label}>Description</dt>
@@ -165,37 +163,23 @@ export const Task: React.VFC<Props> = ({
         </div>
       )}
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Task List in {project.title}</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleAddTask(task.projectId)}>
-            <img
-              src="/images/icon-circle-plus.svg"
-              alt="タスクを追加する"
-              width="30"
-              height="30"
-            />
-          </button>
-        </div>
+        <SubHeadingWithBorder title={`Task List in ${project.title}`}>
+          <AddButton
+            target="タスク"
+            id={task.projectId}
+            handleAddWithId={handleAddTask}
+          />
+        </SubHeadingWithBorder>
         <TaskList context="open" tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Activities</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleAddActivity(task.id!)}>
-            <img
-              src="/images/icon-circle-plus.svg"
-              alt="アクティビティを追加する"
-              width="30"
-              height="30"
-            />
-          </button>
-        </div>
+        <SubHeadingWithBorder title="Activities">
+          <AddButton
+            target="アクティビティ"
+            id={task.id!}
+            handleAddWithId={handleAddActivity}
+          />
+        </SubHeadingWithBorder>
         <ActivityList activities={relatedActivities} />
       </div>
     </section>

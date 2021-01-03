@@ -32,13 +32,13 @@ const Component: React.VFC = () => {
   const isLoading = useSelector(selectIsLoading);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const hadleEditProject = (id: string) => {
+  const handleEditProject = (id: string) => {
     dispatch(editProject({ id }));
   };
-  const hadleAddTask = (projectId: string) => {
+  const handleAddTask = (projectId: string) => {
     dispatch(addTask({ projectId, userId: user.id }));
   };
-  const hadleAddActivity = (projectId: string) => {
+  const handleAddActivity = (projectId: string) => {
     dispatch(addActivity({ projectId, userId: user.id }));
   };
   const handleRemoveProject = (id: string) => {
@@ -67,9 +67,9 @@ const Component: React.VFC = () => {
           createUser={createUser}
           user={user}
           isLoading={isLoading}
-          hadleEditProject={hadleEditProject}
-          hadleAddTask={hadleAddTask}
-          hadleAddActivity={hadleAddActivity}
+          handleEditProject={handleEditProject}
+          handleAddTask={handleAddTask}
+          handleAddActivity={handleAddActivity}
           handleRemoveProject={handleRemoveProject}
           openConfirmation={openConfirmation}
         />

@@ -13,6 +13,9 @@ import { calculateProgress } from '../../redux/modules/tasks';
 import { Activity } from '../../redux/modules/activity';
 import { Userdata } from '../../redux/modules/users';
 import { Confirmation } from '../Confirmation';
+import { AddButton } from '../_atoms/AddButton';
+import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
+import { EditButton } from '../_atoms/EditButton';
 
 type Props = {
   project: typeProject;
@@ -22,9 +25,9 @@ type Props = {
   createUser: Userdata | undefined;
   user: Userdata;
   isLoading: boolean;
-  hadleEditProject: (_id: string) => void;
-  hadleAddTask: (_projectId: string) => void;
-  hadleAddActivity: (_projectId: string) => void;
+  handleEditProject: (_id: string) => void;
+  handleAddTask: (_projectId: string) => void;
+  handleAddActivity: (_projectId: string) => void;
   handleRemoveProject: (_id: string) => void;
   openConfirmation: () => void;
 };
@@ -36,9 +39,9 @@ export const Project: React.VFC<Props> = ({
   createUser,
   user,
   isLoading,
-  hadleEditProject,
-  hadleAddTask,
-  hadleAddActivity,
+  handleEditProject,
+  handleAddTask,
+  handleAddActivity,
   handleRemoveProject,
   openConfirmation,
 }) => (
@@ -66,22 +69,17 @@ export const Project: React.VFC<Props> = ({
         </div>
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Project Overview</h3>
+        <SubHeadingWithBorder title="Project Overview">
           {(user.id === project.userId || user.id === project.ownerId) && (
-            <button
-              type="button"
-              className={styles.action}
-              onClick={() => hadleEditProject(project.id!)}>
-              <img
-                src="/images/icon-edit.svg"
-                alt="プロジェクトを編集する"
-                width="30"
-                height="30"
-              />
-            </button>
+            <EditButton
+              target="プロジェクト"
+              id={project.id!}
+              handleEdit={handleEditProject}
+              width="30"
+              height="30"
+            />
           )}
-        </div>
+        </SubHeadingWithBorder>
         <div className={styles.inner}>
           <dl className={clsx(styles.item, styles.description)}>
             <dt className={styles.label}>Detail</dt>
@@ -142,37 +140,23 @@ export const Project: React.VFC<Props> = ({
         </div>
       )}
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Task List</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleAddTask(project.id!)}>
-            <img
-              src="/images/icon-circle-plus.svg"
-              alt="タスクを追加する"
-              width="30"
-              height="30"
-            />
-          </button>
-        </div>
+        <SubHeadingWithBorder title="Task List">
+          <AddButton
+            target="タスク"
+            id={project.id!}
+            handleAddWithId={handleAddTask}
+          />
+        </SubHeadingWithBorder>
         <TaskList context="open" tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
-        <div className={styles.subheading}>
-          <h3 className={styles.subtitle}>Activities</h3>
-          <button
-            type="button"
-            className={styles.action}
-            onClick={() => hadleAddActivity(project.id!)}>
-            <img
-              src="/images/icon-circle-plus.svg"
-              alt="アクティビティを追加する"
-              width="30"
-              height="30"
-            />
-          </button>
-        </div>
+        <SubHeadingWithBorder title="Activities">
+          <AddButton
+            target="アクティビティ"
+            id={project.id!}
+            handleAddWithId={handleAddActivity}
+          />
+        </SubHeadingWithBorder>
         <ActivityList activities={relatedActivities} />
       </div>
     </section>

@@ -14,13 +14,6 @@
   border-bottom: 5px solid mixin.$headerBgColor;
 }
 
-.subheading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 3px solid mixin.$headerBgColor;
-}
-
 .title {
   font-size: mixin.rem(26);
   font-weight: bold;
@@ -81,15 +74,6 @@
     @include mixin.mq() {
       font-size: mixin.rem(14);
     }
-  }
-}
-
-.subtitle {
-  font-size: mixin.rem(20);
-  font-weight: bold;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(16);
   }
 }
 
@@ -175,11 +159,6 @@
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.action {
-  display: flex;
-  align-items: center;
 }
 
 .delete {

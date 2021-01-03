@@ -48,13 +48,13 @@ const Component: React.VFC = () => {
   const handleFocus = (id: string) => {
     dispatch(focus({ id }));
   };
-  const hadleAddTask = (projectId: string) => {
+  const handleAddTask = (projectId: string) => {
     dispatch(addTask({ projectId, userId: user.id }));
   };
-  const hadleEditTask = (id: string) => {
+  const handleEditTask = (id: string) => {
     dispatch(editTask({ id }));
   };
-  const hadleAddActivity = (taskId: string) => {
+  const handleAddActivity = (taskId: string) => {
     dispatch(addActivity({ taskId, userId: user.id }));
   };
   const handleRemoveTask = (id: string) => {
@@ -88,9 +88,9 @@ const Component: React.VFC = () => {
           isLoading={isLoading}
           toggleList={toggleList}
           handleFocus={handleFocus}
-          hadleAddTask={hadleAddTask}
-          hadleEditTask={hadleEditTask}
-          hadleAddActivity={hadleAddActivity}
+          handleAddTask={handleAddTask}
+          handleEditTask={handleEditTask}
+          handleAddActivity={handleAddActivity}
           handleRemoveTask={handleRemoveTask}
           openConfirmation={openConfirmation}
         />
