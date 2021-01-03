@@ -8,7 +8,6 @@ import { TaskStatusList } from '../TaskStatusList';
 import { TaskForm } from '../TaskForm';
 import { ActivityForm } from '../ActivityForm';
 import { Task as typeTask } from '../../redux/modules/task';
-import { getStringDate } from '../../libs/date';
 import { toStringStatus } from '../../libs/utils';
 import { Activity } from '../../redux/modules/activity';
 import { Project } from '../../redux/modules/project';
@@ -19,6 +18,7 @@ import { SubHeadingWithBorder } from '../_molecules/SubHeadingWithBorder';
 import { EditButton } from '../_atoms/EditButton';
 import { DeleteButton } from '../_atoms/DeleteButton';
 import { HeadingWithBorder } from '../_molecules/HeadingWithBorder';
+import { TaskOverview } from '../_molecules/TaskOverview';
 
 type Props = {
   isOpened: boolean;
@@ -26,8 +26,6 @@ type Props = {
   task: typeTask;
   relatedTasks: typeTask[];
   relatedActivities: Activity[];
-  assignUer: Userdata | undefined;
-  createUer: Userdata | undefined;
   user: Userdata;
   isLoading: boolean;
   toggleList: () => void;
@@ -44,8 +42,6 @@ export const Task: React.VFC<Props> = ({
   task,
   relatedTasks,
   relatedActivities,
-  assignUer,
-  createUer,
   user,
   isLoading,
   handleFocus,
@@ -106,46 +102,7 @@ export const Task: React.VFC<Props> = ({
             />
           )}
         </SubHeadingWithBorder>
-        <div className={styles.inner}>
-          <dl className={clsx(styles.item, styles.description)}>
-            <dt className={styles.label}>Description</dt>
-            <dd className={styles.detail}>{task.description}</dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.assignTo)}>
-            <dt className={styles.label}>Assign to</dt>
-            <dd className={styles.definition}>
-              {assignUer?.username || 'undefined'}
-            </dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.createdBy)}>
-            <dt className={styles.label}>Created By</dt>
-            <dd className={styles.definition}>
-              {createUer?.username || 'undefined'}
-            </dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.startDate)}>
-            <dt className={styles.label}>Start Date</dt>
-            <dd className={styles.definition}>
-              {getStringDate(task.startDate)}
-            </dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.dueDate)}>
-            <dt className={styles.label}>Due Date</dt>
-            <dd className={styles.definition}>{getStringDate(task.dueDate)}</dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.createdAt)}>
-            <dt className={styles.label}>Created at</dt>
-            <dd className={styles.definition}>
-              {getStringDate(task.createdAt!)}
-            </dd>
-          </dl>
-          <dl className={clsx(styles.item, styles.updatedAt)}>
-            <dt className={styles.label}>Updated at</dt>
-            <dd className={styles.definition}>
-              {getStringDate(task.updatedAt!)}
-            </dd>
-          </dl>
-        </div>
+        <TaskOverview />
       </div>
       {(user.id === task.userId || user.id === task.assignTo) && (
         <DeleteButton target="タスク" handleOpen={openConfirmation} />
