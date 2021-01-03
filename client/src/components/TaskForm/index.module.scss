@@ -1,19 +1,5 @@
 @use '../stylesheets/mixin' as mixin;
 
-.root {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: mixin.$z_form;
-  width: min(90vw, 500px);
-  height: min(80vh, 680px);
-  padding: 30px 16px;
-  overflow-y: auto;
-  background-color: mixin.$bgColor;
-  border-radius: 5px;
-  transform: translate(-50%, -50%);
-}
-
 .inputWrapper {
   margin-top: 20px;
 }

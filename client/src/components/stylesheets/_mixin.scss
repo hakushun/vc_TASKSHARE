@@ -11,8 +11,7 @@ $warningColor: #f93;
 
 $z_overlay: 10;
 $z_bargermenu: 10;
-$z_dialog: 100;
-$z_form: 100;
+$z_modal: 100;
 
 @function rem($px) {
   @return ($px / 16) * 1rem;
