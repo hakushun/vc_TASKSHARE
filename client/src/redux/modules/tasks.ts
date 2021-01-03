@@ -116,7 +116,9 @@ export const selectAssignedTasks = createSelector(
     (state: RootState) => state.ui.user,
   ],
   (tasks, sortKey, user) =>
-    sortTaskArray(tasks, sortKey).filter((task) => task.assignTo === user.id),
+    sortTaskArray(tasks, sortKey).filter(
+      (task) => task.assignTo === user.id && task.status !== 'COMPLETE',
+    ),
 );
 
 export const selectOpenTasks = createSelector(
