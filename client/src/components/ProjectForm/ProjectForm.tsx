@@ -5,12 +5,12 @@ import { composeValidators, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
-import { Optional } from '../Badge/Optional';
-import { Required } from '../Badge/Required';
 import { Project } from '../../redux/modules/project';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
 import { Userdata } from '../../redux/modules/users';
 import { CloseButton } from '../_atoms/CloseButton';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
+import { OptionalBadge } from '../_atoms/OptionalBadge';
 
 type Props = {
   initialValues: Project;
@@ -56,7 +56,7 @@ export const ProjectForm: React.VFC<Props> = ({
                       <label htmlFor="project_title" className={styles.label}>
                         Title
                       </label>
-                      <Required />
+                      <RequiredBadge />
                     </div>
                     <input
                       id="project_title"
@@ -80,7 +80,7 @@ export const ProjectForm: React.VFC<Props> = ({
                   <label htmlFor="project_owner" className={styles.label}>
                     Owner
                   </label>
-                  <Required />
+                  <RequiredBadge />
                 </div>
                 <div className={styles.selectboxWrapper}>
                   <Field
@@ -130,7 +130,7 @@ export const ProjectForm: React.VFC<Props> = ({
                         className={styles.label}>
                         Start date
                       </label>
-                      <Required />
+                      <RequiredBadge />
                     </div>
                     <input
                       id="project_startDate"
@@ -163,7 +163,7 @@ export const ProjectForm: React.VFC<Props> = ({
                       <label htmlFor="project_dueDate" className={styles.label}>
                         Due date
                       </label>
-                      <Required />
+                      <RequiredBadge />
                     </div>
                     <input
                       id="project_dueDate"
@@ -186,7 +186,7 @@ export const ProjectForm: React.VFC<Props> = ({
                   <label htmlFor="project_detail" className={styles.label}>
                     Detail
                   </label>
-                  <Optional />
+                  <OptionalBadge />
                 </div>
                 <Field
                   name="detail"

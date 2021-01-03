@@ -4,8 +4,8 @@ import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
 import { composeValidators, isEmail, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
-import { Required } from '../Badge/Required';
 import { CloseButton } from '../_atoms/CloseButton';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
 
 type Props = {
   closeModal: () => void;
@@ -42,7 +42,7 @@ export const PasswordResetForm: React.VFC<Props> = ({
                       <label htmlFor="email" className={styles.label}>
                         Email
                       </label>
-                      <Required />
+                      <RequiredBadge />
                     </div>
                     <input
                       id="email"

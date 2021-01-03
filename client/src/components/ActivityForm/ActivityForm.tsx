@@ -5,10 +5,10 @@ import { composeValidators, isRequired } from '../../libs/validations';
 import { Loading } from '../Loading';
 import styles from './index.module.scss';
 import { Overlay } from '../Overlay';
-import { Required } from '../Badge/Required';
 import { Activity } from '../../redux/modules/activity';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
 import { CloseButton } from '../_atoms/CloseButton';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
 
 type Props = {
   initialValues: Activity;
@@ -52,7 +52,7 @@ export const ActivityForm: React.VFC<Props> = ({
                   <label htmlFor="activity_comment" className={styles.label}>
                     Comment
                   </label>
-                  <Required />
+                  <RequiredBadge />
                 </div>
                 <Field
                   name="comment"
