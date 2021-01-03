@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getInstance } from '../../libs/db/getInstance';
-import { focus, Task } from '../../redux/modules/task';
+import { Task } from '../../redux/modules/task';
 import { getTasks } from '../../redux/modules/tasks';
 import { TaskList as Presentational } from './TaskList';
 
@@ -13,10 +13,6 @@ export const TaskList: React.VFC<Props> = ({ context, tasks }) => {
   const dispatch = useDispatch();
   const db = getInstance();
 
-  const handleFocus = (taskId: string, projectId: string) => {
-    dispatch(focus({ id: taskId, projectId }));
-  };
-
   useEffect(() => {
     db.collection('tasks').onSnapshot((snapshot) => {
       const items: Task[] = [];
@@ -26,7 +22,5 @@ export const TaskList: React.VFC<Props> = ({ context, tasks }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <Presentational context={context} tasks={tasks} handleFocus={handleFocus} />
-  );
+  return <Presentational context={context} tasks={tasks} />;
 };
