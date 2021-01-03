@@ -1,0 +1,41 @@
+
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  border: 1px solid mixin.$headerBgColor;
+  border-radius: 3px;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.status {
+  min-width: 85px;
+  text-align: center;
+}
+
+.name {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.duedate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+}
