@@ -1,0 +1,21 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  border: 1px solid mixin.$headerBgColor;
+  border-radius: 3px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+
+  @include mixin.mq() {
+    font-size: mixin.rem(14);
+  }
+}
+
+.text {
+  margin: 0 auto;
+}
