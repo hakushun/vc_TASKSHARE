@@ -11,6 +11,7 @@
   // .headingのborder-bottom分を加味
   top: calc(100% + 5px);
   right: 0;
+  z-index: mixin.$z_statusList;
   min-width: 170px;
   padding: 15px;
   visibility: hidden;
