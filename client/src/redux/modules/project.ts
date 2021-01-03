@@ -9,6 +9,7 @@ import { focus as focusTask } from './task';
 export interface Project {
   id?: string;
   title: string;
+  startDate: string;
   dueDate: string;
   detail: string;
   userId?: string;
@@ -26,6 +27,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_PROJECT');
 const INITIAL_STATE: Project = {
   title: '',
   ownerId: '',
+  startDate: getStringDate(new Date().getTime()),
   dueDate: getStringDate(new Date().getTime()),
   detail: '',
 };

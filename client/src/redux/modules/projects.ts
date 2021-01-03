@@ -14,6 +14,7 @@ export interface Projects {
 }
 export type CreatePayload = {
   title: string;
+  startDate: string;
   dueDate: string;
   ownerId: string;
   detail: string;
@@ -22,6 +23,7 @@ export type CreatePayload = {
 export type UpdatePayload = {
   id: string;
   title: string;
+  startDate: string;
   dueDate: string;
   ownerId: string;
   detail: string;
