@@ -5,17 +5,3 @@
   padding: 20px 16px 10px;
   margin: 0 auto;
 }
-
-.heading {
-  position: relative;
-}
-
-.title {
-  font-size: mixin.rem(22);
-  font-weight: bold;
-  text-align: center;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(20);
-  }
-}

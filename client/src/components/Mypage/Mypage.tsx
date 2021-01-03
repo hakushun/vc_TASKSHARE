@@ -6,6 +6,7 @@ import { ProjectList } from '../ProjectList';
 import { TaskForm } from '../TaskForm';
 import { TaskList } from '../TaskList';
 import { AddButton } from '../_atoms/AddButton';
+import { Heading } from '../_molecules/Heading';
 import styles from './index.module.scss';
 
 type Props = {
@@ -26,17 +27,15 @@ export const Mypage: React.VFC<Props> = ({
     <ProjectForm />
     <TaskForm />
     <section className={styles.wrpper}>
-      <div className={styles.heading}>
-        <h2 className={styles.title}>Own Project List</h2>
+      <Heading title="Own Project List">
         <AddButton target="プロジェクト" handleAdd={handleAddProject} />
-      </div>
+      </Heading>
       <ProjectList context="open" projects={projects} tasks={tasks} />
     </section>
     <section className={styles.wrpper}>
-      <div className={styles.heading}>
-        <h2 className={styles.title}>Assigned Task List</h2>
+      <Heading title="Assigned Task List">
         <AddButton target="タスク" handleAdd={handleAddTask} />
-      </div>
+      </Heading>
       <TaskList context="open" tasks={assignedTasks} />
     </section>
   </>
