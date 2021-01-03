@@ -6,8 +6,7 @@ import {
   remove,
   selectIsLoading,
 } from '../../redux/modules/activities';
-import { Activity, edit } from '../../redux/modules/activity';
-import { toggleConfirmation } from '../../redux/modules/modal';
+import { Activity } from '../../redux/modules/activity';
 import { selectUser } from '../../redux/modules/user';
 import { ActivityList as Presentational } from './ActivityList';
 
@@ -20,14 +19,8 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
   const isLoading = useSelector(selectIsLoading);
   const db = getInstance();
 
-  const handleEdit = (id: string) => {
-    dispatch(edit({ id }));
-  };
   const handleRemove = (id: string) => {
     dispatch(remove({ id }));
-  };
-  const openConfirmation = () => {
-    dispatch(toggleConfirmation(true));
   };
 
   useEffect(() => {
@@ -44,9 +37,7 @@ export const ActivityList: React.VFC<Props> = ({ activities }) => {
       activities={activities}
       user={user}
       isLoading={isLoading}
-      handleEdit={handleEdit}
       handleRemove={handleRemove}
-      openConfirmation={openConfirmation}
     />
   );
 };
