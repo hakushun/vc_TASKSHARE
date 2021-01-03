@@ -1,0 +1,15 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  display: flex;
+}
