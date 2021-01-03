@@ -5,11 +5,9 @@ import styles from './index.module.scss';
 import { Activity } from '../../redux/modules/activity';
 import { CreatePayload, UpdatePayload } from '../../redux/modules/activities';
 import { CloseButton } from '../_atoms/CloseButton';
-import { RequiredBadge } from '../_atoms/RequiredBadge';
-import { InputLabel } from '../_atoms/InputLabel';
-import { Textarea } from '../_atoms/Textarea';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
+import { TextareaField } from '../_molecules/TextareaField';
 
 type Props = {
   initialValues: Activity;
@@ -43,19 +41,14 @@ export const ActivityForm: React.VFC<Props> = ({
             component="input"
             aria-hidden="true"
             className={styles.hidden}></Field>
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="activity_comment" label="Comment" />
-              <RequiredBadge />
-            </div>
-            <Textarea
-              name="comment"
-              id="activity_comment"
-              placeholder="Comment"
-              disabled={isLoading}
-              required
-            />
-          </div>
+          <TextareaField
+            label="Comment"
+            name="comment"
+            id="activity_comment"
+            placeholder="Comment"
+            disabled={isLoading}
+            required
+          />
           <div className={styles.actionWrapper}>
             {isLoading ? (
               <Loading />

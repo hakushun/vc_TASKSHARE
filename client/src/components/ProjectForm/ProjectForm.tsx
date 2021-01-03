@@ -7,13 +7,12 @@ import { CreatePayload, UpdatePayload } from '../../redux/modules/projects';
 import { Userdata } from '../../redux/modules/users';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
-import { OptionalBadge } from '../_atoms/OptionalBadge';
 import { InputLabel } from '../_atoms/InputLabel';
-import { Textarea } from '../_atoms/Textarea';
 import { Selectbox } from '../_atoms/Selectbox';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextField } from '../_molecules/TextField';
+import { TextareaField } from '../_molecules/TextareaField';
 
 type Props = {
   initialValues: Project;
@@ -81,19 +80,14 @@ export const ProjectForm: React.VFC<Props> = ({
             disabled={isLoading}
             required
           />
-          <div className={styles.inputWrapper}>
-            <div className={styles.labelWrapper}>
-              <InputLabel id="project_detail" label="Detail" />
-              <OptionalBadge />
-            </div>
-            <Textarea
-              name="detail"
-              id="project_detail"
-              placeholder="Project Detail"
-              disabled={isLoading}
-              required={false}
-            />
-          </div>
+          <TextareaField
+            label="Detail"
+            name="detail"
+            id="project_detail"
+            placeholder="Project Detail"
+            disabled={isLoading}
+            required={false}
+          />
           <div className={styles.actionWrapper}>
             {isLoading ? (
               <Loading />
