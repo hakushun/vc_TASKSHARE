@@ -7,6 +7,8 @@ import { DeleteButton } from '../_atoms/DeleteButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
 import { TextInput } from '../_atoms/TextInput';
+import { InputLabel } from '../_atoms/InputLabel';
+import { RequiredBadge } from '../_atoms/RequiredBadge';
 
 type Props = {
   initialValues: Userdata;
@@ -31,9 +33,8 @@ export const Profile: React.VFC<Props> = ({
           <FormWrapper title="Profile" onSubmit={handleSubmit}>
             <div className={styles.inputWrapper}>
               <div className={styles.labelWrapper}>
-                <label htmlFor="profile_username" className={styles.label}>
-                  User name
-                </label>
+                <InputLabel id="profile_username" label="User name" />
+                <RequiredBadge />
               </div>
               <TextInput
                 type="text"

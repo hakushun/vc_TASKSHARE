@@ -15,15 +15,6 @@
   align-items: center;
 }
 
-.label {
-  font-size: mixin.rem(18);
-  font-weight: bold;
-
-  @include mixin.mq() {
-    font-size: mixin.rem(16);
-  }
-}
-
 .actionWrapper {
   display: flex;
   align-items: center;
