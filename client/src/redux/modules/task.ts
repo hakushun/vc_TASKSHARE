@@ -11,6 +11,7 @@ export interface Task {
   id?: string;
   projectId: string;
   title: string;
+  startDate: string;
   dueDate: string;
   description: string;
   status: TaskStatus;
@@ -36,6 +37,7 @@ export const edit = actionCreator<{ id: string }>('EDIT_TASK');
 const INITIAL_STATE: Task = {
   projectId: '',
   title: '',
+  startDate: getStringDate(new Date().getTime()),
   dueDate: getStringDate(new Date().getTime()),
   description: '',
   status: 'NEW',

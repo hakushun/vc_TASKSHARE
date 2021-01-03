@@ -15,6 +15,7 @@ export type CreatePayload = {
   projectId: string;
   title: string;
   assignTo: string;
+  startDate: string;
   dueDate: string;
   description: string;
   status: TaskStatus;
@@ -25,6 +26,7 @@ export type UpdatePayload = {
   projectId: string;
   title: string;
   assignTo: string;
+  startDate: string;
   dueDate: string;
   description: string;
   status: TaskStatus;
