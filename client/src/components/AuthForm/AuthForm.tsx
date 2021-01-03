@@ -6,7 +6,7 @@ import {
   isRequired,
   minValue,
 } from '../../libs/validations';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import { InputLabel } from '../_atoms/InputLabel';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';

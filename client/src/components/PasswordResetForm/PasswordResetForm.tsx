@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import styles from './index.module.scss';
 import { composeValidators, isEmail, isRequired } from '../../libs/validations';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { RequiredBadge } from '../_atoms/RequiredBadge';
 import { InputLabel } from '../_atoms/InputLabel';

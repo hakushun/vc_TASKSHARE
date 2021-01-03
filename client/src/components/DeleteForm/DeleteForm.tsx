@@ -7,7 +7,7 @@ import {
   isRequired,
   minValue,
 } from '../../libs/validations';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { InputLabel } from '../_atoms/InputLabel';
 import { FormWrapper } from '../_molecules/FormWrapper';

@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './index.module.scss';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 

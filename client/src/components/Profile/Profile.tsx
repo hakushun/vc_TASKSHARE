@@ -4,7 +4,7 @@ import { Field, Form } from 'react-final-form';
 import { composeValidators, isRequired } from '../../libs/validations';
 import { Userdata } from '../../redux/modules/users';
 import { DeleteForm } from '../DeleteForm';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import { DeleteButton } from '../_atoms/DeleteButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';

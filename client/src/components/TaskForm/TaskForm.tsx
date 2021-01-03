@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import clsx from 'clsx';
 import { composeValidators, isRequired } from '../../libs/validations';
-import { Loading } from '../Loading';
+import { Loading } from '../_atoms/Loading';
 import styles from './index.module.scss';
 import { Task } from '../../redux/modules/task';
 import { Project } from '../../redux/modules/project';
