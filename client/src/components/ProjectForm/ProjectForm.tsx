@@ -11,6 +11,7 @@ import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextField } from '../_molecules/TextField';
 import { TextareaField } from '../_molecules/TextareaField';
 import { SelectboxField } from '../_molecules/SelectboxField';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   initialValues: Project;
@@ -84,16 +85,15 @@ export const ProjectForm: React.VFC<Props> = ({
             disabled={isLoading}
             required={false}
           />
-          <div className={styles.actionWrapper}>
+          <div className={styles.buttonWrapper}>
             {isLoading ? (
               <Loading />
             ) : (
-              <button
+              <PrimaryButton
+                label={initialValues.id ? 'Update Project' : 'Create Project'}
                 type="submit"
                 disabled={isLoading}
-                className={styles.action}>
-                {initialValues.id ? 'Update Project' : 'Create Project'}
-              </button>
+              />
             )}
           </div>
         </FormWrapper>

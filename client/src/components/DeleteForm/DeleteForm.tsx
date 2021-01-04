@@ -6,6 +6,7 @@ import { CloseButton } from '../_atoms/CloseButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextField } from '../_molecules/TextField';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   isLoading: boolean;
@@ -44,16 +45,15 @@ export const DeleteForm: React.VFC<Props> = ({
             minLength={6}
             required
           />
-          <div className={styles.actionWrapper}>
+          <div className={styles.buttonWrapper}>
             {isLoading ? (
               <Loading />
             ) : (
-              <button
+              <PrimaryButton
+                label="Delete Account"
                 type="submit"
                 disabled={isLoading}
-                className={styles.action}>
-                Delete Account
-              </button>
+              />
             )}
           </div>
         </FormWrapper>

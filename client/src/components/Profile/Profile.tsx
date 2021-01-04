@@ -7,6 +7,7 @@ import { DeleteButton } from '../_atoms/DeleteButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
 import { TextField } from '../_molecules/TextField';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   initialValues: Userdata;
@@ -39,16 +40,15 @@ export const Profile: React.VFC<Props> = ({
               maxLength={50}
               required
             />
-            <div className={styles.actionWrapper}>
+            <div className={styles.buttonWrapper}>
               {isLoading ? (
                 <Loading />
               ) : (
-                <button
+                <PrimaryButton
+                  label="Update"
                   type="submit"
                   disabled={isLoading}
-                  className={styles.action}>
-                  Update
-                </button>
+                />
               )}
             </div>
           </FormWrapper>

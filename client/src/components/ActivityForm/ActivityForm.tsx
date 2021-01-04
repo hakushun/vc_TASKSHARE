@@ -8,6 +8,7 @@ import { CloseButton } from '../_atoms/CloseButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextareaField } from '../_molecules/TextareaField';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   initialValues: Activity;
@@ -49,16 +50,15 @@ export const ActivityForm: React.VFC<Props> = ({
             disabled={isLoading}
             required
           />
-          <div className={styles.actionWrapper}>
+          <div className={styles.buttonWrapper}>
             {isLoading ? (
               <Loading />
             ) : (
-              <button
+              <PrimaryButton
+                label={initialValues.id ? 'Update Activity' : 'Create Activity'}
                 type="submit"
                 disabled={isLoading}
-                className={styles.action}>
-                {initialValues.id ? 'Update Activity' : 'Create Activity'}
-              </button>
+              />
             )}
           </div>
         </FormWrapper>

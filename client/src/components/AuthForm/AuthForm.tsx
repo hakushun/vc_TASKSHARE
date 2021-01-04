@@ -5,6 +5,7 @@ import { FormWrapper } from '../_molecules/FormWrapper';
 import styles from './index.module.scss';
 import { TextField } from '../_molecules/TextField';
 import { GoogleButton } from '../_atoms/GoogleButton';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   type: 'signup' | 'signin';
@@ -39,16 +40,15 @@ export const AuthForm: React.VFC<Props> = ({ type, isLoading, onSubmit }) => (
           minLength={6}
           required
         />
-        <div className={styles.actionWrapper}>
+        <div className={styles.buttonWrapper}>
           {isLoading ? (
             <Loading />
           ) : (
-            <button
+            <PrimaryButton
+              label={type === 'signup' ? 'Create Account' : 'Log In'}
               type="submit"
               disabled={isLoading}
-              className={styles.action}>
-              {type === 'signup' ? 'Create Account' : 'Log In'}
-            </button>
+            />
           )}
         </div>
         <div className={styles.provider}>

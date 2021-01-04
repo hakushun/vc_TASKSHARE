@@ -1,4 +1,5 @@
 import React from 'react';
+import { SecondaryButton } from '../_atoms/SecondaryButton';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import styles from './index.module.scss';
 
@@ -13,12 +14,12 @@ export const Dialog: React.FC<Props> = ({ message, closeDialog }) => (
       <div>{message.description}</div>
     </div>
     <div className={styles.buttonWrapper}>
-      <button
-        className={styles.button}
-        type="button"
-        onClick={() => closeDialog()}>
-        閉じる
-      </button>
+      <SecondaryButton
+        label="Close"
+        type="submit"
+        disabled={false}
+        handleClick={closeDialog}
+      />
     </div>
   </ModalWrapper>
 );

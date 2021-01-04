@@ -1,9 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
 import styles from './index.module.scss';
 import { Loading } from '../_atoms/Loading';
 import { CloseButton } from '../_atoms/CloseButton';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
+import { SecondaryButton } from '../_atoms/SecondaryButton';
 
 type Props = {
   isLoading: boolean;
@@ -24,23 +25,24 @@ export const Confirmation: React.VFC<Props> = ({
       <div className={styles.message}>
         Are you sure you want to delete this item?
       </div>
-      <div className={styles.actionWrapper}>
+      <div className={styles.buttonWrapper}>
         {isLoading ? (
           <Loading />
         ) : (
           <>
-            <button
-              className={clsx(styles.action, styles.delete)}
-              type="button"
-              onClick={() => handleRemove(id)}>
-              Delete
-            </button>
-            <button
-              className={clsx(styles.action, styles.cancel)}
-              type="button"
-              onClick={() => handleClose()}>
-              Cancel
-            </button>
+            <PrimaryButton
+              label="Delete"
+              type="submit"
+              disabled={isLoading}
+              arg={id}
+              handleClick={handleRemove}
+            />
+            <SecondaryButton
+              label="Cancel"
+              type="submit"
+              disabled={false}
+              handleClick={handleClose}
+            />
           </>
         )}
       </div>

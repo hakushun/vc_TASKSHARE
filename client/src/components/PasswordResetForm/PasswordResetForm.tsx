@@ -6,6 +6,7 @@ import { CloseButton } from '../_atoms/CloseButton';
 import { FormWrapper } from '../_molecules/FormWrapper';
 import { ModalWrapper } from '../_molecules/ModalWrapper';
 import { TextField } from '../_molecules/TextField';
+import { PrimaryButton } from '../_atoms/PrimaryButton';
 
 type Props = {
   closeModal: () => void;
@@ -31,16 +32,15 @@ export const PasswordResetForm: React.VFC<Props> = ({
             disabled={submitting}
             required
           />
-          <div className={styles.actionWrapper}>
+          <div className={styles.buttonWrapper}>
             {submitting ? (
               <Loading />
             ) : (
-              <button
+              <PrimaryButton
+                label="Send Email"
                 type="submit"
                 disabled={submitting}
-                className={styles.action}>
-                Send Email
-              </button>
+              />
             )}
           </div>
         </FormWrapper>
