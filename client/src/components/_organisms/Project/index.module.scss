@@ -1,0 +1,16 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  max-width: 750px;
+  padding: 20px 16px 10px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  margin-top: 30px;
+  border-bottom: 3px solid mixin.$headerBgColor;
+
+  @include mixin.mq() {
+    margin-top: 20px;
+  }
+}

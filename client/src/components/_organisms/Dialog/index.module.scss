@@ -1,0 +1,22 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.title {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  text-align: center;
+}
+
+.description {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: mixin.rem(18);
+  white-space: pre-wrap;
+}
+
+.buttonWrapper {
+  margin-top: 15px;
+  text-align: center;
+}

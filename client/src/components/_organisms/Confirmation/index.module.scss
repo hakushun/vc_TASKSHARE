@@ -1,0 +1,30 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.title {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+}
+
+.message {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  margin-top: 15px;
+  font-size: mixin.rem(18);
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  min-height: 45px;
+  margin-top: 20px;
+}

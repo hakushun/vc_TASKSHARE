@@ -1,0 +1,49 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  padding: 100px 0;
+  background-color: mixin.$headerBgColor;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  display: flex;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.navItem {
+  width: 100%;
+  border-bottom: 2px solid mixin.$bgColor;
+
+  &:first-child {
+    border-top: 2px solid mixin.$bgColor;
+  }
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+  font-size: mixin.rem(18);
+}
+
+.navButton {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: mixin.rem(18);
+}
