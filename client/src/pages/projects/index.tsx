@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from '../../components/Layout';
-import { Projects } from '../../components/Projects';
+import { Projects } from '../../components/_organisms/Projects';
 
 const projects: React.VFC = () => (
   <Layout>

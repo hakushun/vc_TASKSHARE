@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from '../components/Layout';
-import { SignUp } from '../components/SignUp';
+import { SignUp } from '../components/_organisms/SignUp';
 
 const signup: React.VFC = () => (
   <Layout>
