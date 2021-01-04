@@ -1,0 +1,16 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  &:not(:first-child) {
+    margin-top: 10px;
+    border-top: 2px solid mixin.$headerBgColor;
+  }
+}
+
+.wrapper {
+  padding: 5px 10px;
+}
+
+.empty {
+  text-align: center;
+}
