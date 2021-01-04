@@ -19,22 +19,3 @@
   width: 100%;
   margin-top: 50px;
 }
-
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 15px;
-  font-size: mixin.rem(20);
-  background-color: mixin.$headerBgColor;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: darken(mixin.$headerBgColor, 10%);
-  }
-
-  &:active {
-    background-color: mixin.$headerBgColor;
-    box-shadow: inset 0 0 5px 5px darken(mixin.$headerBgColor, 10%);
-  }
-}
