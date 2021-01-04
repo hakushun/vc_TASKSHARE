@@ -1,7 +1,8 @@
 import React from 'react';
 import { Activity } from '../../redux/modules/activity';
-import { Confirmation } from '../Confirmation';
+import { Confirmation } from '../_organisms/Confirmation';
 import { ActivityHeader } from '../_molecules/ActivityHeader';
+import { ListNoActivities } from '../_molecules/ListNoActivities';
 import styles from './index.module.scss';
 
 type Props = {
@@ -17,11 +18,7 @@ export const ActivityList: React.VFC<Props> = ({
   <div className={styles.wrapper}>
     <ul className={styles.list}>
       {activities.length === 0 ? (
-        <li className={styles.item}>
-          <div className={styles.commentWrapper}>
-            <p className={styles.empty}>No Activities</p>
-          </div>
-        </li>
+        <ListNoActivities />
       ) : (
         <>
           {activities.map((activity) => (
