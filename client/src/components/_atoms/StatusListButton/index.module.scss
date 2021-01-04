@@ -1,0 +1,23 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  display: flex;
+  width: 100%;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.button {
+  flex: 1;
+  padding: 5px 0;
+  background-color: mixin.$bgColor;
+  border: 5px solid mixin.$bgColor;
+  border-radius: 20px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: mixin.$statusListColor;
+  }
+}
