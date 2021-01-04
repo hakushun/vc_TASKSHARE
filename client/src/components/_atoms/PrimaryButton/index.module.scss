@@ -1,0 +1,28 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  padding: 5px 15px;
+  font-size: mixin.rem(18);
+  color: mixin.$bgColor;
+  background-color: mixin.$primaryColor;
+  border: 3px solid mixin.$primaryColor;
+  border-radius: 3px;
+  box-shadow: 0 3px 5px 0 mixin.$mainTextColor;
+
+  @include mixin.mq() {
+    padding: 5px 10px;
+    font-size: mixin.rem(16);
+  }
+
+  &:hover,
+  &:focus {
+    color: mixin.$primaryColor;
+    background-color: mixin.$bgColor;
+    border: 3px solid mixin.$primaryColor;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(3px);
+  }
+}
