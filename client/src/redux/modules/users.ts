@@ -156,7 +156,7 @@ export const selectUserCreateTask = createSelector(
 );
 
 // 関数
-export const getCommenter = (users: Userdata[], id: string): string => {
+export const getUsername = (users: Userdata[], id: string): string => {
   const user = users.find((usr) => usr.id === id);
   return user?.username || 'undefined';
 };
