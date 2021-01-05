@@ -1,0 +1,37 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid mixin.$headerBgColor;
+  border-radius: 10px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.item {
+  margin-left: 10px;
+}
+
+.button {
+  padding: 0 10px;
+  color: mixin.$mainTextColor;
+  border-radius: 20px;
+
+  &:hover {
+    color: mixin.$bgColor;
+    background-color: mixin.$primaryColor;
+  }
+
+  &.active {
+    color: mixin.$bgColor;
+    background-color: mixin.$primaryColor;
+  }
+}
