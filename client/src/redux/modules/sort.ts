@@ -4,11 +4,11 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { Project } from './project';
 import { RootState } from './reducers';
 import { Task, TaskStatus } from './task';
-import { calculateProgress, countOpenRelatedTasks } from './tasks';
+import { calculateProgress } from './tasks';
 
-export type ProjectsSortKey = {
-  progress?: 'up' | 'down ';
-  openTask?: 'up' | 'down ';
+export type ProjectsSort = {
+  key: 'owner' | 'progress';
+  order: 'up' | 'down';
 };
 export type TasksSortKey = {
   status?: 'up' | 'down ';
@@ -17,14 +17,14 @@ export type TasksSortKey = {
 
 const actionCreator = actionCreatorFactory();
 
-export const sortProjects = actionCreator<ProjectsSortKey>('SORT_PROJECTS');
+export const sortProjects = actionCreator<ProjectsSort>('SORT_PROJECTS');
 export const sortTasks = actionCreator<TasksSortKey>('SORT_TASKS');
 
 const INITIAL_STATE: {
-  projects: ProjectsSortKey;
+  projects: ProjectsSort;
   tasks: TasksSortKey;
 } = {
-  projects: { progress: 'up' },
+  projects: { key: 'progress', order: 'up' },
   tasks: { status: 'up' },
 };
 
@@ -40,7 +40,7 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 
 export default reducer;
 
-export const selectProjectsSortKey = createSelector(
+export const selectProjectsSort = createSelector(
   [(state: RootState) => state.ui.sort.projects],
   (projects) => projects,
 );
@@ -54,39 +54,35 @@ export const selectTasksSortKey = createSelector(
 export const sortProjectArray = (
   projects: Project[],
   tasks: Task[],
-  key: ProjectsSortKey,
+  sort: ProjectsSort,
 ): Project[] => {
-  if (key.progress) {
+  if (sort.key === 'progress') {
     projects.sort((a, b) => {
       if (calculateProgress(tasks, a.id!) === calculateProgress(tasks, b.id!))
         return 0;
-      if (key.progress === 'up') {
+      if (sort.order === 'up') {
         return calculateProgress(tasks, a.id!) > calculateProgress(tasks, b.id!)
           ? 1
           : -1;
       }
-      return calculateProgress(tasks, a.id!) > calculateProgress(tasks, b.id!)
-        ? -1
-        : 1;
+      if (sort.order === 'down') {
+        return calculateProgress(tasks, a.id!) > calculateProgress(tasks, b.id!)
+          ? -1
+          : 1;
+      }
+      return 0;
     });
   }
-  if (key.openTask) {
+  if (sort.key === 'owner') {
     projects.sort((a, b) => {
-      if (
-        countOpenRelatedTasks(tasks, a.id!) ===
-        countOpenRelatedTasks(tasks, b.id!)
-      )
-        return 0;
-      if (key.openTask === 'up') {
-        return countOpenRelatedTasks(tasks, a.id!) >
-          countOpenRelatedTasks(tasks, b.id!)
-          ? 1
-          : -1;
+      if (a.ownerId === b.ownerId) return 0;
+      if (sort.order === 'up') {
+        return a.ownerId > b.ownerId ? 1 : -1;
       }
-      return countOpenRelatedTasks(tasks, a.id!) >
-        countOpenRelatedTasks(tasks, b.id!)
-        ? -1
-        : 1;
+      if (sort.order === 'down') {
+        return a.ownerId > b.ownerId ? -1 : 1;
+      }
+      return 0;
     });
   }
   return projects;
