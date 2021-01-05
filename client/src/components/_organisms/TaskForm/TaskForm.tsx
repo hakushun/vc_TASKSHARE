@@ -86,8 +86,8 @@ export const TaskForm: React.VFC<Props> = ({
           <TextField
             label="Due date"
             type="date"
-            name="startDate"
-            id="task_startDate"
+            name="dueDate"
+            id="task_dueDate"
             placeholder="Task Start date"
             disabled={isLoading}
             required
