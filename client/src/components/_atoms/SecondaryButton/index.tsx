@@ -11,7 +11,6 @@ export const SecondaryButton: React.VFC<Props> = ({
   label,
   type,
   disabled,
-  arg,
   handleClick,
 }) => (
   <button
