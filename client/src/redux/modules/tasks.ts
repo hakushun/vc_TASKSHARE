@@ -6,6 +6,7 @@ import { Task, TaskStatus } from './task';
 import { RootState } from './reducers';
 import { sortTaskArray } from './sort';
 import { deleteTask, postTask, putTask } from '../../libs/db/crud';
+import { filterTasks } from './filter';
 
 export interface Tasks {
   list: Task[];
@@ -115,24 +116,30 @@ export const selectAssignedTasks = createSelector(
   [
     (state: RootState) => state.resources.tasks.list,
     (state: RootState) => state.ui.sort.tasks,
+    (state: RootState) => state.ui.filter,
     (state: RootState) => state.ui.user,
   ],
-  (tasks, sortKey, user) =>
-    sortTaskArray(tasks, sortKey).filter(
+  (tasks, sortKey, filter, user) => {
+    const filteredTasks = filterTasks(filter, tasks);
+    return sortTaskArray(filteredTasks, sortKey).filter(
       (task) => task.assignTo === user.id && task.status !== 'COMPLETE',
-    ),
+    );
+  },
 );
 
 export const selectOpenTasks = createSelector(
   [
     (state: RootState) => state.resources.tasks.list,
     (state: RootState) => state.ui.sort.tasks,
+    (state: RootState) => state.ui.filter,
   ],
-  (tasks, sortKey) =>
-    sortTaskArray(
-      tasks.filter((task) => task.status !== 'COMPLETE'),
+  (tasks, sortKey, filter) => {
+    const filteredTasks = filterTasks(filter, tasks);
+    return sortTaskArray(
+      filteredTasks.filter((task) => task.status !== 'COMPLETE'),
       sortKey,
-    ),
+    );
+  },
 );
 
 export const selectCloseTasks = createSelector(
