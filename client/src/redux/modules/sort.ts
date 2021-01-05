@@ -10,22 +10,22 @@ export type ProjectsSort = {
   key: 'owner' | 'progress';
   order: 'up' | 'down';
 };
-export type TasksSortKey = {
-  status?: 'up' | 'down ';
-  dueDate?: 'up' | 'down ';
+export type TasksSort = {
+  key: 'status' | 'dueDate';
+  order: 'up' | 'down';
 };
 
 const actionCreator = actionCreatorFactory();
 
 export const sortProjects = actionCreator<ProjectsSort>('SORT_PROJECTS');
-export const sortTasks = actionCreator<TasksSortKey>('SORT_TASKS');
+export const sortTasks = actionCreator<TasksSort>('SORT_TASKS');
 
 const INITIAL_STATE: {
   projects: ProjectsSort;
-  tasks: TasksSortKey;
+  tasks: TasksSort;
 } = {
   projects: { key: 'progress', order: 'up' },
-  tasks: { status: 'up' },
+  tasks: { key: 'dueDate', order: 'up' },
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE)
@@ -45,7 +45,7 @@ export const selectProjectsSort = createSelector(
   (projects) => projects,
 );
 
-export const selectTasksSortKey = createSelector(
+export const selectTasksSort = createSelector(
   [(state: RootState) => state.ui.sort.tasks],
   (tasks) => tasks,
 );
@@ -103,28 +103,34 @@ const changeStatusToNumber = (status: TaskStatus): number => {
   }
 };
 
-export const sortTaskArray = (tasks: Task[], key: TasksSortKey): Task[] => {
-  if (key.status) {
+export const sortTaskArray = (tasks: Task[], sort: TasksSort): Task[] => {
+  if (sort.key === 'status') {
     return tasks.sort((a, b) => {
       if (changeStatusToNumber(a.status) === changeStatusToNumber(b.status))
         return 0;
-      if (key.status === 'up') {
+      if (sort.order === 'up') {
         return changeStatusToNumber(a.status) > changeStatusToNumber(b.status)
           ? 1
           : -1;
       }
-      return changeStatusToNumber(a.status) > changeStatusToNumber(b.status)
-        ? -1
-        : 1;
+      if (sort.order === 'down') {
+        return changeStatusToNumber(a.status) > changeStatusToNumber(b.status)
+          ? -1
+          : 1;
+      }
+      return 0;
     });
   }
-  if (key.dueDate) {
+  if (sort.key === 'dueDate') {
     return tasks.sort((a, b) => {
       if (a.dueDate === b.dueDate) return 0;
-      if (key.dueDate === 'up') {
+      if (sort.order === 'up') {
         return a.dueDate > b.dueDate ? 1 : -1;
       }
-      return a.dueDate > b.dueDate ? -1 : 1;
+      if (sort.order === 'down') {
+        return a.dueDate > b.dueDate ? -1 : 1;
+      }
+      return 0;
     });
   }
   return tasks;
