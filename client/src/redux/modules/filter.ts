@@ -11,6 +11,7 @@ export type DueDateFilterValue = 'all' | 'whitin3days' | 'today' | 'expired';
 type Filter = {
   started: StartedFilterValue;
   dueDate: DueDateFilterValue;
+  complete: boolean;
 };
 
 type ChageFilterPayload =
@@ -19,6 +20,9 @@ type ChageFilterPayload =
     }
   | {
       dueDate: DueDateFilterValue;
+    }
+  | {
+      complete: boolean;
     };
 const actionCreator = actionCreatorFactory();
 
@@ -27,6 +31,7 @@ export const change = actionCreator<ChageFilterPayload>('CHANGE_FILTER');
 const INITIAL_STATE: Filter = {
   started: 'all',
   dueDate: 'all',
+  complete: false,
 };
 
 const reducer = reducerWithInitialState(INITIAL_STATE).case(
