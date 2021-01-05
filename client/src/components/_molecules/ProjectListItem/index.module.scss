@@ -20,12 +20,11 @@
   }
 }
 
-.status {
-  padding: 0 5px;
-}
-
-.statusBar {
-  max-width: 75px;
+.owner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 85px;
 }
 
 .name {
@@ -35,9 +34,10 @@
   white-space: nowrap;
 }
 
-.task {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 110px;
+.status {
+  padding: 0 5px;
+}
+
+.statusBar {
+  max-width: 100px;
 }
