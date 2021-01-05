@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTasksSortKey, sortTasks } from '../../../redux/modules/sort';
+import { selectTasksSort, sortTasks } from '../../../redux/modules/sort';
 import { TaskListHeader as Presentational } from './TaskListHeader';
 
 type Props = {
@@ -8,16 +8,16 @@ type Props = {
 };
 export const TaskListHeader: React.VFC<Props> = ({ context }) => {
   const dispatch = useDispatch();
-  const tasksSortKey = useSelector(selectTasksSortKey);
+  const tasksSort = useSelector(selectTasksSort);
 
   const handleSrotTasks = (key: 'status' | 'dueDate') => {
-    const value = tasksSortKey[key] === 'up' ? 'down' : 'up';
-    dispatch(sortTasks({ [key]: value }));
+    const order = tasksSort.order === 'up' ? 'down' : 'up';
+    dispatch(sortTasks({ key, order }));
   };
   return (
     <Presentational
       context={context}
-      tasksSortKey={tasksSortKey}
+      tasksSort={tasksSort}
       handleSrotTasks={handleSrotTasks}
     />
   );
