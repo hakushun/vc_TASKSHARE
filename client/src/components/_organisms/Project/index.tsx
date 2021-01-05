@@ -11,7 +11,7 @@ import {
 } from '../../../redux/modules/project';
 import { remove, selectIsLoading } from '../../../redux/modules/projects';
 import { add as addTask } from '../../../redux/modules/task';
-import { selectRelatedTasks } from '../../../redux/modules/tasks';
+import { selectRelatedTasks, selectTasks } from '../../../redux/modules/tasks';
 import { selectUser } from '../../../redux/modules/user';
 import { PageLoader } from '../../_atoms/PageLoader';
 import { Project as Presentational } from './Project';
@@ -20,6 +20,7 @@ const Component: React.VFC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const project = useSelector(selectProject);
+  const tasks = useSelector(selectTasks);
   const relatedTasks = useSelector(selectRelatedTasks);
   const relatedActivities = useSelector(selectActivitiesRelatedProject);
   const user = useSelector(selectUser);
@@ -55,6 +56,7 @@ const Component: React.VFC = () => {
       ) : (
         <Presentational
           project={project}
+          tasks={tasks}
           relatedTasks={relatedTasks}
           relatedActivities={relatedActivities}
           user={user}

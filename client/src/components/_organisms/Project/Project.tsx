@@ -17,9 +17,11 @@ import { DeleteButton } from '../../_atoms/DeleteButton';
 import { HeadingWithBorder } from '../../_molecules/HeadingWithBorder';
 import { ProjectOverview } from '../../_molecules/ProjectOverview';
 import { Progress } from '../../_molecules/Progress';
+import { StatusController } from '../../_molecules/StatusController';
 
 type Props = {
   project: typeProject;
+  tasks: Task[];
   relatedTasks: Task[];
   relatedActivities: Activity[];
   user: Userdata;
@@ -32,6 +34,7 @@ type Props = {
 };
 export const Project: React.VFC<Props> = ({
   project,
+  tasks,
   relatedTasks,
   relatedActivities,
   user,
@@ -53,7 +56,7 @@ export const Project: React.VFC<Props> = ({
     />
     <section className={styles.root}>
       <HeadingWithBorder title={project.title}>
-        <Progress relatedTasks={relatedTasks} projectId={project.id!} />
+        <Progress tasks={tasks} projectId={project.id!} />
       </HeadingWithBorder>
       <div className={styles.wrapper}>
         <SubHeadingWithBorder title="Project Overview">
@@ -80,6 +83,7 @@ export const Project: React.VFC<Props> = ({
             handleAddWithId={handleAddTask}
           />
         </SubHeadingWithBorder>
+        <StatusController />
         <TaskList context="open" tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>

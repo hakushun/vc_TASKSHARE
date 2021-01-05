@@ -20,6 +20,7 @@ import { DeleteButton } from '../../_atoms/DeleteButton';
 import { HeadingWithBorder } from '../../_molecules/HeadingWithBorder';
 import { TaskOverview } from '../../_molecules/TaskOverview';
 import { StatusButton } from '../../_atoms/StatusButton';
+import { StatusController } from '../../_molecules/StatusController';
 
 type Props = {
   isOpened: boolean;
@@ -112,6 +113,7 @@ export const Task: React.VFC<Props> = ({
             handleAddWithId={handleAddTask}
           />
         </SubHeadingWithBorder>
+        <StatusController />
         <TaskList context="open" tasks={relatedTasks} />
       </div>
       <div className={styles.wrapper}>
