@@ -6,6 +6,7 @@ import dropdown from './dropdown';
 import modal from './modal';
 import bargerMenu from './bargerMenu';
 import sort from './sort';
+import filter from './filter';
 import project from './project';
 import projects from './projects';
 import task from './task';
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     modal,
     bargerMenu,
     sort,
+    filter,
     project,
     task,
     activity,
