@@ -1,9 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectProjectsSortKey,
-  sortProjects,
-} from '../../../redux/modules/sort';
+import { selectProjectsSort, sortProjects } from '../../../redux/modules/sort';
 import { ProjectListHeader as Presentational } from './ProjectListHeader';
 
 type Props = {
@@ -11,16 +8,16 @@ type Props = {
 };
 export const ProjectListHeader: React.VFC<Props> = ({ context }) => {
   const dispatch = useDispatch();
-  const projectsSortKey = useSelector(selectProjectsSortKey);
+  const projectsSort = useSelector(selectProjectsSort);
 
-  const handleSrotProjects = (key: 'progress' | 'openTask') => {
-    const value = projectsSortKey[key] === 'up' ? 'down' : 'up';
-    dispatch(sortProjects({ [key]: value }));
+  const handleSrotProjects = (key: 'owner' | 'progress') => {
+    const order = projectsSort.order === 'up' ? 'down' : 'up';
+    dispatch(sortProjects({ key, order }));
   };
   return (
     <Presentational
       context={context}
-      projectsSortKey={projectsSortKey}
+      projectsSort={projectsSort}
       handleSrotProjects={handleSrotProjects}
     />
   );
