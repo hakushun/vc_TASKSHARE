@@ -21,10 +21,12 @@
 }
 
 .owner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 85px;
+  display: block;
+  width: 110px;
+  overflow-x: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .name {
