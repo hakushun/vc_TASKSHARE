@@ -5,6 +5,7 @@ import { TaskList } from '../TaskList';
 import { AddButton } from '../../_atoms/AddButton';
 import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
+import { FilterController } from '../../_molecules/FilterController';
 
 type Props = {
   openTasks: Task[];
@@ -22,6 +23,7 @@ export const Tasks: React.VFC<Props> = ({
       <Heading title="Open Task List">
         <AddButton target="タスク" handleAdd={handleAddTask} />
       </Heading>
+      <FilterController />
       <TaskList context="open" tasks={openTasks} />
     </section>
     <section className={styles.wrpper}>

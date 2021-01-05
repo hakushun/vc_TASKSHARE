@@ -8,6 +8,7 @@ import { TaskList } from '../TaskList';
 import { AddButton } from '../../_atoms/AddButton';
 import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
+import { FilterController } from '../../_molecules/FilterController';
 
 type Props = {
   projects: Project[];
@@ -36,6 +37,7 @@ export const Mypage: React.VFC<Props> = ({
       <Heading title="Assigned Task List">
         <AddButton target="タスク" handleAdd={handleAddTask} />
       </Heading>
+      <FilterController />
       <TaskList context="open" tasks={assignedTasks} />
     </section>
   </>
