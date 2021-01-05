@@ -152,12 +152,17 @@ export const selectRelatedTasks = createSelector(
     (state: RootState) => state.resources.tasks.list,
     (state: RootState) => state.ui.project,
     (state: RootState) => state.ui.sort.tasks,
+    (state: RootState) => state.ui.filter.complete,
   ],
-  (tasks, project, sortKey) =>
-    sortTaskArray(
-      tasks.filter((task) => task.projectId === project.id),
+  (tasks, project, sortKey, complete) => {
+    const filteredTasks = complete
+      ? tasks
+      : tasks.filter((task) => task.status !== 'COMPLETE');
+    return sortTaskArray(
+      filteredTasks.filter((task) => task.projectId === project.id),
       sortKey,
-    ),
+    );
+  },
 );
 
 export const selectIsLoading = createSelector(
