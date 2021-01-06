@@ -5,6 +5,10 @@
   margin-top: 10px;
   border: 1px solid mixin.$headerBgColor;
   border-radius: 10px;
+
+  @include mixin.mq() {
+    padding: 5px;
+  }
 }
 
 .list {

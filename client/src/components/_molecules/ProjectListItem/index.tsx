@@ -31,9 +31,9 @@ export const ProjectListItem: React.VFC<Props> = ({ tasks, project }) => {
             {getUsername(users, project.ownerId)}
           </div>
           <div className={styles.name}>{project.title}</div>
-          <div className={styles.status}>
+          <div className={styles.progress}>
             <progress
-              className={styles.statusBar}
+              className={styles.progressBar}
               value={calculateProgress(tasks, project.id!)}
               max="100"></progress>
           </div>

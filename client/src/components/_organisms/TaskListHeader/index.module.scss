@@ -9,6 +9,7 @@
   border-radius: 20px;
 
   @include mixin.mq() {
+    padding: 0 5px;
     font-size: mixin.rem(14);
   }
 }
@@ -18,6 +19,10 @@
   align-items: center;
   justify-content: center;
   min-width: 85px;
+
+  @include mixin.mq() {
+    min-width: 75px;
+  }
 }
 
 .label {
@@ -25,6 +30,10 @@
   align-items: center;
   justify-content: center;
   min-width: 110px;
+
+  @include mixin.mq() {
+    min-width: 90px;
+  }
 }
 
 .icon {

@@ -16,17 +16,22 @@
   padding: 10px;
 
   @include mixin.mq() {
+    padding: 10px 5px;
     font-size: mixin.rem(14);
   }
 }
 
 .owner {
   display: block;
-  width: 110px;
+  width: 85px;
   overflow-x: hidden;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @include mixin.mq() {
+    width: 75px;
+  }
 }
 
 .name {
@@ -36,10 +41,14 @@
   white-space: nowrap;
 }
 
-.status {
+.progress {
   padding: 0 5px;
 }
 
-.statusBar {
+.progressBar {
   max-width: 100px;
+
+  @include mixin.mq() {
+    max-width: 80px;
+  }
 }

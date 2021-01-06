@@ -17,6 +17,7 @@
   padding: 10px;
 
   @include mixin.mq() {
+    padding: 10px 5px;
     font-size: mixin.rem(14);
   }
 }
@@ -24,6 +25,10 @@
 .status {
   min-width: 85px;
   text-align: center;
+
+  @include mixin.mq() {
+    min-width: 75px;
+  }
 }
 
 .name {
@@ -38,4 +43,8 @@
   align-items: center;
   justify-content: center;
   min-width: 110px;
+
+  @include mixin.mq() {
+    min-width: 90px;
+  }
 }
