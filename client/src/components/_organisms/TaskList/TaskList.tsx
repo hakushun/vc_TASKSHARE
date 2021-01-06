@@ -1,6 +1,6 @@
 import React from 'react';
 import { Task } from '../../../redux/modules/task';
-import { TaskListHeader } from '../TaskListHeader';
+import { TaskListHeader } from '../../_molecules/TaskListHeader';
 import { ListNoItems } from '../../_molecules/ListNoItems';
 import { TaskListItem } from '../../_molecules/TaskListItem';
 import styles from './index.module.scss';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '../../../redux/modules/project';
 import { Task } from '../../../redux/modules/task';
-import { ProjectListHeader } from '../ProjectListHeader';
+import { ProjectListHeader } from '../../_molecules/ProjectListHeader';
 import { ListNoItems } from '../../_molecules/ListNoItems';
 import { ProjectListItem } from '../../_molecules/ProjectListItem';
 import styles from './index.module.scss';
