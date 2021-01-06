@@ -6,6 +6,24 @@
   margin: 0 auto;
 }
 
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 25px;
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  color: mixin.$bgColor;
+  background-color: mixin.$primaryColor;
+  border-radius: 20px;
+
+  @include mixin.mq() {
+    padding: 2px 25px;
+    font-size: mixin.rem(16);
+  }
+}
+
+
 .statusListWrapper {
   position: absolute;
   // .headingのborder-bottom分を加味
