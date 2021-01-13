@@ -1,7 +1,6 @@
 @use '../../stylesheets/mixin' as mixin;
 
 .header {
-  width: 100vw;
   background-color: mixin.$headerBgColor;
 }
 
