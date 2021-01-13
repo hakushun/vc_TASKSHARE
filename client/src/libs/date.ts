@@ -1,3 +1,5 @@
+import dayjs, { Dayjs } from 'dayjs';
+
 export const getStringDate = (date: string | number): string => {
   const dt = new Date(date);
   const years = dt.getFullYear();
@@ -15,4 +17,12 @@ export const getStringTimestamp = (date: number): string => {
   const minutes = ('00' + dt.getMinutes()).slice(-2);
   const seconds = ('00' + dt.getSeconds()).slice(-2);
   return `${years}-${months}-${dates} ${hours}:${minutes}:${seconds}`;
+};
+
+export const generateDateArray = (num: number): Array<Dayjs> => {
+  const result: Array<Dayjs> = [];
+  for (let i = 0; i < num; i++) {
+    result.push(dayjs().add(i, 'day'));
+  }
+  return result;
 };
