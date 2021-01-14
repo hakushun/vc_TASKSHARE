@@ -1,75 +1,16 @@
 @use '../../stylesheets/mixin' as mixin;
 
 .root {
-  padding: 20px 16px 10px;
+  padding: 20px 32px 10px;
+}
 
-  .wrapper {
-    position: relative;
-    border: 1px solid mixin.$headerBgColor;
-  }
+.wrapper {
+  display: grid;
+  grid-template-columns: max(275px, 20vw) 1fr;
+  margin-top: 20px;
+  border: 1px solid mixin.$headerBgColor;
 
-  .content {
-    position: relative;
-    display: flex;
-  }
-
-  .contentLeft {
-    width: 30%;
-    min-width: 275px;
-    border-right: 1px solid mixin.$headerBgColor;
-  }
-
-  .heading {
-    position: sticky;
-    top: 0;
-    display: flex;
-    padding: 8px 10px;
-    background-color: mixin.$bgColor;
-    border-bottom: 1px solid mixin.$headerBgColor;
-  }
-
-  .headingTitle {
-    display: flex;
-    flex: 1 0 auto;
-    align-items: center;
-    width: 70%;
-  }
-
-  .headingUsername {
-    width: 30%;
-  }
-
-  .row {
-    display: flex;
-    align-items: center;
-    padding: 8px 10px;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid mixin.$headerBgColor;
-    }
-  }
-
-  .rowTitle {
-    flex: 1 0 auto;
-    width: 70%;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .rowUsername {
-    width: 30%;
-    overflow-x: hidden;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .rowImg {
-    vertical-align: sub;
-  }
-
-  .contentRight {
-    overflow-x: auto;
+  @include mixin.mq() {
+    display: none;
   }
 }
