@@ -34,6 +34,11 @@ export const Header: React.VFC<Props> = ({ isAuth, logout }) => (
           ) : (
             <>
               <li className={styles.navItem}>
+                <Link href="/gantt">
+                  <a className={styles.navLink}>Gantt</a>
+                </Link>
+              </li>
+              <li className={styles.navItem}>
                 <Link href="/projects">
                   <a className={styles.navLink}>Projects</a>
                 </Link>
