@@ -1,0 +1,78 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  border-right: 1px solid mixin.$headerBgColor;
+}
+
+.contentRight {
+  display: grid;
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 100%;
+  width: 100%;
+}
+
+.heading {
+  position: sticky;
+  top: 0;
+  z-index: mixin.$z_gantHeader;
+  display: flex;
+  height: 50px;
+  padding: 0 10px;
+  background-color: mixin.$bgColor;
+  border-bottom: 1px solid mixin.$headerBgColor;
+}
+
+.headingTitle {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  width: 70%;
+}
+
+.headingUsername {
+  display: flex;
+  align-items: center;
+  width: 30%;
+}
+
+.list {
+  display: grid;
+
+  .row {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    padding: 0 10px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid mixin.$headerBgColor;
+    }
+  }
+
+  .title {
+    flex: 1 0 auto;
+    width: 70%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .username {
+    width: 30%;
+    overflow-x: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .img {
+    vertical-align: sub;
+  }
+
+  .link {
+    color: mixin.$primaryColor;
+    text-decoration: underline;
+  }
+}
