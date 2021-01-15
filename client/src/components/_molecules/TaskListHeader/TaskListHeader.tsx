@@ -19,6 +19,7 @@ export const TaskListHeader: React.VFC<Props> = ({
       ) : (
         <button
           type="button"
+          aria-label="sort tasks by status"
           className={styles.status}
           onClick={() => handleSrotTasks('status')}>
           Status
@@ -43,6 +44,7 @@ export const TaskListHeader: React.VFC<Props> = ({
       ) : (
         <button
           type="button"
+          aria-label="sort tasks by due date"
           className={styles.label}
           onClick={() => handleSrotTasks('dueDate')}>
           Due Date

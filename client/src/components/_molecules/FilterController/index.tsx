@@ -22,10 +22,13 @@ export const FilterController: React.VFC = () => {
 
   return (
     <div className={styles.root}>
-      <dl className={styles.list}>
+      <dl
+        className={styles.list}
+        aria-label="controller to filter tasks by started date">
         <dt className={styles.key}>Started :</dt>
         <dd className={styles.item}>
           <button
+            aria-label="show all tasks"
             className={clsx(
               styles.button,
               filter.started === 'all' && styles.active,
@@ -36,6 +39,7 @@ export const FilterController: React.VFC = () => {
         </dd>
         <dd className={styles.item}>
           <button
+            aria-label="show tasks have not started yet"
             className={clsx(
               styles.button,
               filter.started === 'notYet' && styles.active,
@@ -46,6 +50,7 @@ export const FilterController: React.VFC = () => {
         </dd>
         <dd className={styles.item}>
           <button
+            aria-label="show tasks have already started"
             className={clsx(
               styles.button,
               filter.started === 'started' && styles.active,
@@ -55,10 +60,13 @@ export const FilterController: React.VFC = () => {
           </button>
         </dd>
       </dl>
-      <dl className={styles.list}>
+      <dl
+        className={styles.list}
+        aria-label="controller to filter tasks by due date">
         <dt className={styles.key}>Due date :</dt>
         <dd className={styles.item}>
           <button
+            aria-label="show all tasks"
             className={clsx(
               styles.button,
               filter.dueDate === 'all' && styles.active,
@@ -69,6 +77,7 @@ export const FilterController: React.VFC = () => {
         </dd>
         <dd className={styles.item}>
           <button
+            aria-label="show tasks expire within three days"
             className={clsx(
               styles.button,
               filter.dueDate === 'whitin3days' && styles.active,
@@ -79,6 +88,7 @@ export const FilterController: React.VFC = () => {
         </dd>
         <dd className={styles.item}>
           <button
+            aria-label="show tasks by today"
             className={clsx(
               styles.button,
               filter.dueDate === 'today' && styles.active,
@@ -89,6 +99,7 @@ export const FilterController: React.VFC = () => {
         </dd>
         <dd className={styles.item}>
           <button
+            aria-label="show tasks expired due date"
             className={clsx(
               styles.button,
               filter.dueDate === 'expired' && styles.active,

@@ -24,6 +24,12 @@ export const ProjectListItem: React.VFC<Props> = ({ tasks, project }) => {
       <Link href={`/projects/${project.id}`}>
         <a
           id={`projects_${project.id}`}
+          aria-label={`プロジェクト名：${
+            project.title
+          }、オーナー：${getUsername(
+            users,
+            project.ownerId,
+          )}、進捗${calculateProgress(tasks, project.id!)}％`}
           className={styles.link}
           onClick={() => handleFocus(project.id!)}
           onKeyPress={() => handleFocus(project.id!)}>

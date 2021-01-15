@@ -19,6 +19,7 @@ export const ProjectListHeader: React.VFC<Props> = ({
       ) : (
         <button
           type="button"
+          aria-label="sort projects by owner"
           className={styles.owner}
           onClick={() => handleSrotProjects('owner')}>
           Owner
@@ -43,6 +44,7 @@ export const ProjectListHeader: React.VFC<Props> = ({
       ) : (
         <button
           type="button"
+          aria-label="sort projects by progress"
           className={styles.progress}
           onClick={() => handleSrotProjects('progress')}>
           Progress

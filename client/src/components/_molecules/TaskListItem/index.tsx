@@ -21,6 +21,9 @@ export const TaskListItem: React.VFC<Props> = ({ task }) => {
       <Link href={`/tasks/${task.id}`}>
         <a
           id={`tasks_${task.id}`}
+          aria-label={`タスク名：${task.title}、ステータス：${
+            task.status
+          }、期限${getStringDate(task.dueDate)}`}
           className={styles.link}
           onClick={() => handleFocus(task.id!, task.projectId)}
           onKeyPress={() => handleFocus(task.id!, task.projectId)}>
