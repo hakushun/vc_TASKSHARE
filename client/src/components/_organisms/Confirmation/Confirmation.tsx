@@ -18,9 +18,9 @@ export const Confirmation: React.VFC<Props> = ({
   handleRemove,
   handleClose,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="confirmation" handleClose={handleClose}>
     <CloseButton handleClose={handleClose} />
-    <div className={styles.inner}>
+    <div id="confirmation" className={styles.inner}>
       <div className={styles.title}>Delete Confirmation</div>
       <div className={styles.message}>
         Are you sure you want to delete this item?

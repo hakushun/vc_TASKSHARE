@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUser } from '../../../libs/auth/useUser';
 import {
@@ -18,6 +18,7 @@ export const PasswordResetForm: React.VFC = () => {
   const dialogMessage = useSelector(selectDialogMessage);
   const formIsOpened = useSelector(selectResetPasswordForm);
   const { resetPassword } = useUser();
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
 
   const closeModal = () => {
     dispatch(toggleResetPasswordForm(false));
@@ -26,11 +27,20 @@ export const PasswordResetForm: React.VFC = () => {
     resetPassword(value.email);
     dispatch(toggleResetPasswordForm(false));
   };
+
+  useEffect(() => {
+    titleRef?.current?.focus();
+  });
+
   return (
     <>
       {dialogIsOpened && <Dialog message={dialogMessage} />}
       {formIsOpened && (
-        <Presentational closeModal={closeModal} handleReset={handleReset} />
+        <Presentational
+          titleRef={titleRef}
+          closeModal={closeModal}
+          handleReset={handleReset}
+        />
       )}
     </>
   );

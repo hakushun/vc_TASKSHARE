@@ -14,6 +14,7 @@ import { TextareaField } from '../../_molecules/TextareaField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Activity;
   isLoading: boolean;
   closeActivityModal: () => void;
@@ -21,20 +22,25 @@ type Props = {
   updateActivity: (_data: UpdatePayload) => void;
 };
 export const ActivityForm: React.VFC<Props> = ({
+  titleRef,
   initialValues,
   isLoading,
   closeActivityModal,
   createActivity,
   updateActivity,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="activity_form" handleClose={closeActivityModal}>
     <CloseButton handleClose={closeActivityModal} />
     <Form
       onSubmit={initialValues.id ? updateActivity : createActivity}
       initialValues={initialValues}
       subscription={{ submitting: true }}
       render={({ handleSubmit }) => (
-        <FormWrapper title="Activity Form" onSubmit={handleSubmit}>
+        <FormWrapper
+          id="activity_form"
+          title="Activity Form"
+          titleRef={titleRef}
+          onSubmit={handleSubmit}>
           <Field
             name="projectId"
             component="input"

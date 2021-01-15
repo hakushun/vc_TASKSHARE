@@ -10,12 +10,14 @@ import { TextField } from '../../_molecules/TextField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Userdata;
   isLoading: boolean;
   handleUpdate: (_value: Userdata) => void;
   openModal: () => void;
 };
 export const Profile: React.VFC<Props> = ({
+  titleRef,
   initialValues,
   isLoading,
   handleUpdate,
@@ -29,7 +31,11 @@ export const Profile: React.VFC<Props> = ({
         subscription={{ submitting: true }}
         initialValues={initialValues}
         render={({ handleSubmit }) => (
-          <FormWrapper title="Profile" onSubmit={handleSubmit}>
+          <FormWrapper
+            id="profile_form"
+            title="Profile"
+            titleRef={titleRef}
+            onSubmit={handleSubmit}>
             <TextField
               label="User name"
               type="text"

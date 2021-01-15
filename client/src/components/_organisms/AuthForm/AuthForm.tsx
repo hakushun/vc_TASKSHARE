@@ -8,17 +8,25 @@ import { GoogleButton } from '../../_atoms/GoogleButton';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   type: 'signup' | 'signin';
   isLoading: boolean;
   onSubmit: (_value: { email: string; password: string }) => void;
 };
-export const AuthForm: React.VFC<Props> = ({ type, isLoading, onSubmit }) => (
+export const AuthForm: React.VFC<Props> = ({
+  titleRef,
+  type,
+  isLoading,
+  onSubmit,
+}) => (
   <Form
     onSubmit={onSubmit}
     subscription={{ submitting: true }}
     render={({ handleSubmit }) => (
       <FormWrapper
+        id="auth_form"
         title={type === 'signup' ? 'Sign Up' : 'Log In'}
+        titleRef={titleRef}
         onSubmit={handleSubmit}>
         <TextField
           label="Email"

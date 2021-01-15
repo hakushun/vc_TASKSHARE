@@ -15,6 +15,7 @@ import { SelectboxField } from '../../_molecules/SelectboxField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Task;
   isLoading: boolean;
   projects: Project[];
@@ -24,6 +25,7 @@ type Props = {
   updateTask: (_data: UpdatePayload) => void;
 };
 export const TaskForm: React.VFC<Props> = ({
+  titleRef,
   initialValues,
   isLoading,
   projects,
@@ -32,14 +34,18 @@ export const TaskForm: React.VFC<Props> = ({
   createTask,
   updateTask,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="task_form" handleClose={closeTaskModal}>
     <CloseButton handleClose={closeTaskModal} />
     <Form
       onSubmit={initialValues.id ? updateTask : createTask}
       initialValues={initialValues}
       subscription={{ submitting: true }}
       render={({ handleSubmit }) => (
-        <FormWrapper title="Task Form" onSubmit={handleSubmit}>
+        <FormWrapper
+          id="task_form"
+          title="Task Form"
+          titleRef={titleRef}
+          onSubmit={handleSubmit}>
           <SelectboxField
             id="task_project"
             label="Project"

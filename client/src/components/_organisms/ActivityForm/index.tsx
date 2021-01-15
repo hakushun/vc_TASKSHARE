@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   create,
@@ -26,6 +26,8 @@ export const ActivityForm: React.VFC = () => {
   const formIsOpened = useSelector(selectActivityForm);
   const activity = useSelector(selectActivity);
   const isLoading = useSelector(selectIsLoading);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+
   const closeActivityModal = () => {
     dispatch(toggleActivityForm(false));
   };
@@ -35,11 +37,17 @@ export const ActivityForm: React.VFC = () => {
   const updateActivity = (data: UpdatePayload) => {
     dispatch(update(data));
   };
+
+  useEffect(() => {
+    titleRef?.current?.focus();
+  });
+
   return (
     <>
       {dialogIsOpened && <Dialog message={dialogMessage} />}
       {formIsOpened && (
         <Preasentational
+          titleRef={titleRef}
           initialValues={activity}
           isLoading={isLoading}
           closeActivityModal={closeActivityModal}

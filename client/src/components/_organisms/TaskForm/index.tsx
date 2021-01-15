@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectDialog,
@@ -27,6 +27,8 @@ export const TaskForm: React.VFC = () => {
   const isLoading = useSelector(selectIsLoading);
   const projects = useSelector(selectProjects);
   const users = useSelector(selectUsers);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+
   const closeTaskModal = () => {
     dispatch(toggleTaskForm(false));
   };
@@ -36,11 +38,17 @@ export const TaskForm: React.VFC = () => {
   const updateTask = (data: UpdatePayload) => {
     dispatch(update(data));
   };
+
+  useEffect(() => {
+    titleRef?.current?.focus();
+  });
+
   return (
     <>
       {dialogIsOpened && <Dialog message={dialogMessage} />}
       {formIsOpened && (
         <Preasentational
+          titleRef={titleRef}
           initialValues={task}
           isLoading={isLoading}
           projects={projects}

@@ -9,20 +9,26 @@ import { TextField } from '../../_molecules/TextField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   closeModal: () => void;
   handleReset: (_value: { email: string }) => void;
 };
 export const PasswordResetForm: React.VFC<Props> = ({
+  titleRef,
   closeModal,
   handleReset,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="password_reset_form" handleClose={closeModal}>
     <CloseButton handleClose={closeModal} />
     <Form
       onSubmit={handleReset}
       subscription={{ submitting: true }}
       render={({ handleSubmit, submitting }) => (
-        <FormWrapper title="Password Reset Form" onSubmit={handleSubmit}>
+        <FormWrapper
+          id="password_reset_form"
+          title="Password Reset Form"
+          titleRef={titleRef}
+          onSubmit={handleSubmit}>
           <TextField
             label="Email"
             type="email"

@@ -9,22 +9,28 @@ import { TextField } from '../../_molecules/TextField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   isLoading: boolean;
   closeModal: () => void;
   handleRemove: (_value: { email: string; password: string }) => void;
 };
 export const DeleteForm: React.VFC<Props> = ({
+  titleRef,
   isLoading,
   closeModal,
   handleRemove,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="delete_form" handleClose={closeModal}>
     <CloseButton handleClose={closeModal} />
     <Form
       onSubmit={handleRemove}
       subscription={{ submitting: true }}
       render={({ handleSubmit }) => (
-        <FormWrapper title="Delete Account Form" onSubmit={handleSubmit}>
+        <FormWrapper
+          id="delete_form"
+          title="Delete Account Form"
+          titleRef={titleRef}
+          onSubmit={handleSubmit}>
           <TextField
             label="Email"
             type="email"

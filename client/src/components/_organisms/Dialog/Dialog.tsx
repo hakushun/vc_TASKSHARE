@@ -8,18 +8,20 @@ type Props = {
   closeDialog: () => void;
 };
 export const Dialog: React.FC<Props> = ({ message, closeDialog }) => (
-  <ModalWrapper>
-    <div className={styles.title}>{message.title}</div>
-    <div className={styles.description}>
-      <div>{message.description}</div>
-    </div>
-    <div className={styles.buttonWrapper}>
-      <SecondaryButton
-        label="Close"
-        type="submit"
-        disabled={false}
-        handleClick={closeDialog}
-      />
+  <ModalWrapper id="dialog" handleClose={closeDialog}>
+    <div id="dialog">
+      <div className={styles.title}>{message.title}</div>
+      <div className={styles.description}>
+        <div>{message.description}</div>
+      </div>
+      <div className={styles.buttonWrapper}>
+        <SecondaryButton
+          label="Close"
+          type="submit"
+          disabled={false}
+          handleClick={closeDialog}
+        />
+      </div>
     </div>
   </ModalWrapper>
 );

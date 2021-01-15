@@ -14,6 +14,7 @@ import { SelectboxField } from '../../_molecules/SelectboxField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
 type Props = {
+  titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Project;
   isLoading: boolean;
   users: Userdata[];
@@ -22,6 +23,7 @@ type Props = {
   updateProject: (_data: UpdatePayload) => void;
 };
 export const ProjectForm: React.VFC<Props> = ({
+  titleRef,
   initialValues,
   isLoading,
   users,
@@ -29,14 +31,18 @@ export const ProjectForm: React.VFC<Props> = ({
   createProject,
   updateProject,
 }) => (
-  <ModalWrapper>
+  <ModalWrapper id="project_form" handleClose={closeProjectModal}>
     <CloseButton handleClose={closeProjectModal} />
     <Form
       onSubmit={initialValues.id ? updateProject : createProject}
       subscription={{ submitting: true }}
       initialValues={initialValues}
       render={({ handleSubmit }) => (
-        <FormWrapper title="Project Form" onSubmit={handleSubmit}>
+        <FormWrapper
+          id="project_form"
+          title="Project Form"
+          titleRef={titleRef}
+          onSubmit={handleSubmit}>
           <TextField
             label="Title"
             type="text"
