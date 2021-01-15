@@ -7,6 +7,8 @@ type Props = {
 export const Layout: React.FC<Props> = ({ children }) => (
   <>
     <Header />
-    <main>{children}</main>
   </>
+    <main id="main" tabIndex={-1}>
+      {children}
+    </main>
 );
