@@ -12,7 +12,7 @@ type Props = {
   tasks: Task[];
 };
 export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
-  const dateArray = generateDateArray(31);
+  const dateArray = generateDateArray(61);
 
   useEffect(() => {
     renderChart();
@@ -25,7 +25,7 @@ export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
   }, [projects, tasks]);
 
   return (
-    <div className={styles.root}>
+    <div id="gantt_chart" className={styles.root}>
       <div className={styles.heading}>
         <div className={styles.headingRow}>
           {dateArray.map((date) => (

@@ -3,50 +3,57 @@ import dayjs from 'dayjs';
 const getElement = (
   id: string,
 ): {
+  originRect: DOMRect;
   targetRect: DOMRect;
   initialDateRect: DOMRect;
   lastDateRect: DOMRect;
 } => {
+  const origin = document.getElementById('gantt_chart') as HTMLDivElement;
   const target = document.getElementById(id) as HTMLDivElement;
   const initialDate = document.getElementById(
     dayjs().format('YYYY-MM-DD'),
   ) as HTMLDivElement;
   const lastDate = document.getElementById(
-    dayjs().add(30, 'day').format('YYYY-MM-DD'),
+    dayjs().add(60, 'day').format('YYYY-MM-DD'),
   ) as HTMLDivElement;
 
+  const originRect = origin?.getBoundingClientRect();
   const targetRect = target?.getBoundingClientRect();
   const initialDateRect = initialDate.getBoundingClientRect();
   const lastDateRect = lastDate.getBoundingClientRect();
 
-  return { targetRect, initialDateRect, lastDateRect };
+  return { originRect, targetRect, initialDateRect, lastDateRect };
 };
 
 const getPositionTop = (id: string): number => {
-  const { targetRect } = getElement(id);
-  return targetRect.top + 3;
+  const { originRect, targetRect } = getElement(id);
+  return targetRect.top - originRect.top + 3;
 };
 
 const getPositionLeft = (date: string): number => {
-  const { targetRect, initialDateRect, lastDateRect } = getElement(date);
-  if (targetRect) return targetRect.left;
+  const { originRect, targetRect, initialDateRect, lastDateRect } = getElement(
+    date,
+  );
+  if (targetRect) return targetRect.left - originRect.left;
 
-  if (dayjs().add(30, 'day') < dayjs(date)) {
-    return lastDateRect!.left + lastDateRect!.width;
+  if (dayjs().add(60, 'day') < dayjs(date)) {
+    return lastDateRect!.left + lastDateRect!.width - originRect.left;
   }
 
-  return initialDateRect.left;
+  return initialDateRect.left - originRect.left;
 };
 
 const getPositionRight = (date: string): number => {
-  const { targetRect, initialDateRect, lastDateRect } = getElement(date);
+  const { originRect, targetRect, initialDateRect, lastDateRect } = getElement(
+    date,
+  );
 
-  if (targetRect) return targetRect.left + targetRect.width;
+  if (targetRect) return targetRect.left + targetRect.width - originRect.left;
 
-  if (dayjs().add(30, 'day') < dayjs(date)) {
-    return lastDateRect!.left + lastDateRect!.width;
+  if (dayjs().add(60, 'day') < dayjs(date)) {
+    return lastDateRect!.left + lastDateRect!.width - originRect.left;
   }
-  return initialDateRect.left;
+  return initialDateRect.left - originRect.left;
 };
 
 export const renderChart = (): void => {
