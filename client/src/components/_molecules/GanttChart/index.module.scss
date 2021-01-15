@@ -1,16 +1,19 @@
 @use '../../stylesheets/mixin' as mixin;
 
 .root {
+  position: relative;
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-columns: 100%;
   width: 100%;
+  overflow-x: scroll;
 }
 
 .heading {
-  position: sticky;
-  top: 0;
-  z-index: mixin.$z_gantHeader;
+  // overflowしてるとstickyが効かない
+  // position: sticky;
+  // top: 0;
+  // z-index: mixin.$z_gantHeader;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: 1fr;
@@ -21,7 +24,7 @@
 .headingRow {
   display: grid;
   grid-template-rows: 24px;
-  grid-template-columns: repeat(31, minmax(30px, 1fr));
+  grid-template-columns: repeat(61, minmax(30px, 1fr));
   border-bottom: 1px solid mixin.$headerBgColor;
 }
 
@@ -38,7 +41,7 @@
 
 .bodyRow {
   display: grid;
-  grid-template-columns: repeat(31, minmax(30px, 1fr));
+  grid-template-columns: repeat(61, minmax(30px, 1fr));
   height: 42px;
 
   &:not(:last-child) {
@@ -57,6 +60,14 @@
 .chart {
   position: absolute;
   height: 35px;
-  background-color: mixin.$primaryColor;
+  background-color: mixin.$primaryLightColor;
   border-radius: 3px;
+}
+
+.saturday {
+  background-color: mixin.$saturdayColor;
+}
+
+.sunday {
+  background-color: mixin.$sundayColor;
 }

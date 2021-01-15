@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import clsx from 'clsx';
 import { generateDateArray } from '../../../libs/date';
 import { renderChart } from '../../../libs/gantt';
 import { Project } from '../../../redux/modules/project';
@@ -28,7 +29,13 @@ export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
       <div className={styles.heading}>
         <div className={styles.headingRow}>
           {dateArray.map((date) => (
-            <span className={styles.headingCell} key={date.toJSON()}>
+            <span
+              className={clsx(
+                styles.headingCell,
+                date.day() === 6 && styles.saturday,
+                date.day() === 0 && styles.sunday,
+              )}
+              key={date.toJSON()}>
               {date.month() + 1}
             </span>
           ))}
@@ -37,7 +44,11 @@ export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
           {dateArray.map((date) => (
             <span
               id={date.format('YYYY-MM-DD')}
-              className={styles.headingCell}
+              className={clsx(
+                styles.headingCell,
+                date.day() === 6 && styles.saturday,
+                date.day() === 0 && styles.sunday,
+              )}
               key={date.toJSON()}>
               {date.date()}
             </span>
@@ -49,7 +60,13 @@ export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
           <>
             <div key={project.id} className={styles.bodyRow}>
               {dateArray.map((date) => (
-                <span className={styles.bodyCell} key={date.toJSON()}></span>
+                <span
+                  className={clsx(
+                    styles.bodyCell,
+                    date.day() === 6 && styles.saturday,
+                    date.day() === 0 && styles.sunday,
+                  )}
+                  key={date.toJSON()}></span>
               ))}
               <div
                 className={styles.chart}
@@ -61,7 +78,13 @@ export const GanttChart: React.VFC<Props> = ({ projects, tasks }) => {
             {getRelatedTasks(tasks, project.id!).map((task) => (
               <div key={task.id} className={styles.bodyRow}>
                 {dateArray.map((date) => (
-                  <span className={styles.bodyCell} key={date.toJSON()}></span>
+                  <span
+                    className={clsx(
+                      styles.bodyCell,
+                      date.day() === 6 && styles.saturday,
+                      date.day() === 0 && styles.sunday,
+                    )}
+                    key={date.toJSON()}></span>
                 ))}
                 <div
                   className={styles.chart}
