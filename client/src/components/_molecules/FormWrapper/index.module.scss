@@ -13,6 +13,7 @@
 .title {
   font-size: mixin.rem(20);
   font-weight: bold;
+  outline: none;
 
   @include mixin.mq() {
     font-size: mixin.rem(18);
