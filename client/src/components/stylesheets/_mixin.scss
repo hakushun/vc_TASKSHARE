@@ -6,12 +6,15 @@ $primaryColor: #33f;
 $primaryLightColor: #66f;
 $errorColor: #f33;
 $warningColor: #f93;
+$saturdayColor: rgba(0, 255, 255, 0.3);
+$sundayColor: rgba(255, 0, 0, 0.4);
 
 /* https://www.colordic.org/colorscheme/1009 */
 
 $z_overlay: 10;
 $z_bargermenu: 10;
 $z_statusList: 10;
+$z_gantHeader: 10;
 $z_modal: 100;
 
 @function rem($px) {

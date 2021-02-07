@@ -1,0 +1,16 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  padding: 20px 32px 10px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: max(275px, 20vw) 1fr;
+  margin-top: 20px;
+  border: 1px solid mixin.$headerBgColor;
+
+  @include mixin.mq() {
+    display: none;
+  }
+}
