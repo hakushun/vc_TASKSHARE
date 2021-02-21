@@ -13,3 +13,11 @@ export const composeValidators = (...validators: any[]) => (
   value: string,
 ): false | string =>
   validators.reduce((error, validator) => error || validator(value), false);
+
+export const getValidateFunction = (
+  type: string,
+): ((_value: string) => string | false) => {
+  if (type === 'email') return composeValidators(isRequired, isEmail);
+  if (type === 'password') return composeValidators(isRequired, minValue(6));
+  return composeValidators(isRequired);
+};

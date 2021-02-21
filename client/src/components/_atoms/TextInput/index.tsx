@@ -2,20 +2,8 @@ import React from 'react';
 import { Field } from 'react-final-form';
 import clsx from 'clsx';
 import styles from './index.module.scss';
-import {
-  composeValidators,
-  isEmail,
-  isRequired,
-  minValue,
-} from '../../../libs/validations';
+import { getValidateFunction } from '../../../libs/validations';
 
-const getValidateFunction = (
-  type: string,
-): ((_value: string) => string | false) => {
-  if (type === 'email') return composeValidators(isRequired, isEmail);
-  if (type === 'email') return composeValidators(isRequired, minValue(6));
-  return composeValidators(isRequired);
-};
 type Propps = {
   type: string;
   name: string;
