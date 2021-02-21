@@ -1,26 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleBargerMenu } from '../../../redux/modules/bargerMenu';
-import styles from './index.module.scss';
+import { MenuButton as Presentational } from './MenuButton';
 
-export const MenuButton = () => {
+export const MenuButton: React.VFC = () => {
   const dispatch = useDispatch();
 
   const handletoggle = () => {
     dispatch(toggleBargerMenu());
   };
-  return (
-    <button
-      className={styles.root}
-      type="button"
-      onClick={() => handletoggle()}>
-      <img
-        src="/images/icon-menu.svg"
-        alt="メニューボタン"
-        width="44"
-        height="44"
-        className={styles.menu}
-      />
-    </button>
-  );
+  return <Presentational handletoggle={handletoggle} />;
 };
