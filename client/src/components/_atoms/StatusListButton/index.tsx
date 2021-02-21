@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTask, TaskStatus } from '../../../redux/modules/task';
 import { update } from '../../../redux/modules/tasks';
-import styles from './index.module.scss';
+import { StatusListButton as Presentational } from './StatusListButton';
 
 type Props = {
   label: string;
@@ -31,13 +31,10 @@ export const StatusListButton: React.VFC<Props> = ({ label, status }) => {
   };
 
   return (
-    <li className={styles.root}>
-      <button
-        type="button"
-        className={styles.button}
-        onClick={() => updateTaskStatus(status)}>
-        {label}
-      </button>
-    </li>
+    <Presentational
+      label={label}
+      status={status}
+      updateTaskStatus={updateTaskStatus}
+    />
   );
 };
