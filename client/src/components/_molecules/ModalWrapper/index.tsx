@@ -1,16 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { Overlay } from '../../_atoms/Overlay';
-import styles from './index.module.scss';
+import { ModalWrapper as Presentational } from './ModalWrapper';
 
 type Props = {
   id: string;
   handleClose: () => void;
 };
-export const ModalWrapper: React.FC<Props> = ({
-  id,
-  handleClose,
-  children,
-}) => {
+export const ModalWrapper: React.VFC<Props> = ({ id, handleClose }) => {
   const modalRef = useRef<HTMLElement | null>(null);
 
   const getFocusableElements = (
@@ -68,17 +63,6 @@ export const ModalWrapper: React.FC<Props> = ({
   }, []);
 
   return (
-    <Overlay>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <section
-        ref={modalRef}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={id}
-        className={styles.root}
-        onKeyDown={(e) => handleKeydown(e)}>
-        {children}
-      </section>
-    </Overlay>
+    <Presentational id={id} modalRef={modalRef} handleKeydown={handleKeydown} />
   );
 };
