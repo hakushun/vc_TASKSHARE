@@ -1,11 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './index.module.scss';
 import { focus, Project } from '../../../redux/modules/project';
-import { calculateProgress } from '../../../redux/modules/tasks';
 import { Task } from '../../../redux/modules/task';
-import { getUsername, selectUsers } from '../../../redux/modules/users';
+import { selectUsers } from '../../../redux/modules/users';
+import { ProjectListItem as Presentational } from './ProjectListItem';
 
 type Props = {
   project: Project;
@@ -20,31 +18,11 @@ export const ProjectListItem: React.VFC<Props> = ({ tasks, project }) => {
   };
 
   return (
-    <li className={styles.root}>
-      <Link href={`/projects/${project.id}`}>
-        <a
-          id={`projects_${project.id}`}
-          aria-label={`プロジェクト名：${
-            project.title
-          }、オーナー：${getUsername(
-            users,
-            project.ownerId,
-          )}、進捗${calculateProgress(tasks, project.id!)}％`}
-          className={styles.link}
-          onClick={() => handleFocus(project.id!)}
-          onKeyPress={() => handleFocus(project.id!)}>
-          <div className={styles.owner}>
-            {getUsername(users, project.ownerId)}
-          </div>
-          <div className={styles.name}>{project.title}</div>
-          <div className={styles.progress}>
-            <progress
-              className={styles.progressBar}
-              value={calculateProgress(tasks, project.id!)}
-              max="100"></progress>
-          </div>
-        </a>
-      </Link>
-    </li>
+    <Presentational
+      tasks={tasks}
+      project={project}
+      users={users}
+      handleFocus={handleFocus}
+    />
   );
 };
