@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/modules/user';
-import { ActivityAction } from '../ActivityAction';
-import { ActivityInfo } from '../ActivityInfo';
-import styles from './index.module.scss';
+import { ActivityHeader as Presentational } from './ActivityHeader';
 
 type Props = {
   userId: string;
@@ -14,9 +12,6 @@ export const ActivityHeader: React.VFC<Props> = ({ userId, updatedAt, id }) => {
   const user = useSelector(selectUser);
 
   return (
-    <div className={styles.root}>
-      <ActivityInfo userId={userId} updatedAt={updatedAt} />
-      {user.id === userId && <ActivityAction id={id} />}
-    </div>
+    <Presentational userId={userId} updatedAt={updatedAt} id={id} user={user} />
   );
 };
