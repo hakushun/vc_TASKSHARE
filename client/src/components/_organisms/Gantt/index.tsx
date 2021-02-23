@@ -6,13 +6,10 @@ import {
   selectOpenProjects,
 } from '../../../redux/modules/projects';
 import { selectOpenTasks, getTasks } from '../../../redux/modules/tasks';
-import styles from './index.module.scss';
 import { getInstance } from '../../../libs/db/getInstance';
 import { Project } from '../../../redux/modules/project';
 import { Task } from '../../../redux/modules/task';
-import { GanttChart } from '../../_molecules/GanttChart';
-import { GanttTaskList } from '../../_molecules/GanttTaskList';
-import { Heading } from '../../_molecules/Heading';
+import { Gantt as Presentational } from './Gantt';
 
 const Component: React.VFC = () => {
   const dispatch = useDispatch();
@@ -34,15 +31,7 @@ const Component: React.VFC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <section className={styles.root}>
-      <Heading title="Gantt Chart" />
-      <div className={styles.wrapper}>
-        <GanttTaskList projects={projects} tasks={tasks} />
-        <GanttChart projects={projects} tasks={tasks} />
-      </div>
-    </section>
-  );
+  return <Presentational projects={projects} tasks={tasks} />;
 };
 
 export const Gantt = withAuth(Component);
