@@ -10,6 +10,21 @@ import {
   removeActions as removeUserActions,
   updateActions as updateUserActions,
 } from '../users';
+import {
+  createActions as createProjectActions,
+  updateActions as updateProjectActions,
+  removeActions as removeProjectActions,
+} from '../projects';
+import {
+  createActions as createTaskActions,
+  updateActions as updateTaskActions,
+  removeActions as removeTaskActions,
+} from '../tasks';
+import {
+  createActions as createActivityActions,
+  updateActions as updateActivityActions,
+  removeActions as removeActivityActions,
+} from '../activities';
 
 describe('Reducer: dialog', () => {
   const error: Error = { name: 'error', message: 'something is wrong' };
@@ -89,6 +104,181 @@ describe('Reducer: dialog', () => {
       },
       error,
     });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('createProjectActions.failed', () => {
+    const action = createProjectActions.failed({
+      params: {
+        title: '',
+        startDate: '',
+        dueDate: '',
+        ownerId: '',
+        detail: '',
+        userId: '',
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('updateProjectActions.failed', () => {
+    const action = updateProjectActions.failed({
+      params: {
+        id: '',
+        title: '',
+        startDate: '',
+        dueDate: '',
+        ownerId: '',
+        detail: '',
+        userId: '',
+        createdAt: 0,
+        updatedAt: 0,
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('removeProjectActions.failed', () => {
+    const action = removeProjectActions.failed({ params: { id: '' }, error });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('createTaskActions.failed', () => {
+    const action = createTaskActions.failed({
+      params: {
+        projectId: '',
+        title: '',
+        assignTo: '',
+        startDate: '',
+        dueDate: '',
+        description: '',
+        status: 'NEW',
+        userId: '',
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('updateTaskActions.failed', () => {
+    const action = updateTaskActions.failed({
+      params: {
+        id: '',
+        projectId: '',
+        title: '',
+        assignTo: '',
+        startDate: '',
+        dueDate: '',
+        description: '',
+        status: 'NEW',
+        userId: '',
+        createdAt: 0,
+        updatedAt: 0,
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('removeTaskActions.failed', () => {
+    const action = removeTaskActions.failed({ params: { id: '' }, error });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('createActivityActions.failed', () => {
+    const action = createActivityActions.failed({
+      params: {
+        taskId: '',
+        comment: '',
+        userId: '',
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('updateActivityActions.failed', () => {
+    const action = updateActivityActions.failed({
+      params: {
+        id: '',
+        taskId: '',
+        comment: '',
+        userId: '',
+        createdAt: 0,
+        updatedAt: 0,
+      },
+      error,
+    });
+    const result = reducer(undefined, action);
+    expect(result).toEqual({
+      isOpened: true,
+      message: {
+        title: 'error',
+        description: 'something is wrong',
+      },
+    });
+  });
+
+  it('removeActivityActions.failed', () => {
+    const action = removeActivityActions.failed({ params: { id: '' }, error });
     const result = reducer(undefined, action);
     expect(result).toEqual({
       isOpened: true,
