@@ -3,7 +3,7 @@ import { Task } from '../../../redux/modules/task';
 import { calculateProgress } from '../../../redux/modules/tasks';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   tasks: Task[];
   projectId: string;
 };
