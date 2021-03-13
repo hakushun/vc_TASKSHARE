@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './index.module.scss';
 import { getValidateFunction } from '../../../libs/validations';
 
-type Propps = {
+export type Props = {
   type: string;
   name: string;
   id: string;
@@ -15,7 +15,7 @@ type Propps = {
   maxLength?: number;
   autoComplete?: string;
 };
-export const TextInput: React.VFC<Propps> = ({
+export const TextInput: React.VFC<Props> = ({
   type,
   name,
   id,
