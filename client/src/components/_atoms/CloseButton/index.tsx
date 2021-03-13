@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   context?: string;
   handleClose: () => void;
 };
