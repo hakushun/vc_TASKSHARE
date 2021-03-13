@@ -5,7 +5,7 @@ import { RequiredBadge } from '../../_atoms/RequiredBadge';
 import { Selectbox } from '../../_atoms/Selectbox';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   label: string;
   name: string;
   id: string;
