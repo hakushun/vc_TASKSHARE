@@ -8,7 +8,7 @@ import { Task } from './task';
 export type StartedFilterValue = 'all' | 'notYet' | 'started';
 export type DueDateFilterValue = 'all' | 'whitin3days' | 'today' | 'expired';
 
-type Filter = {
+export type Filter = {
   started: StartedFilterValue;
   dueDate: DueDateFilterValue;
   complete: boolean;
