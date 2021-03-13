@@ -5,7 +5,7 @@ import { RequiredBadge } from '../../_atoms/RequiredBadge';
 import { Textarea } from '../../_atoms/Textarea';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   label: string;
   name: string;
   id: string;
