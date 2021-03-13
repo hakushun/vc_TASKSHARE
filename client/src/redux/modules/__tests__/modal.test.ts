@@ -31,9 +31,7 @@ import {
   updateActions as updateActivityActions,
   removeActions as removeActivityActions,
 } from '../activities';
-import {
-  removeActions as removeUserActions,
-} from '../users';
+import { removeActions as removeUserActions } from '../users';
 
 describe('Reducer: modal', () => {
   it('Initial state', () => {
