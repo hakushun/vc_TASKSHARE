@@ -5,7 +5,11 @@ type Props = {
   id: string;
   handleClose: () => void;
 };
-export const ModalWrapper: React.VFC<Props> = ({ id, handleClose }) => {
+export const ModalWrapper: React.FC<Props> = ({
+  id,
+  handleClose,
+  children,
+}) => {
   const modalRef = useRef<HTMLElement | null>(null);
 
   const getFocusableElements = (
@@ -63,6 +67,8 @@ export const ModalWrapper: React.VFC<Props> = ({ id, handleClose }) => {
   }, []);
 
   return (
-    <Presentational id={id} modalRef={modalRef} handleKeydown={handleKeydown} />
+    <Presentational id={id} modalRef={modalRef} handleKeydown={handleKeydown}>
+      {children}
+    </Presentational>
   );
 };
