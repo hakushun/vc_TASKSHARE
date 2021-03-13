@@ -2,7 +2,7 @@ import React from 'react';
 import { TasksSort } from '../../../redux/modules/sort';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   context: 'open' | 'close';
   tasksSort: TasksSort;
   handleSrotTasks: (_key: 'status' | 'dueDate') => void;
