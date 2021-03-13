@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './index.module.scss';
 import { composeValidators, isRequired } from '../../../libs/validations';
 
-type Props = {
+export type Props = {
   name: string;
   id: string;
   placeholder: string;
