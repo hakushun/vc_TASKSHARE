@@ -2,7 +2,7 @@ import React from 'react';
 import { ProjectsSort } from '../../../redux/modules/sort';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   context: 'open' | 'close';
   projectsSort: ProjectsSort;
   handleSrotProjects: (_key: 'owner' | 'progress') => void;
