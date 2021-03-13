@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   label: string;
   type: 'button' | 'submit';
   disabled: boolean;
