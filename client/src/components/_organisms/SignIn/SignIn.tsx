@@ -5,7 +5,7 @@ import { Dialog } from '../Dialog';
 import { PasswordResetForm } from '../PasswordResetForm';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   isOpend: boolean;
   message: { title: string; description: string };
   isLoading: boolean;
