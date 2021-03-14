@@ -7,7 +7,7 @@ import { TextField } from '../../_molecules/TextField';
 import { GoogleButton } from '../../_atoms/GoogleButton';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
-type Props = {
+export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   type: 'signup' | 'signin';
   isLoading: boolean;
