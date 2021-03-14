@@ -5,7 +5,7 @@ import { ListNoItems } from '../../_molecules/ListNoItems';
 import { TaskListItem } from '../../_molecules/TaskListItem';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   context: 'open' | 'close';
   tasks: Task[];
 };
