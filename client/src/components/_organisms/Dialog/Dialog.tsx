@@ -3,7 +3,7 @@ import { SecondaryButton } from '../../_atoms/SecondaryButton';
 import { ModalWrapper } from '../../_molecules/ModalWrapper';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   message: { title: string; description: string };
   closeDialog: () => void;
 };
