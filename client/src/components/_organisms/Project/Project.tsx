@@ -19,7 +19,7 @@ import { ProjectOverview } from '../../_molecules/ProjectOverview';
 import { Progress } from '../../_molecules/Progress';
 import { StatusController } from '../../_molecules/StatusController';
 
-type Props = {
+export type Props = {
   project: typeProject;
   tasks: Task[];
   relatedTasks: Task[];
