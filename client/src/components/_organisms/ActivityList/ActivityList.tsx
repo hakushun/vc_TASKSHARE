@@ -5,7 +5,7 @@ import { ActivityHeader } from '../../_molecules/ActivityHeader';
 import { ListNoActivities } from '../../_molecules/ListNoActivities';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   activities: Activity[];
   isLoading: boolean;
   handleRemove: (_id: string) => void;
