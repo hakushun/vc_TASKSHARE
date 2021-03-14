@@ -13,7 +13,7 @@ import { TextareaField } from '../../_molecules/TextareaField';
 import { SelectboxField } from '../../_molecules/SelectboxField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
-type Props = {
+export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Project;
   isLoading: boolean;
