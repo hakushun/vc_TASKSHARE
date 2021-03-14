@@ -4,7 +4,7 @@ import { AuthForm } from '../AuthForm';
 import { Dialog } from '../Dialog';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   isOpend: boolean;
   message: { title: string; description: string };
   isLoading: boolean;
