@@ -22,7 +22,7 @@ import { TaskOverview } from '../../_molecules/TaskOverview';
 import { StatusButton } from '../../_atoms/StatusButton';
 import { StatusController } from '../../_molecules/StatusController';
 
-type Props = {
+export type Props = {
   isOpened: boolean;
   project: Project;
   task: typeTask;
