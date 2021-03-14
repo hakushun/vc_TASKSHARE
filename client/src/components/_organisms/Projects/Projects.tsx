@@ -7,7 +7,7 @@ import { AddButton } from '../../_atoms/AddButton';
 import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   openProjects: Project[];
   closeProjects: Project[];
   tasks: Task[];
