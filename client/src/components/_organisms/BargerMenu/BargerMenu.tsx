@@ -4,7 +4,7 @@ import { Overlay } from '../../_atoms/Overlay';
 import { CloseButton } from '../../_atoms/CloseButton';
 import styles from './index.module.scss';
 
-type Props = {
+export type Props = {
   isAuth: boolean;
   logout: () => Promise<void>;
   handletoggle: () => void;
