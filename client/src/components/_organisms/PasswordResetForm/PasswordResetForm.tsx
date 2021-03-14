@@ -8,7 +8,7 @@ import { ModalWrapper } from '../../_molecules/ModalWrapper';
 import { TextField } from '../../_molecules/TextField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
-type Props = {
+export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   closeModal: () => void;
   handleReset: (_value: { email: string }) => void;
