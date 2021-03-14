@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import { TextField } from '../../_molecules/TextField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
-type Props = {
+export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Userdata;
   isLoading: boolean;
