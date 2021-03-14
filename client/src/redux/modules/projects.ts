@@ -42,18 +42,22 @@ const actionCreator = actionCreatorFactory();
 
 export const getProjects = actionCreator<Project[]>('GET_PROJECTS');
 
-export const createActions = actionCreator.async<CreatePayload, Project, Error>(
-  'CREATE_PROJECT',
-);
+export const createActions = actionCreator.async<
+  CreatePayload,
+  undefined,
+  Error
+>('CREATE_PROJECT');
 export const create = (body: CreatePayload): StepAction =>
   steps(createActions.started(body), () => postProject(body), [
     (data) => createActions.done({ params: body, result: data }),
     (error) => createActions.failed({ params: body, error }),
   ]);
 
-export const updateActions = actionCreator.async<UpdatePayload, Project, Error>(
-  'UPDATE_PROJECT',
-);
+export const updateActions = actionCreator.async<
+  UpdatePayload,
+  undefined,
+  Error
+>('UPDATE_PROJECT');
 export const update = (body: UpdatePayload): StepAction =>
   steps(updateActions.started(body), () => putProject(body), [
     (data) => updateActions.done({ params: body, result: data }),
@@ -62,7 +66,7 @@ export const update = (body: UpdatePayload): StepAction =>
 
 export const removeActions = actionCreator.async<
   RemovePayload,
-  RemovePayload,
+  undefined,
   Error
 >('REMOVE_PROJECT');
 export const remove = (body: RemovePayload): StepAction =>
