@@ -7,7 +7,7 @@ import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
 import { FilterController } from '../../_molecules/FilterController';
 
-type Props = {
+export type Props = {
   openTasks: Task[];
   closeTasks: Task[];
   handleAddTask: () => void;
