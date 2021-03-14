@@ -6,7 +6,7 @@ import { ModalWrapper } from '../../_molecules/ModalWrapper';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 import { SecondaryButton } from '../../_atoms/SecondaryButton';
 
-type Props = {
+export type Props = {
   isLoading: boolean;
   id: string;
   handleRemove: (_id: string) => void;
