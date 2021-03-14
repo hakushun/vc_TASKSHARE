@@ -13,7 +13,7 @@ import { ModalWrapper } from '../../_molecules/ModalWrapper';
 import { TextareaField } from '../../_molecules/TextareaField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
 
-type Props = {
+export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
   initialValues: Activity;
   isLoading: boolean;
