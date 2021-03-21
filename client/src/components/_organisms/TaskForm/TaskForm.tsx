@@ -13,6 +13,7 @@ import { TextField } from '../../_molecules/TextField';
 import { TextareaField } from '../../_molecules/TextareaField';
 import { SelectboxField } from '../../_molecules/SelectboxField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
+import { checkDueDate } from '../../../libs/validations';
 
 export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
@@ -39,6 +40,7 @@ export const TaskForm: React.VFC<Props> = ({
     <Form
       onSubmit={initialValues.id ? updateTask : createTask}
       initialValues={initialValues}
+      validate={checkDueDate}
       subscription={{ submitting: true }}
       render={({ handleSubmit }) => (
         <FormWrapper

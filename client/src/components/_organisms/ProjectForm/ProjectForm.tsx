@@ -12,6 +12,7 @@ import { TextField } from '../../_molecules/TextField';
 import { TextareaField } from '../../_molecules/TextareaField';
 import { SelectboxField } from '../../_molecules/SelectboxField';
 import { PrimaryButton } from '../../_atoms/PrimaryButton';
+import { checkDueDate } from '../../../libs/validations';
 
 export type Props = {
   titleRef: React.MutableRefObject<HTMLHeadingElement | null>;
@@ -37,6 +38,7 @@ export const ProjectForm: React.VFC<Props> = ({
       onSubmit={initialValues.id ? updateProject : createProject}
       subscription={{ submitting: true }}
       initialValues={initialValues}
+      validate={checkDueDate}
       render={({ handleSubmit }) => (
         <FormWrapper
           id="project_form"
