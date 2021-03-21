@@ -16,7 +16,9 @@
     "lint:prettier": "prettier --write './src/**/*.{ts,tsx}'",
     "lint:stylelint": "stylelint --fix './src/**/*.{css,scss}'",
     "storybook": "start-storybook -s ./public,./static -p 9001",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy": "vercel deploy",
+    "deploy:prod": "vercel deploy --prod"
   },
   "husky": {
     "hooks": {
