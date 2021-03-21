@@ -1,3 +1,13 @@
+import { ValidationErrors } from 'final-form';
+import {
+  CreatePayload as CreateProjectPayload,
+  UpdatePayload as UpdateProjectPayload,
+} from '../redux/modules/projects';
+import {
+  CreatePayload as CreateTaskPayload,
+  UpdatePayload as UpdateTaskPayload,
+} from '../redux/modules/tasks';
+
 export const isRequired = (value: string): false | 'Required' =>
   value ? false : 'Required';
 
@@ -20,4 +30,17 @@ export const getValidateFunction = (
   if (type === 'email') return composeValidators(isRequired, isEmail);
   if (type === 'password') return composeValidators(isRequired, minValue(6));
   return composeValidators(isRequired);
+};
+
+type CheckDueDateValues =
+  | CreateProjectPayload
+  | UpdateProjectPayload
+  | CreateTaskPayload
+  | UpdateTaskPayload;
+export const checkDueDate = (values: CheckDueDateValues): ValidationErrors => {
+  const errors: ValidationErrors = {};
+  if (values.startDate > values.dueDate) {
+    errors.dueDate = 'Due date must be the day after Start date';
+  }
+  return errors;
 };
