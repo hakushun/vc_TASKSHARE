@@ -1,7 +1,15 @@
 import React from 'react';
+import { View } from '../../../redux/modules/view';
 import styles from './index.module.scss';
 
-export const ViewSwitch: React.VFC = () => (
+type Props = {
+  currentView: View;
+  handleChangeView: (_value: View) => void;
+};
+export const ViewSwitch: React.VFC<Props> = ({
+  currentView,
+  handleChangeView,
+}) => (
   <div className={styles.root}>
     <dl className={styles.list}>
       <dd className={styles.definition}>View:</dd>
@@ -11,7 +19,8 @@ export const ViewSwitch: React.VFC = () => (
           type="radio"
           name="view"
           id="view_list"
-          checked
+          checked={currentView === 'list'}
+          onChange={() => handleChangeView('list')}
         />
         <label className={styles.label} htmlFor="view_list">
           List
@@ -23,6 +32,8 @@ export const ViewSwitch: React.VFC = () => (
           type="radio"
           name="view"
           id="view_board"
+          checked={currentView === 'board'}
+          onChange={() => handleChangeView('board')}
         />
         <label className={styles.label} htmlFor="view_board">
           Board
