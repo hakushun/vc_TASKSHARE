@@ -7,6 +7,7 @@ import modal from './modal';
 import bargerMenu from './bargerMenu';
 import sort from './sort';
 import filter from './filter';
+import view from './view';
 import project from './project';
 import projects from './projects';
 import task from './task';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     bargerMenu,
     sort,
     filter,
+    view,
     project,
     task,
     activity,
