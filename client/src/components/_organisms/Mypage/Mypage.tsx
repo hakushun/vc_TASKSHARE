@@ -9,6 +9,7 @@ import { AddButton } from '../../_atoms/AddButton';
 import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
 import { FilterController } from '../../_molecules/FilterController';
+import { ViewSwitch } from '../../_molecules/ViewSwitch';
 
 export type Props = {
   projects: Project[];
@@ -27,6 +28,7 @@ export const Mypage: React.VFC<Props> = ({
   <>
     <ProjectForm />
     <TaskForm />
+    <ViewSwitch />
     <section className={styles.wrpper}>
       <Heading title="Own Project List">
         <AddButton target="プロジェクト" handleAdd={handleAddProject} />
