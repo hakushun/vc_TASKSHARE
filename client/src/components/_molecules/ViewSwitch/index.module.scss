@@ -1,0 +1,38 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  max-width: 750px;
+  padding: 0 16px;
+  margin: 20px auto 0;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.definition {
+  margin-right: 10px;
+}
+
+.radio {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  opacity: 0;
+
+  &:checked + .label {
+    color: mixin.$bgColor;
+    background-color: mixin.$primaryColor;
+    border: 2px solid mixin.$primaryColor;
+  }
+}
+
+.label {
+  padding: 3px 5px;
+  color: mixin.$primaryColor;
+  cursor: pointer;
+  background-color: mixin.$bgColor;
+  border: 2px solid mixin.$primaryColor;
+}
