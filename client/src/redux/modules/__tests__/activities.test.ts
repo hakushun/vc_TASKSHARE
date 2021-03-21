@@ -21,8 +21,8 @@ const mockStore = configureMockStore([steps]);
 describe('Async actions: activities', () => {
   it('create: SUCCESS', async () => {
     const payload = { taskId: '', comment: '', userId: '' };
-    jest.spyOn(module, 'postActivity').mockImplementationOnce(async (data) => {
-      Promise.resolve(data);
+    jest.spyOn(module, 'postActivity').mockImplementationOnce(async () => {
+      Promise.resolve();
     });
     const expectedActions = [
       createActions.started(payload),
@@ -36,8 +36,8 @@ describe('Async actions: activities', () => {
   // doesn't work as expected
   // it('create: FAILED', async () => {
   //   const payload = { taskId: '', comment: '', userId: '' };
-  //   jest.spyOn(module, 'postActivity').mockImplementationOnce(async (data) => {
-  //     Promise.reject(data);
+  //   jest.spyOn(module, 'postActivity').mockImplementationOnce(async () => {
+  //     Promise.reject();
   //   });
   //   const expectedActions = [
   //     createActions.started(payload),
@@ -60,8 +60,8 @@ describe('Async actions: activities', () => {
       createdAt: 0,
       updatedAt: 0,
     };
-    jest.spyOn(module, 'putActivity').mockImplementationOnce(async (data) => {
-      Promise.resolve(data);
+    jest.spyOn(module, 'putActivity').mockImplementationOnce(async () => {
+      Promise.resolve();
     });
     const expectedActions = [
       updateActions.started(payload),
@@ -75,8 +75,8 @@ describe('Async actions: activities', () => {
   // doesn't work as expected
   // it('update: FAILED', async () => {
   //   const payload = { id: '', taskId: '', comment: '', userId: '', createdAt: 0, updatedAt: 0 };
-  //   jest.spyOn(module, 'putActivity').mockImplementationOnce(async (data) => {
-  //     Promise.reject(data);
+  //   jest.spyOn(module, 'putActivity').mockImplementationOnce(async () => {
+  //     Promise.reject();
   //   });
   //   const expectedActions = [
   //     updateActions.started(payload),
@@ -92,11 +92,9 @@ describe('Async actions: activities', () => {
 
   it('remove: SUCCESS', async () => {
     const payload = { id: '' };
-    jest
-      .spyOn(module, 'deleteActivity')
-      .mockImplementationOnce(async (data) => {
-        Promise.resolve(data);
-      });
+    jest.spyOn(module, 'deleteActivity').mockImplementationOnce(async () => {
+      Promise.resolve();
+    });
     const expectedActions = [
       removeActions.started(payload),
       removeActions.done({ params: payload, result: undefined }),
@@ -110,8 +108,8 @@ describe('Async actions: activities', () => {
   //   const payload = { id: '' };
   //   jest
   //     .spyOn(module, 'deleteActivity')
-  //     .mockImplementationOnce(async (data) => {
-  //       Promise.reject(data);
+  //     .mockImplementationOnce(async () => {
+  //       Promise.reject();
   //     });
   //   const expectedActions = [
   //     removeActions.started(payload),
