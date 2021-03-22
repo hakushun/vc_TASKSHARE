@@ -103,18 +103,18 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 
 export default reducer;
 
+const getProjectsList = (state: RootState) => state.resources.projects.list;
+const getTasksList = (state: RootState) => state.resources.tasks.list;
+const getSortProjects = (state: RootState) => state.ui.sort.projects;
+const getUser = (state: RootState) => state.ui.user;
+
 export const selectProjects = createSelector(
-  [(state: RootState) => state.resources.projects.list],
+  [getProjectsList],
   (projects) => projects,
 );
 
 export const selectOwnProjects = createSelector(
-  [
-    (state: RootState) => state.resources.projects.list,
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.sort.projects,
-    (state: RootState) => state.ui.user,
-  ],
+  [getProjectsList, getTasksList, getSortProjects, getUser],
   (projects, tasks, sortKey, user) =>
     sortProjectArray(projects, tasks, sortKey).filter((project) => {
       const relatedTasks = getRelatedTasks(tasks, project.id!);
@@ -127,11 +127,7 @@ export const selectOwnProjects = createSelector(
 );
 
 export const selectOpenProjects = createSelector(
-  [
-    (state: RootState) => state.resources.projects.list,
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.sort.projects,
-  ],
+  [getProjectsList, getTasksList, getSortProjects],
   (projects, tasks, sortKey) =>
     sortProjectArray(projects, tasks, sortKey).filter((project) => {
       const relatedTasks = getRelatedTasks(tasks, project.id!);
@@ -141,10 +137,7 @@ export const selectOpenProjects = createSelector(
 );
 
 export const selectCloseProjects = createSelector(
-  [
-    (state: RootState) => state.resources.projects.list,
-    (state: RootState) => state.resources.tasks.list,
-  ],
+  [getProjectsList, getTasksList],
   (projects, tasks) =>
     projects.filter((project) => {
       const relatedTasks = getRelatedTasks(tasks, project.id!);

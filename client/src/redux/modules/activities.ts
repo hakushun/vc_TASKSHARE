@@ -98,25 +98,23 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 
 export default reducer;
 
+const getActivitiesList = (state: RootState) => state.resources.activities.list;
+const getProject = (state: RootState) => state.ui.project;
+const getTask = (state: RootState) => state.ui.task;
+
 export const selectActivities = createSelector(
-  [(state: RootState) => state.resources.activities.list],
+  [getActivitiesList],
   (activities) => activities,
 );
 
 export const selectActivitiesRelatedProject = createSelector(
-  [
-    (state: RootState) => state.resources.activities.list,
-    (state: RootState) => state.ui.project,
-  ],
+  [getActivitiesList, getProject],
   (activities, project) =>
     activities.filter((activity) => activity.projectId === project.id),
 );
 
 export const selectActivitiesRelatedTask = createSelector(
-  [
-    (state: RootState) => state.resources.activities.list,
-    (state: RootState) => state.ui.task,
-  ],
+  [getActivitiesList, getTask],
   (activities, task) =>
     activities.filter((activity) => activity.taskId === task.id),
 );

@@ -97,10 +97,13 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 
 export default reducer;
 
-export const selectUsers = createSelector(
-  [(state: RootState) => state.resources.users.list],
-  (users) => users,
-);
+const getUsersList = (state: RootState) => state.resources.users.list;
+const getProjectsList = (state: RootState) => state.resources.projects.list;
+const getTasksList = (state: RootState) => state.resources.tasks.list;
+const getProject = (state: RootState) => state.ui.project;
+const getTask = (state: RootState) => state.ui.task;
+
+export const selectUsers = createSelector([getUsersList], (users) => users);
 
 export const selectIsLoading = createSelector(
   [(state: RootState) => state.resources.users.isLoading],
@@ -108,11 +111,7 @@ export const selectIsLoading = createSelector(
 );
 
 export const selectOwner = createSelector(
-  [
-    (state: RootState) => state.resources.users.list,
-    (state: RootState) => state.resources.projects.list,
-    (state: RootState) => state.ui.project,
-  ],
+  [getUsersList, getProjectsList, getProject],
   (users, projects, project) => {
     const target = projects.find((prj) => prj.id === project.id);
     return users.find((user) => user.id === target?.ownerId);
@@ -120,11 +119,7 @@ export const selectOwner = createSelector(
 );
 
 export const selectAssignUser = createSelector(
-  [
-    (state: RootState) => state.resources.users.list,
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.task,
-  ],
+  [getUsersList, getTasksList, getTask],
   (users, tasks, task) => {
     const target = tasks.find((tsk) => tsk.id === task.id);
     return users.find((user) => user.id === target?.assignTo);
@@ -132,11 +127,7 @@ export const selectAssignUser = createSelector(
 );
 
 export const selectUserCreateProject = createSelector(
-  [
-    (state: RootState) => state.resources.users.list,
-    (state: RootState) => state.resources.projects.list,
-    (state: RootState) => state.ui.project,
-  ],
+  [getUsersList, getProjectsList, getProject],
   (users, projects, project) => {
     const target = projects.find((prj) => prj.id === project.id);
     return users.find((user) => user.id === target?.userId);
@@ -144,11 +135,7 @@ export const selectUserCreateProject = createSelector(
 );
 
 export const selectUserCreateTask = createSelector(
-  [
-    (state: RootState) => state.resources.users.list,
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.task,
-  ],
+  [getUsersList, getTasksList, getTask],
   (users, tasks, task) => {
     const target = tasks.find((tsk) => tsk.id === task.id);
     return users.find((user) => user.id === target?.userId);
