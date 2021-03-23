@@ -10,11 +10,14 @@ import { Heading } from '../../_molecules/Heading';
 import styles from './index.module.scss';
 import { FilterController } from '../../_molecules/FilterController';
 import { ViewSwitch } from '../../_molecules/ViewSwitch';
+import { View } from '../../../redux/modules/view';
+import { TaskBoard } from '../TaskBoard';
 
 export type Props = {
   projects: Project[];
   tasks: Task[];
   assignedTasks: Task[];
+  currentView: View;
   handleAddProject: () => void;
   handleAddTask: () => void;
 };
@@ -22,6 +25,7 @@ export const Mypage: React.VFC<Props> = ({
   projects,
   tasks,
   assignedTasks,
+  currentView,
   handleAddProject,
   handleAddTask,
 }) => (
@@ -29,18 +33,30 @@ export const Mypage: React.VFC<Props> = ({
     <ProjectForm />
     <TaskForm />
     <ViewSwitch />
-    <section className={styles.wrpper}>
-      <Heading title="Own Project List">
-        <AddButton target="プロジェクト" handleAdd={handleAddProject} />
-      </Heading>
-      <ProjectList context="open" projects={projects} tasks={tasks} />
-    </section>
-    <section className={styles.wrpper}>
-      <Heading title="Assigned Task List">
-        <AddButton target="タスク" handleAdd={handleAddTask} />
-      </Heading>
-      <FilterController />
-      <TaskList context="open" tasks={assignedTasks} />
-    </section>
+    {currentView === 'list' && (
+      <>
+        <section className={styles.wrpper}>
+          <Heading title="Own Project List">
+            <AddButton target="プロジェクト" handleAdd={handleAddProject} />
+          </Heading>
+          <ProjectList context="open" projects={projects} tasks={tasks} />
+        </section>
+        <section className={styles.wrpper}>
+          <Heading title="Assigned Task List">
+            <AddButton target="タスク" handleAdd={handleAddTask} />
+          </Heading>
+          <FilterController />
+          <TaskList context="open" tasks={assignedTasks} />
+        </section>
+      </>
+    )}
+    {currentView === 'board' && (
+      <section className={styles.wrpper}>
+        <Heading title="Assigned Task Borad">
+          <AddButton target="タスク" handleAdd={handleAddTask} />
+        </Heading>
+        <TaskBoard assignedTasks={assignedTasks} />
+      </section>
+    )}
   </>
 );

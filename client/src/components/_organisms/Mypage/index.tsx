@@ -7,6 +7,7 @@ import { selectAssignedTasks, selectTasks } from '../../../redux/modules/tasks';
 import { add as addProject } from '../../../redux/modules/project';
 import { add as addTask } from '../../../redux/modules/task';
 import { selectUser } from '../../../redux/modules/user';
+import { selectCurrentView } from '../../../redux/modules/view';
 
 const Component: React.VFC = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Component: React.VFC = () => {
   const tasks = useSelector(selectTasks);
   const assignedTasks = useSelector(selectAssignedTasks);
   const user = useSelector(selectUser);
+  const currentView = useSelector(selectCurrentView);
 
   const handleAddProject = () => {
     dispatch(addProject({ userId: user.id }));
@@ -26,6 +28,7 @@ const Component: React.VFC = () => {
       projects={ownProjects}
       tasks={tasks}
       assignedTasks={assignedTasks}
+      currentView={currentView}
       handleAddProject={handleAddProject}
       handleAddTask={handleAddTask}
     />
