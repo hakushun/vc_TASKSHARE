@@ -107,18 +107,16 @@ const reducer = reducerWithInitialState(INITIAL_STATE)
 
 export default reducer;
 
-export const selectTasks = createSelector(
-  [(state: RootState) => state.resources.tasks.list],
-  (tasks) => tasks,
-);
+const getTasksList = (state: RootState) => state.resources.tasks.list;
+const getSortTasks = (state: RootState) => state.ui.sort.tasks;
+const getFilter = (state: RootState) => state.ui.filter;
+const getFilterComplete = (state: RootState) => state.ui.filter.complete;
+const getUser = (state: RootState) => state.ui.user;
+const getProject = (state: RootState) => state.ui.project;
+export const selectTasks = createSelector([getTasksList], (tasks) => tasks);
 
 export const selectAssignedTasks = createSelector(
-  [
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.sort.tasks,
-    (state: RootState) => state.ui.filter,
-    (state: RootState) => state.ui.user,
-  ],
+  [getTasksList, getSortTasks, getFilter, getUser],
   (tasks, sortKey, filter, user) => {
     const filteredTasks = filterTasks(filter, tasks);
     return sortTaskArray(filteredTasks, sortKey).filter(
@@ -128,11 +126,7 @@ export const selectAssignedTasks = createSelector(
 );
 
 export const selectOpenTasks = createSelector(
-  [
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.sort.tasks,
-    (state: RootState) => state.ui.filter,
-  ],
+  [getTasksList, getSortTasks, getFilter],
   (tasks, sortKey, filter) => {
     const filteredTasks = filterTasks(filter, tasks);
     return sortTaskArray(
@@ -142,18 +136,12 @@ export const selectOpenTasks = createSelector(
   },
 );
 
-export const selectCloseTasks = createSelector(
-  [(state: RootState) => state.resources.tasks.list],
-  (tasks) => tasks.filter((task) => task.status === 'COMPLETE'),
+export const selectCloseTasks = createSelector([getTasksList], (tasks) =>
+  tasks.filter((task) => task.status === 'COMPLETE'),
 );
 
 export const selectRelatedTasks = createSelector(
-  [
-    (state: RootState) => state.resources.tasks.list,
-    (state: RootState) => state.ui.project,
-    (state: RootState) => state.ui.sort.tasks,
-    (state: RootState) => state.ui.filter.complete,
-  ],
+  [getTasksList, getProject, getSortTasks, getFilterComplete],
   (tasks, project, sortKey, complete) => {
     const filteredTasks = complete
       ? tasks
