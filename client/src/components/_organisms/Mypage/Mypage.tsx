@@ -51,7 +51,7 @@ export const Mypage: React.VFC<Props> = ({
       </>
     )}
     {currentView === 'board' && (
-      <section className={styles.wrpper}>
+      <section className={styles.boardWrapper}>
         <Heading title="Assigned Task Borad">
           <AddButton target="タスク" handleAdd={handleAddTask} />
         </Heading>
