@@ -1,0 +1,12 @@
+@use '../../stylesheets/mixin' as mixin;
+
+.root {
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 1px mixin.$mainTextColor;
+}
+
+.link {
+  display: block;
+  padding: 10px 0;
+}
