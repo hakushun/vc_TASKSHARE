@@ -1,3 +1,32 @@
 @use '../../stylesheets/mixin' as mixin;
 
-.root {}
+.root {
+  flex: 1;
+  padding: 15px 15px;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 1px mixin.$mainTextColor;
+}
+
+.status {
+  font-size: mixin.rem(20);
+  font-weight: bold;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card {
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 1px mixin.$mainTextColor;
+}
+
+.link {
+  display: block;
+  padding: 10px 0;
+}
