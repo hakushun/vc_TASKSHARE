@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { focus, Task } from '../../../redux/modules/task';
 import { TaskCard as Presentational } from './TaskCard';
@@ -12,5 +13,21 @@ export const TaskCard: React.VFC<Props> = ({ task }) => {
   const handleFocus = (taskId: string, projectId: string) => {
     dispatch(focus({ id: taskId, projectId }));
   };
-  return <Presentational task={task} handleFocus={handleFocus} />;
+
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'TASKCARD',
+    item: { ...task },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  return (
+    <Presentational
+      task={task}
+      isDragging={isDragging}
+      handleFocus={handleFocus}
+      drag={drag}
+    />
+  );
 };
