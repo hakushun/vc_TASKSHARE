@@ -3,8 +3,13 @@
 .root {
   flex: 1;
   padding: 15px 15px;
+  min-height: 70vh;
   border-radius: 3px;
   box-shadow: 0 2px 3px 1px mixin.$mainTextColor;
+
+  &.isOver {
+    background-color: mixin.$headerBgColor;
+  }
 }
 
 .status {
