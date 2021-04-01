@@ -12,8 +12,8 @@ export const ViewSwitch: React.VFC<Props> = ({
 }) => (
   <div className={styles.root}>
     <dl className={styles.list}>
-      <dd className={styles.definition}>View:</dd>
-      <dt>
+      <dt className={styles.definition}>View:</dt>
+      <dd>
         <input
           className={styles.radio}
           type="radio"
@@ -25,8 +25,8 @@ export const ViewSwitch: React.VFC<Props> = ({
         <label className={styles.label} htmlFor="view_list">
           List
         </label>
-      </dt>
-      <dt>
+      </dd>
+      <dd>
         <input
           className={styles.radio}
           type="radio"
@@ -38,7 +38,7 @@ export const ViewSwitch: React.VFC<Props> = ({
         <label className={styles.label} htmlFor="view_board">
           Board
         </label>
-      </dt>
+      </dd>
     </dl>
   </div>
 );
